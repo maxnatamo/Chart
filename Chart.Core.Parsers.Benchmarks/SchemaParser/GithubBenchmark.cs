@@ -20,12 +20,7 @@ namespace Chart.Core.Parsers.Benchmarks
         public void Setup()
         {
             this.Expression = File.ReadAllText(this.Query);
-            this.Tokens = new Tokenizer(this.Expression).GetAllTokens();
         }
-
-        [Benchmark]
-        public List<Token> GetAllTokens()
-            => new Tokenizer(this.Expression).GetAllTokens();
 
         [Benchmark]
         public void GetNextToken()
@@ -39,6 +34,6 @@ namespace Chart.Core.Parsers.Benchmarks
 
         [Benchmark]
         public GraphDocument Parse()
-            => new SchemaParser().Parse(this.Expression, this.Tokens);
+            => new SchemaParser().Parse(this.Expression);
     }
 }

@@ -10,13 +10,13 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            Token token = tokenizer.GetNextToken();
 
             // Assert
-            tokens[0].Start.Should().Be(0);
-            tokens[0].End.Should().Be(5);
-            tokens[0].Type.Should().Be(TokenType.BOOLEAN);
-            tokens[0].Value.Should().Be("false");
+            token.Start.Should().Be(0);
+            token.End.Should().Be(5);
+            token.Type.Should().Be(TokenType.BOOLEAN);
+            token.Value.Should().Be("false");
         }
 
         [Fact]
@@ -27,13 +27,13 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            Token token = tokenizer.GetNextToken();
 
             // Assert
-            tokens[0].Start.Should().Be(0);
-            tokens[0].End.Should().Be(4);
-            tokens[0].Type.Should().Be(TokenType.BOOLEAN);
-            tokens[0].Value.Should().Be("true");
+            token.Start.Should().Be(0);
+            token.End.Should().Be(4);
+            token.Type.Should().Be(TokenType.BOOLEAN);
+            token.Value.Should().Be("true");
         }
 
         [Fact]
@@ -44,13 +44,13 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            Token token = tokenizer.GetNextToken();
 
             // Assert
-            tokens[0].Start.Should().Be(0);
-            tokens[0].End.Should().Be(5);
-            tokens[0].Type.Should().Be(TokenType.NAME);
-            tokens[0].Value.Should().Be("FALSE");
+            token.Start.Should().Be(0);
+            token.End.Should().Be(5);
+            token.Type.Should().Be(TokenType.NAME);
+            token.Value.Should().Be("FALSE");
         }
 
         [Fact]
@@ -61,13 +61,13 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            Token token = tokenizer.GetNextToken();
 
             // Assert
-            tokens[0].Start.Should().Be(1);
-            tokens[0].End.Should().Be(8);
-            tokens[0].Type.Should().Be(TokenType.STRING);
-            tokens[0].Value.Should().Be("false");
+            token.Start.Should().Be(1);
+            token.End.Should().Be(8);
+            token.Type.Should().Be(TokenType.STRING);
+            token.Value.Should().Be("false");
         }
     }
 }

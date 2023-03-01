@@ -34,7 +34,7 @@ namespace Chart.Core.Parsers
         /// <summary>
         /// The source document.
         /// </summary>
-        public readonly string Source;
+        public string Source = string.Empty;
 
         /// <summary>
         /// The position into the document currently being processed.
@@ -42,31 +42,26 @@ namespace Chart.Core.Parsers
         private int CurrentIndex = 0;
 
         /// <summary>
+        /// Initialize a new tokenizer without a GraphQL-document attached..
+        /// </summary>
+        public Tokenizer()
+        {
+            this.CurrentIndex = 0;
+        }
+
+        /// <summary>
         /// Initialize a new tokenizer with a GraphQL-document.
         /// </summary>
         /// <param name="source">The GraphQL-document to use.</param>
         public Tokenizer(string source)
         {
-            this.Source = source;
+            this.SetSource(source);
         }
 
-        /// <summary>
-        /// Get all tokens in the document
-        /// </summary>
-        /// <returns>List of tokens found the in the document.</returns>
-        public List<Token> GetAllTokens()
+        public void SetSource(string source)
         {
-            Token token;
-            List<Token> tokens = new List<Token>();
-
-            do
-            {
-                token = this.GetNextToken();
-                tokens.Add(token);
-            }
-            while(token.Type != TokenType.EOF);
-
-            return tokens;
+            this.Source = source;
+            this.CurrentIndex = 0;
         }
         
         /// <summary>

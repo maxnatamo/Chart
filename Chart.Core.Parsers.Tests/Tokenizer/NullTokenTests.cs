@@ -10,14 +10,12 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            Token token = tokenizer.GetNextToken();
 
             // Assert
-            tokens.Count.Should().Be(2);
-
-            tokens[0].Start.Should().Be(0);
-            tokens[0].End.Should().Be(4);
-            tokens[0].Type.Should().Be(TokenType.NULL);
+            token.Start.Should().Be(0);
+            token.End.Should().Be(4);
+            token.Type.Should().Be(TokenType.NULL);
         }
 
         [Fact]
@@ -28,15 +26,13 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            Token token = tokenizer.GetNextToken();
 
             // Assert
-            tokens.Count.Should().Be(2);
-
-            tokens[0].Start.Should().Be(0);
-            tokens[0].End.Should().Be(4);
-            tokens[0].Type.Should().Be(TokenType.NAME);
-            tokens[0].Value.Should().Be("NULL");
+            token.Start.Should().Be(0);
+            token.End.Should().Be(4);
+            token.Type.Should().Be(TokenType.NAME);
+            token.Value.Should().Be("NULL");
         }
 
         [Fact]
@@ -47,15 +43,13 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            Token token = tokenizer.GetNextToken();
 
             // Assert
-            tokens.Count.Should().Be(2);
-
-            tokens[0].Start.Should().Be(1);
-            tokens[0].End.Should().Be(7);
-            tokens[0].Type.Should().Be(TokenType.STRING);
-            tokens[0].Value.Should().Be("null");
+            token.Start.Should().Be(1);
+            token.End.Should().Be(7);
+            token.Type.Should().Be(TokenType.STRING);
+            token.Value.Should().Be("null");
         }
     }
 }

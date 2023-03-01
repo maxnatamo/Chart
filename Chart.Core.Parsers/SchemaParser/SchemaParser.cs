@@ -25,7 +25,7 @@ namespace Chart.Core.Parsers
         /// <summary>
         /// The source document.
         /// </summary>
-        public List<Token> Tokens = new List<Token>();
+        public Tokenizer Tokenizer = new Tokenizer();
 
         /// <summary>
         /// The current depth of the document.
@@ -45,10 +45,7 @@ namespace Chart.Core.Parsers
         /// <summary>
         /// The currently-processing token
         /// </summary>
-        private Token CurrentToken
-        {
-            get => this.Tokens[this.CurrentTokenIndex];
-        }
+        private Token CurrentToken = new Token();
 
         /// <summary>
         /// Increase the current depth of the document.
@@ -88,10 +85,6 @@ namespace Chart.Core.Parsers
         /// <returns>True, if the type matches the current token. Otherwise, false.</returns>
         private bool Peek(TokenType type)
         {
-            if(this.CurrentTokenIndex >= this.Tokens.Count)
-            {
-                return false;
-            }
             return this.CurrentToken.Type == type;
         }
 
@@ -105,10 +98,6 @@ namespace Chart.Core.Parsers
         /// <returns>True, if the value matches the current token. Otherwise, false.</returns>
         private bool Peek(string value)
         {
-            if(this.CurrentTokenIndex >= this.Tokens.Count)
-            {
-                return false;
-            }
             return this.CurrentToken.Value == value;
         }
 
@@ -146,11 +135,8 @@ namespace Chart.Core.Parsers
         /// </remarks>
         private void Skip()
         {
-            if(this.CurrentTokenIndex >= this.Tokens.Count)
-            {
-                return;
-            }
             this.CurrentTokenIndex++;
+            this.CurrentToken = this.Tokenizer.GetNextToken();
         }
 
         /// <summary>
@@ -210,14 +196,15 @@ namespace Chart.Core.Parsers
         /// Parse the specified source into a GraphDocument-object.
         /// </summary>
         /// <param name="source">The GraphQL schema source.</param>
-        /// <param name="tokens">List of tokens from the tokenizer.</param>
         /// <param name="options">Options for the parser.</param>
         /// <returns>The parsed GraphDocument-object.</returns>
         /// <exception cref="MissingBraceException">Thrown when the number of braces isn't even.</exception>
         /// <exception cref="UnexpectedTokenException">Thrown when an unexpected token was found.</exception>
-        public GraphDocument Parse(string source, List<Token> tokens, SchemaParserOptions options)
+        public GraphDocument Parse(string source, SchemaParserOptions options)
         {
-            this.Tokens = tokens;
+            this.Tokenizer.SetSource(source);
+            this.CurrentToken = this.Tokenizer.GetNextToken();
+
             this.Document = new GraphDocument();
             this.Document.Source = source;
             this.Options = options;
@@ -240,29 +227,7 @@ namespace Chart.Core.Parsers
         /// <exception cref="MissingBraceException">Thrown when the number of braces isn't even.</exception>
         /// <exception cref="UnexpectedTokenException">Thrown when an unexpected token was found.</exception>
         public GraphDocument Parse(string source)
-            => this.Parse(source, new Tokenizer(source).GetAllTokens(), new SchemaParserOptions());
-
-        /// <summary>
-        /// Parse the specified source into a GraphDocument-object.
-        /// </summary>
-        /// <param name="source">The GraphQL schema source.</param>
-        /// <param name="options">Options for the parser.</param>
-        /// <returns>The parsed GraphDocument-object.</returns>
-        /// <exception cref="MissingBraceException">Thrown when the number of braces isn't even.</exception>
-        /// <exception cref="UnexpectedTokenException">Thrown when an unexpected token was found.</exception>
-        public GraphDocument Parse(string source, SchemaParserOptions options)
-            => this.Parse(source, new Tokenizer(source).GetAllTokens(), options);
-
-        /// <summary>
-        /// Parse the specified source into a GraphDocument-object.
-        /// </summary>
-        /// <param name="source">The GraphQL schema source.</param>
-        /// <param name="tokens">List of tokens from the tokenizer.</param>
-        /// <returns>The parsed GraphDocument-object.</returns>
-        /// <exception cref="MissingBraceException">Thrown when the number of braces isn't even.</exception>
-        /// <exception cref="UnexpectedTokenException">Thrown when an unexpected token was found.</exception>
-        public GraphDocument Parse(string source, List<Token> tokens)
-            => this.Parse(source, tokens, new SchemaParserOptions());
+            => this.Parse(source, new SchemaParserOptions());
 
         /// <summary>
         /// Parse a top-level definition in the GraphQL-document, such operations, schemas, types, etc.

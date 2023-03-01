@@ -10,7 +10,13 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            List<Token> tokens = new List<Token>
+            {
+                tokenizer.GetNextToken(),
+                tokenizer.GetNextToken(),
+                tokenizer.GetNextToken(),
+                tokenizer.GetNextToken(),
+            };
 
             // Assert
             tokens.Count.Should().Be(4);
@@ -38,15 +44,13 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            Token token = tokenizer.GetNextToken();
 
             // Assert
-            tokens.Count.Should().Be(2);
-
-            tokens[0].Start.Should().Be(0);
-            tokens[0].End.Should().Be(18);
-            tokens[0].Type.Should().Be(TokenType.COMMENT);
-            tokens[0].Value.Should().Be("Super Comment");
+            token.Start.Should().Be(0);
+            token.End.Should().Be(18);
+            token.Type.Should().Be(TokenType.COMMENT);
+            token.Value.Should().Be("Super Comment");
         }
     }
 }

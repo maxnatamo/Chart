@@ -10,7 +10,11 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            List<Token> tokens = new List<Token>
+            {
+                tokenizer.GetNextToken(),
+                tokenizer.GetNextToken(),
+            };
 
             // Assert
             tokens.Count.Should().Be(2);
@@ -29,7 +33,11 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            List<Token> tokens = new List<Token>
+            {
+                tokenizer.GetNextToken(),
+                tokenizer.GetNextToken(),
+            };
 
             // Assert
             tokens.Count.Should().Be(2);
@@ -48,7 +56,11 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            List<Token> tokens = new List<Token>
+            {
+                tokenizer.GetNextToken(),
+                tokenizer.GetNextToken(),
+            };
 
             // Assert
             tokens.Count.Should().Be(2);
@@ -67,7 +79,11 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            List<Token> tokens = new List<Token>
+            {
+                tokenizer.GetNextToken(),
+                tokenizer.GetNextToken(),
+            };
 
             // Assert
             tokens.Count.Should().Be(2);
@@ -86,7 +102,11 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            List<Token> tokens = new List<Token>
+            {
+                tokenizer.GetNextToken(),
+                tokenizer.GetNextToken(),
+            };
 
             // Assert
             tokens.Count.Should().Be(2);
@@ -105,7 +125,11 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            List<Token> tokens = new List<Token>
+            {
+                tokenizer.GetNextToken(),
+                tokenizer.GetNextToken(),
+            };
 
             // Assert
             tokens.Count.Should().Be(2);
@@ -124,7 +148,11 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            List<Token> tokens = new List<Token>
+            {
+                tokenizer.GetNextToken(),
+                tokenizer.GetNextToken(),
+            };
 
             // Assert
             tokens.Count.Should().Be(2);

@@ -10,13 +10,12 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            Token token = tokenizer.GetNextToken();
 
             // Assert
-            tokens.Count.Should().Be(2);
-            tokens[0].Start.Should().Be(0);
-            tokens[0].End.Should().Be(1);
-            tokens[0].Type.Should().Be(TokenType.COLON);
+            token.Start.Should().Be(0);
+            token.End.Should().Be(1);
+            token.Type.Should().Be(TokenType.COLON);
         }
 
         [Fact]
@@ -27,13 +26,12 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            Token token = tokenizer.GetNextToken();
 
             // Assert
-            tokens.Count.Should().Be(2);
-            tokens[0].Start.Should().Be(0);
-            tokens[0].End.Should().Be(1);
-            tokens[0].Type.Should().Be(TokenType.PARENTHESIS_LEFT);
+            token.Start.Should().Be(0);
+            token.End.Should().Be(1);
+            token.Type.Should().Be(TokenType.PARENTHESIS_LEFT);
         }
 
         [Fact]
@@ -44,13 +42,12 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            Token token = tokenizer.GetNextToken();
 
             // Assert
-            tokens.Count.Should().Be(2);
-            tokens[0].Start.Should().Be(0);
-            tokens[0].End.Should().Be(1);
-            tokens[0].Type.Should().Be(TokenType.PARENTHESIS_RIGHT);
+            token.Start.Should().Be(0);
+            token.End.Should().Be(1);
+            token.Type.Should().Be(TokenType.PARENTHESIS_RIGHT);
         }
 
         [Fact]
@@ -61,13 +58,12 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            Token token = tokenizer.GetNextToken();
 
             // Assert
-            tokens.Count.Should().Be(2);
-            tokens[0].Start.Should().Be(0);
-            tokens[0].End.Should().Be(1);
-            tokens[0].Type.Should().Be(TokenType.BRACE_LEFT);
+            token.Start.Should().Be(0);
+            token.End.Should().Be(1);
+            token.Type.Should().Be(TokenType.BRACE_LEFT);
         }
 
         [Fact]
@@ -78,13 +74,12 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            Token token = tokenizer.GetNextToken();
 
             // Assert
-            tokens.Count.Should().Be(2);
-            tokens[0].Start.Should().Be(0);
-            tokens[0].End.Should().Be(1);
-            tokens[0].Type.Should().Be(TokenType.BRACE_RIGHT);
+            token.Start.Should().Be(0);
+            token.End.Should().Be(1);
+            token.Type.Should().Be(TokenType.BRACE_RIGHT);
         }
 
         [Fact]
@@ -95,13 +90,12 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            Token token = tokenizer.GetNextToken();
 
             // Assert
-            tokens.Count.Should().Be(2);
-            tokens[0].Start.Should().Be(0);
-            tokens[0].End.Should().Be(1);
-            tokens[0].Type.Should().Be(TokenType.BRACKET_LEFT);
+            token.Start.Should().Be(0);
+            token.End.Should().Be(1);
+            token.Type.Should().Be(TokenType.BRACKET_LEFT);
         }
 
         [Fact]
@@ -112,13 +106,12 @@ namespace Chart.Core.Parsers.Tests
             Tokenizer tokenizer = new Tokenizer(source);
 
             // Act
-            List<Token> tokens = tokenizer.GetAllTokens();
+            Token token = tokenizer.GetNextToken();
 
             // Assert
-            tokens.Count.Should().Be(2);
-            tokens[0].Start.Should().Be(0);
-            tokens[0].End.Should().Be(1);
-            tokens[0].Type.Should().Be(TokenType.BRACKET_RIGHT);
+            token.Start.Should().Be(0);
+            token.End.Should().Be(1);
+            token.Type.Should().Be(TokenType.BRACKET_RIGHT);
         }
     }
 }
