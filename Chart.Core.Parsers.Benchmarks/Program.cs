@@ -1,5 +1,4 @@
 ﻿using BenchmarkDotNet.Running;
-using BenchmarkDotNet.Reports;
 
 namespace Chart.Core.Parsers.Benchmarks
 {

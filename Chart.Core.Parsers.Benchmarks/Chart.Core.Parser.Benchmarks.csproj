@@ -13,6 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Files\*.graphql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Chart.Core.Parsers\Chart.Core.Parsers.csproj" />
     <ProjectReference Include="..\Chart.Models.AST\Chart.Models.AST.csproj" />
   </ItemGroup>

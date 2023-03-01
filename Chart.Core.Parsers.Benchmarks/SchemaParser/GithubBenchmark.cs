@@ -23,7 +23,7 @@ namespace Chart.Core.Parsers.Benchmarks
         }
 
         [Benchmark]
-        public void GetNextToken()
+        public void Tokenize()
         {
             Token token;
             Tokenizer tokenizer = new Tokenizer(this.Expression);
