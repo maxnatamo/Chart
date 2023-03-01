@@ -10,7 +10,7 @@ namespace Chart.Core.Parsers
         /// <param name="definition">The definition to descend into.</param>
         public void Visit(GraphUnionDefinition definition)
         {
-            this.WriteLine("union ");
+            this.Write("union ");
 
             if(definition.Name != null)
             {
@@ -26,6 +26,8 @@ namespace Chart.Core.Parsers
             {
                 this.Visit(definition.Members);
             }
+
+            this.WriteLine("");
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace Chart.Core.Parsers
 
             if(definition.Name != null)
             {
-                this.WriteLine(definition.Name.ToString() + " ");
+                this.Write(definition.Name.ToString() + " ");
             }
 
             if(definition.Directives != null)

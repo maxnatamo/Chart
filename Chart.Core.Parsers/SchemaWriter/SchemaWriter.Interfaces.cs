@@ -10,11 +10,11 @@ namespace Chart.Core.Parsers
         /// <param name="definition">The definition to descend into.</param>
         protected void Visit(GraphInterfaceDefinition definition)
         {
-            this.WriteLine("interface ");
+            this.Write("interface ");
 
             if(definition.Name != null)
             {
-                this.Write(definition.Name.ToString());
+                this.Write(definition.Name.ToString() + " ");
             }
 
             if(definition.Interface != null)
@@ -39,7 +39,7 @@ namespace Chart.Core.Parsers
         /// <param name="definition">The definition to descend into.</param>
         protected void Visit(GraphInterfaces definition)
         {
-            this.Write(" implements ");
+            this.Write("implements ");
 
             for(int i = 0; i < definition.Implements.Count; i++)
             {
@@ -50,6 +50,7 @@ namespace Chart.Core.Parsers
                     this.Write(" & ");
                 }
             }
+            this.Write(" ");
         }
     }
 }

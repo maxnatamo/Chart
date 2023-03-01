@@ -73,7 +73,7 @@ namespace Chart.Core.Parsers
         /// <param name="definition">The definition to descend into.</param>
         protected void Visit(GraphInputDefinition definition)
         {
-            this.WriteLine("input ");
+            this.Write("input ");
 
             if(definition.Name != null)
             {
@@ -86,6 +86,8 @@ namespace Chart.Core.Parsers
             }
 
             this.Visit(definition.Arguments);
+
+            this.WriteLine("");
         }
     }
 }
