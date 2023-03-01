@@ -37,12 +37,7 @@ namespace Chart.Core.Parsers
             }
 
             GraphField def = new GraphField();
-
-            if(this.Peek(TokenType.STRING))
-            {
-                def.Description = new GraphDescription(this.CurrentToken.Value);
-                this.Skip();
-            }
+            def.Description = this.ParseDescription();
 
             this.Expect(TokenType.NAME);
             def.Name = new GraphName(this.CurrentToken.Value);

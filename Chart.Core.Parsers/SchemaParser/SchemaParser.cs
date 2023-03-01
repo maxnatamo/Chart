@@ -289,15 +289,12 @@ namespace Chart.Core.Parsers
         /// <exception cref="UnexpectedTokenException">Thrown when an unexpected token was found.</exception>
         public GraphDefinition? ParseNamedDefinitionWithDescription()
         {
-            this.Expect(TokenType.STRING);
-            var description = this.CurrentToken.Value;
-
-            this.Skip();
-
+            GraphDescription? description = this.ParseDescription();
             GraphDefinition? def = this.ParseNamedDefinition();
+
             if(def != null)
             {
-                def.Description = new GraphDescription(description);
+                def.Description = description;
             }
 
             return def;
