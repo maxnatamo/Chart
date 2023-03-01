@@ -1,4 +1,4 @@
-namespace Chart.Core.Parser.Execution
+namespace Chart.Core.Execution
 {
     public class ExecutionContext
     {

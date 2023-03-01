@@ -1,10 +1,13 @@
-namespace Chart.Core.Parser.Execution
+using Chart.Core.Parsers;
+using Chart.Models.AST;
+
+namespace Chart.Core.Execution
 {
     public partial class Document
     {
         public Document RegisterType<T>()
         {
-            GraphObjectType obj = this.Serializer.ConvertObjectType<T>();
+            GraphObjectType obj = this.ModelParser.ConvertType<T>();
 
             this.GraphDocument.Definitions.Add(obj);
 

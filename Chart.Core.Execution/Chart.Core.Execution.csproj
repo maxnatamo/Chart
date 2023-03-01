@@ -1,7 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Chart.Core.Parser\Chart.Core.Parser.csproj" />
+    <ProjectReference Include="..\Chart.Core.Parsers\Chart.Core.Parsers.csproj" />
+    <ProjectReference Include="..\Chart.Models.AST\Chart.Models.AST.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
   <PropertyGroup>

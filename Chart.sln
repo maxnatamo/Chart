@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Core.Parser", "Chart.Core.Parser\Chart.Core.Parser.csproj", "{69450A76-577B-47E9-A9E9-5BD764622FF4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{A27C8A15-0F18-4CB3-9FE0-570D30959059}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Core.Parser.Tests", "Chart.Core.Parser.Tests\Chart.Core.Parser.Tests.csproj", "{67914A78-F831-4AB9-9A75-69AC93D05B78}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Core.Parser.Benchmarks", "Chart.Core.Parser.Benchmarks\Chart.Core.Parser.Benchmarks.csproj", "{B0B0713E-41EA-4A28-9C93-F543EAA1F806}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Core.Execution", "Chart.Core.Execution\Chart.Core.Execution.csproj", "{C9955700-C662-4D77-872A-A15CB0520321}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Core.Parsers", "Chart.Core.Parsers\Chart.Core.Parsers.csproj", "{4E2AA9BD-D057-4D09-A7D3-7C28BD1D611C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Models.AST", "Chart.Models.AST\Chart.Models.AST.csproj", "{8711F545-0733-4A55-A587-F6E952925A91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Shared", "Chart.Shared\Chart.Shared.csproj", "{84A75023-8013-4EF5-AFFD-8972A5915C80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Utils.Printer", "Chart.Utils.Printer\Chart.Utils.Printer.csproj", "{70DC33A2-811D-4882-8099-7BA55437C9F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Core.Parser.Tests", "Chart.Core.Parsers.Tests\Chart.Core.Parser.Tests.csproj", "{73E29285-1196-46CA-9BF2-D2CD529B211D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Core.Parser.Benchmarks", "Chart.Core.Parsers.Benchmarks\Chart.Core.Parser.Benchmarks.csproj", "{FAD435DB-16E5-4994-90E1-11FF424D69B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,25 +26,33 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{69450A76-577B-47E9-A9E9-5BD764622FF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69450A76-577B-47E9-A9E9-5BD764622FF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69450A76-577B-47E9-A9E9-5BD764622FF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69450A76-577B-47E9-A9E9-5BD764622FF4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A27C8A15-0F18-4CB3-9FE0-570D30959059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A27C8A15-0F18-4CB3-9FE0-570D30959059}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A27C8A15-0F18-4CB3-9FE0-570D30959059}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A27C8A15-0F18-4CB3-9FE0-570D30959059}.Release|Any CPU.Build.0 = Release|Any CPU
-		{67914A78-F831-4AB9-9A75-69AC93D05B78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67914A78-F831-4AB9-9A75-69AC93D05B78}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67914A78-F831-4AB9-9A75-69AC93D05B78}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67914A78-F831-4AB9-9A75-69AC93D05B78}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0B0713E-41EA-4A28-9C93-F543EAA1F806}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0B0713E-41EA-4A28-9C93-F543EAA1F806}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0B0713E-41EA-4A28-9C93-F543EAA1F806}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0B0713E-41EA-4A28-9C93-F543EAA1F806}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C9955700-C662-4D77-872A-A15CB0520321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C9955700-C662-4D77-872A-A15CB0520321}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9955700-C662-4D77-872A-A15CB0520321}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9955700-C662-4D77-872A-A15CB0520321}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E2AA9BD-D057-4D09-A7D3-7C28BD1D611C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E2AA9BD-D057-4D09-A7D3-7C28BD1D611C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E2AA9BD-D057-4D09-A7D3-7C28BD1D611C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E2AA9BD-D057-4D09-A7D3-7C28BD1D611C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8711F545-0733-4A55-A587-F6E952925A91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8711F545-0733-4A55-A587-F6E952925A91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8711F545-0733-4A55-A587-F6E952925A91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8711F545-0733-4A55-A587-F6E952925A91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84A75023-8013-4EF5-AFFD-8972A5915C80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84A75023-8013-4EF5-AFFD-8972A5915C80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84A75023-8013-4EF5-AFFD-8972A5915C80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84A75023-8013-4EF5-AFFD-8972A5915C80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70DC33A2-811D-4882-8099-7BA55437C9F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70DC33A2-811D-4882-8099-7BA55437C9F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70DC33A2-811D-4882-8099-7BA55437C9F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70DC33A2-811D-4882-8099-7BA55437C9F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73E29285-1196-46CA-9BF2-D2CD529B211D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73E29285-1196-46CA-9BF2-D2CD529B211D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73E29285-1196-46CA-9BF2-D2CD529B211D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73E29285-1196-46CA-9BF2-D2CD529B211D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAD435DB-16E5-4994-90E1-11FF424D69B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAD435DB-16E5-4994-90E1-11FF424D69B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAD435DB-16E5-4994-90E1-11FF424D69B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAD435DB-16E5-4994-90E1-11FF424D69B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

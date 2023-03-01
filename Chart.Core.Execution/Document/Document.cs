@@ -1,29 +1,32 @@
-namespace Chart.Core.Parser.Execution
+using Chart.Core.Parsers;
+using Chart.Models.AST;
+
+namespace Chart.Core.Execution
 {
     /// <summary>
     /// 
     /// </summary>
     public partial class Document
     {
-        private readonly Parser Parser;
+        private readonly SchemaParser Parser;
 
-        private readonly Serializer Serializer;
+        private readonly ModelParser ModelParser;
 
         private readonly GraphDocument GraphDocument;
 
-        private readonly SchemaPrinter SchemaPrinter;
+        private readonly SchemaWriter SchemaWriter;
 
         public Document()
         {
-            this.Parser = new Parser();
-            this.Serializer = new Serializer();
+            this.Parser = new SchemaParser();
+            this.ModelParser = new ModelParser();
             this.GraphDocument = new GraphDocument();
-            this.SchemaPrinter = new SchemaPrinter();
+            this.SchemaWriter = new SchemaWriter();
         }
 
         public string GetSchema()
         {
-            return this.SchemaPrinter.Visit(this.GraphDocument).ToString();
+            return this.SchemaWriter.Visit(this.GraphDocument).ToString();
         }
     }
 }
