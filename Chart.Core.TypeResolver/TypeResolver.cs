@@ -9,15 +9,19 @@ namespace Chart.Core.TypeResolver
 {
     public partial class Resolver
     {
-        private readonly ObjectType ObjectParser;
+        /// <summary>
+        /// Map of all GraphQL scalar types and their respective parsers.
+        /// </summary>
+        private readonly Dictionary<Type, GraphBaseType> ScalarTypes;
 
-        private readonly Dictionary<Type, GraphBaseType> DefinedTypes;
+        /// <summary>
+        /// List of all visited types. This is to avoid re-checking types.
+        /// </summary>
+        private readonly List<Type> VisitedTypes;
 
         public Resolver()
         {
-            this.ObjectParser = new ObjectType();
-
-            this.DefinedTypes = new Dictionary<Type, GraphBaseType>
+            this.ScalarTypes = new Dictionary<Type, GraphBaseType>
             {
                 { typeof(Boolean), new BooleanScalarType() },
                 { typeof(Single), new FloatScalarType() },
@@ -35,6 +39,9 @@ namespace Chart.Core.TypeResolver
                 { typeof(UInt128), new IntScalarType() },
                 { typeof(String), new StringScalarType() },
             };
+
+            // Initialize with all scalar types
+            this.VisitedTypes = this.ScalarTypes.Select(v => v.Key).ToList();
         }
 
         /// <summary>
@@ -57,11 +64,12 @@ namespace Chart.Core.TypeResolver
             }
 
             // Ignore if the type already.
-            if(this.DefinedTypes.ContainsKey(type))
+            if(this.VisitedTypes.Contains(type))
             {
                 return;
             }
 
+            this.VisitedTypes.Add(type);
             this.RegisterObjectType(type);
         }
 
@@ -71,8 +79,6 @@ namespace Chart.Core.TypeResolver
         /// <param name="type">The object type to parse and register.</param>
         private void RegisterObjectType(Type type)
         {
-            this.DefinedTypes.Add(type, this.ObjectParser);
-    
             // Properties
             var propertyInfos = type.GetProperties();
             for(int i = 0; i < propertyInfos.Count(); i++)
@@ -120,7 +126,7 @@ namespace Chart.Core.TypeResolver
                 return new GraphListType(this.ResolveType(underlyingType));
             }
 
-            if(this.DefinedTypes.ContainsKey(type))
+            if(this.VisitedTypes.Contains(type))
             {
                 return new GraphNamedType(type.Name);
             }
@@ -158,17 +164,60 @@ namespace Chart.Core.TypeResolver
                 return listValue;
             }
 
-            foreach(var def in this.DefinedTypes)
+            // Resolve scalar types.
+            if(this.ScalarTypes.ContainsKey(type))
             {
-                if(def.Key != type)
-                {
-                    continue;
-                }
+                return this.ScalarTypes[type].ParseLiteral(obj);
+            }
 
-                return def.Value.ParseLiteral(obj);
+            // Resolve non-scalar, object types.
+            if(this.VisitedTypes.Contains(type))
+            {
+                return this.ResolveObjectValue(obj);
             }
 
             throw new InvalidTypeException(type.Name);
+        }
+
+        /// <summary>
+        /// Resolve an object into a GraphObjectValue-object.
+        /// </summary>
+        /// <param name="obj">The object to resolve a GraphObjectValue.</param>
+        /// <returns>The parsed GraphObjectValue-object.</returns>
+        /// <exception cref="InvalidTypeException">Thrown if a type is not registered or is invalid.</exception>
+        protected GraphObjectValue ResolveObjectValue(object obj)
+        {
+            Type type = obj.GetType();
+            GraphObjectValue def = new GraphObjectValue();
+
+            // Properties
+            var propertyInfos = type.GetProperties();
+            for(int i = 0; i < propertyInfos.Count(); i++)
+            {
+                var name = new GraphName(propertyInfos[i].Name);
+                var value = this.ResolveValue(propertyInfos[i].GetValue(obj));
+
+                def.Fields.Add(name, value);
+            }
+
+            // Fields
+            var fieldInfos = type.GetFields();
+            for(int i = 0; i < fieldInfos.Count(); i++)
+            {
+                var name = new GraphName(fieldInfos[i].Name);
+                var value = this.ResolveValue(fieldInfos[i].GetValue(obj));
+
+                def.Fields.Add(name, value);
+            }
+
+            // Methods
+            var methodInfos = type.GetMethods();
+            for(int i = 0; i < methodInfos.Count(); i++)
+            {
+                var name = new GraphName(methodInfos[i].Name);
+            }
+
+            return def;
         }
     }
 }
