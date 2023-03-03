@@ -39,5 +39,10 @@ which will produce the following AST:
                [GraphFieldSelection]
                   [GraphName] age
 ```
+> **Note**
+> The parse the GraphQL-expression into an AST, use the [SchemaParser](/Chart.Core.Parsers/SchemaParser/).
 
-Do not clutter the output, descriptions are excluded.
+> **Note**
+> To print the AST, like done above, use the [DocumentPrinter](/Chart.Utils.Printer/).
+
+To not clutter the output, descriptions are excluded.
