@@ -7,6 +7,12 @@ namespace Chart.Core.Parsers
 {
     public partial class ModelParser
     {
+        /// <summary>
+        /// Parse GraphName-attributes from a member and return it.
+        /// </summary>
+        /// <param name="info">The member to parse the name from.</param>
+        /// <returns>GraphName-attribute value, if one is found. Otherwise, member name is returned.</returns>
+        /// <exception cref="InvalidDataException">Thrown if a member name is invalid.</exception>
         public GraphName ParseName(MemberInfo info)
         {
             GraphName? name = info.GetAttribute<GraphNameAttribute>()?.Name;
@@ -20,6 +26,12 @@ namespace Chart.Core.Parsers
             return name;
         }
 
+        /// <summary>
+        /// Parse GraphName-attributes from a member and return it.
+        /// </summary>
+        /// <param name="info">The member to parse the name from.</param>
+        /// <returns>GraphName-attribute value, if one is found. Otherwise, member name is returned.</returns>
+        /// <exception cref="InvalidDataException">Thrown if a member name is invalid.</exception>
         public GraphName ParseName(ParameterInfo info)
         {
             GraphName? name = info.GetAttribute<GraphNameAttribute>()?.Name;

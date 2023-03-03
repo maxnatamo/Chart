@@ -7,6 +7,11 @@ namespace Chart.Core.Parsers
 {
     public partial class ModelParser
     {
+        /// <summary>
+        /// Parse GraphDescriptionAttribute-attributes from a member and return it.
+        /// </summary>
+        /// <param name="info">The member to parse the description from.</param>
+        /// <returns>GraphDescription, if one is found. Otherwise, null.</returns>
         public GraphDescription? ParseDescription(ICustomAttributeProvider info)
         {
             var attr = info.GetAttribute<GraphDescriptionAttribute>();

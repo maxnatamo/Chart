@@ -6,6 +6,13 @@ namespace Chart.Core.Parsers
 {
     public partial class ModelParser
     {
+        /// <summary>
+        /// Parse an object type into a GraphObjectType-object.
+        /// </summary>
+        /// <param name="type">The type to parse.</param>
+        /// <returns>The parsed GraphObjectType-object.</returns>
+        /// <exception cref="NotImplementedException">Thrown if the MemberType is not valid to parse.</exception>
+        /// <exception cref="InvalidDataException">Thrown if a member name is invalid.</exception>
         public GraphObjectType ConvertObjectType(Type type)
         {
             GraphObjectType def = new GraphObjectType();
@@ -18,6 +25,13 @@ namespace Chart.Core.Parsers
             return def;
         }
 
+        /// <summary>
+        /// Parse the fields from a Type-struct into a GraphFields-object.
+        /// </summary>
+        /// <param name="type">The type to parse.</param>
+        /// <returns>The parsed GraphFields-object, if any fields are found. Otherwise, null.</returns>
+        /// <exception cref="NotImplementedException">Thrown if the MemberType is not valid to parse.</exception>
+        /// <exception cref="InvalidDataException">Thrown if a member name is invalid.</exception>
         private GraphFields? ParseFields(Type type)
         {
             GraphFields def = new GraphFields();
@@ -45,7 +59,8 @@ namespace Chart.Core.Parsers
         /// </summary>
         /// <param name="info">The MemberInfo structure to parse.</param>
         /// <returns>The parsed GraphField-object.</returns>
-        /// <throws cref="NotImplementedException">Thrown if the MemberType is not valid to parse.</exception>
+        /// <exception cref="NotImplementedException">Thrown if the MemberType is not valid to parse.</exception>
+        /// <exception cref="InvalidDataException">Thrown if a member name is invalid.</exception>
         private GraphField ParseField(MemberInfo info)
         {
             return info.MemberType switch

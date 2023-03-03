@@ -6,31 +6,75 @@ using Chart.Shared.Extensions;
 
 namespace Chart.Core.Parsers
 {
+    /// <summary>
+    /// Class for parsing C# models into an IR-format.
+    /// </summary>
     public partial class ModelParser
     {
-        private readonly Resolver TypeResolver;
+        /// <summary>
+        /// Internal resolver for values and types.
+        /// </summary>
+        private readonly Resolver Resolver;
 
+        /// <summary>
+        /// Initialize new ModelParser.
+        /// </summary>
         public ModelParser()
         {
-            this.TypeResolver = new Resolver();
+            this.Resolver = new Resolver();
         }
 
+        /// <summary>
+        /// Convert type into the IR-format and return it.
+        /// </summary>
+        /// <remarks>
+        /// The type is not registered to the resolver, so unregistered child-types will throw.
+        /// </remarks>
+        /// <typeparam name="T">The type to convert into IR-format.</typeparam>
+        /// <returns>The IR-format in an AST.</returns>
         public GraphObjectType ConvertType<T>()
             => this.ConvertType(typeof(T));
 
+        /// <summary>
+        /// Convert type into the IR-format and return it.
+        /// </summary>
+        /// <remarks>
+        /// The type is not registered to the resolver, so unregistered child-types will throw.
+        /// </remarks>
+        /// <param name="type">The type to convert into IR-format.</param>
+        /// <returns>The IR-format in an AST.</returns>
+        /// <exception cref="InvalidDataException">Thrown when the object name is an invalid GraphQL-name.</exception>
         public GraphObjectType ConvertType(Type type)
         {
-            this.TypeResolver.RegisterType(type);
-
             GraphObjectType def = this.ConvertAnonymousType(type);
             def.Name = this.ParseName(type);
 
             return def;
         }
 
+        /// <summary>
+        /// Convert anonymous type into the IR-format and return it.
+        /// </summary>
+        /// <remarks>
+        /// The type is not registered to the resolver, so unregistered child-types will throw.
+        /// </remarks>
+        /// <typeparam name="T">The type to convert into IR-format.</typeparam>
+        /// <param name="name">The to give to the object.</param>
+        /// <returns>The IR-format in an AST.</returns>
+        /// <exception cref="InvalidDataException">Thrown when the object name is an invalid GraphQL-name.</exception>
         public GraphObjectType ConvertAnonymousType<T>(string name = "object")
-            => this.ConvertObjectType(typeof(T));
+            => this.ConvertAnonymousType(typeof(T), name);
 
+        /// <summary>
+        /// Convert anonymous type into the IR-format and return it.
+        /// </summary>
+        /// <remarks>
+        /// The type is not registered to the resolver, so unregistered child-types will throw.
+        /// </remarks>
+        /// <param name="type">The type to convert into IR-format.</param>
+        /// <param name="name">The to give to the object.</param>
+        /// <returns>The IR-format in an AST.</returns>
+        /// <exception cref="InvalidDataException">Thrown when the object name is an invalid GraphQL-name.</exception>
         public GraphObjectType ConvertAnonymousType(Type type, string name = "object")
         {
             GraphObjectType def = new GraphObjectType();
