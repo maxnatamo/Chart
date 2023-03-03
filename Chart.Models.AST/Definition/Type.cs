@@ -12,6 +12,11 @@ namespace Chart.Models.AST
         public override GraphDefinitionKind DefinitionKind => GraphDefinitionKind.Type;
 
         /// <summary>
+        /// Whether the definition is executable, as per the GraphQL-spec.
+        /// </summary>
+        public override bool Executable => false;
+
+        /// <summary>
         /// The kind of type this definition represents.
         /// </summary>
         public abstract GraphTypeDefinitionKind TypeKind { get; }

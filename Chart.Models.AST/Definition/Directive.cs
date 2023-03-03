@@ -12,6 +12,11 @@ namespace Chart.Models.AST
         public override GraphDefinitionKind DefinitionKind => GraphDefinitionKind.Directive;
 
         /// <summary>
+        /// Whether the definition is executable, as per the GraphQL-spec.
+        /// </summary>
+        public override bool Executable => false;
+
+        /// <summary>
         /// Optional arguments for the directive.
         /// </summary>
         public GraphArgumentsDefinition? Arguments { get; set; } = null;

@@ -12,6 +12,11 @@ namespace Chart.Models.AST
         public override GraphDefinitionKind DefinitionKind => GraphDefinitionKind.Fragment;
 
         /// <summary>
+        /// Whether the definition is executable, as per the GraphQL-spec.
+        /// </summary>
+        public override bool Executable => true;
+
+        /// <summary>
         /// The type to apply the fragment to.
         /// </summary>
         public GraphNamedType Type { get; set; } = default!;

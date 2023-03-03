@@ -12,6 +12,11 @@ namespace Chart.Models.AST
         public abstract GraphDefinitionKind DefinitionKind { get; }
 
         /// <summary>
+        /// Whether the definition is executable, as per the GraphQL-spec.
+        /// </summary>
+        public abstract bool Executable { get; }
+
+        /// <summary>
         /// The optional name for the definition.
         /// </summary>
         public GraphName? Name { get; set; } = null;
