@@ -54,6 +54,13 @@ namespace Chart.Core.TypeResolver
         /// <summary>
         /// Register a type for the resolver.
         /// </summary>
+        /// <typeparam name="T">The type to register.</typeparam>
+        public void RegisterType<T>(T obj)
+            => this.RegisterType(typeof(T));
+
+        /// <summary>
+        /// Register a type for the resolver.
+        /// </summary>
         /// <param name="type">The type to register.</param>
         public void RegisterType(Type type)
         {
@@ -110,6 +117,31 @@ namespace Chart.Core.TypeResolver
                 this.ParseObjectMethod(methodInfos[i]);
             }
         }
+
+        /// <summary>
+        /// Whether the type has been visited.
+        /// </summary>
+        /// <typeparam name="T">The type to check for.</typeparam>
+        /// <returns>True, if the type has been visited. Otherwise, false.</returns>
+        public bool Visited<T>()
+            => this.Visited(typeof(T));
+
+        /// <summary>
+        /// Whether the type has been visited.
+        /// </summary>
+        /// <param name="type">The type to check for.</param>
+        /// <returns>True, if the type has been visited. Otherwise, false.</returns>
+        public bool Visited(Type type)
+            => this.VisitedTypes.Contains(type);
+
+            /// <summary>
+        /// Resolve a Type into a GraphType-object.
+        /// </summary>
+        /// <typeparam name="T">The type to resolve a GraphType.</typeparam>
+        /// <returns>The parsed GraphType-object.</returns>
+        /// <exception cref="InvalidTypeException">Thrown if a type is not registered or is invalid.</exception>
+        public GraphType ResolveType<T>()
+            => this.ResolveType(typeof(T));
 
         /// <summary>
         /// Resolve a Type into a GraphType-object.
