@@ -158,6 +158,13 @@ namespace Chart.Core.TypeResolver
                 return new GraphListType(this.ResolveType(underlyingType));
             }
 
+            // Resolve scalar types.
+            if(this.ScalarTypes.ContainsKey(type))
+            {
+                return new GraphNamedType(this.ScalarTypes[type].Name);
+            }
+
+            // Resolve object types.
             if(this.VisitedTypes.Contains(type))
             {
                 return new GraphNamedType(type.Name);
