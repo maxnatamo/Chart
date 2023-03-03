@@ -12,7 +12,7 @@ namespace Chart.Core.Parsers
             def.Name = this.ParseName(info);
             def.Description = this.ParseDescription(info);
             def.Directives = this.ParseDirectives(info);
-            def.Type = this.TypeResolver.ResolveType(info.PropertyType);
+            // def.Type = this.TypeResolver.ResolveType(info.PropertyType);
 
             return def;
         }

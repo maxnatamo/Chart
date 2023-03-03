@@ -1,6 +1,6 @@
 using Chart.Models.AST;
 
-namespace Chart.Core.Parsers
+namespace Chart.Core.TypeResolver
 {
     /// <summary>
     /// Scalar type for the Boolean-type in GraphQL.

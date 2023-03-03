@@ -1,6 +1,7 @@
 using System.Reflection;
 using Chart.Models.AST;
 using Chart.Shared.Attributes;
+using Chart.Shared.Extensions;
 
 namespace Chart.Core.Parsers
 {

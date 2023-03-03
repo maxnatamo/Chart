@@ -12,7 +12,7 @@ namespace Chart.Core.Parsers
             def.Name = this.ParseName(info);
             def.Description = this.ParseDescription(info);
             def.Directives = this.ParseDirectives(info);
-            def.Type = this.TypeResolver.ResolveType(info.ReturnType);
+            // def.Type = this.TypeResolver.ResolveType(info.ReturnType);
             def.Arguments = this.ParseMethodArguments(info);
 
             return def;
@@ -38,11 +38,11 @@ namespace Chart.Core.Parsers
             def.Name = this.ParseName(info);
             def.Description = this.ParseDescription(info);
             def.Directives = this.ParseDirectives(info);
-            def.Type = this.TypeResolver.ResolveType(info.ParameterType);
+            // def.Type = this.TypeResolver.ResolveType(info.ParameterType);
 
             if(info.HasDefaultValue && info.DefaultValue != null)
             {
-                def.DefaultValue = this.TypeResolver.ResolveValue(info.DefaultValue);
+                // def.DefaultValue = this.TypeResolver.ResolveValue(info.DefaultValue);
             }
 
             return def;

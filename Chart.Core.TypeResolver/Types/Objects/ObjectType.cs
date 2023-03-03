@@ -1,6 +1,6 @@
 using Chart.Models.AST;
 
-namespace Chart.Core.Parsers
+namespace Chart.Core.TypeResolver
 {
     /// <summary>
     /// Scalar type for the Boolean-type in GraphQL.
@@ -37,7 +37,7 @@ namespace Chart.Core.Parsers
 
             if(!value.GetType().IsPrimitive)
             {
-                Console.WriteLine(value.ToString());
+                Console.WriteLine($"{value.ToString()} => {value.GetType().GetMembers().Count()}");
                 return new GraphObjectValue();
             }
 

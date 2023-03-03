@@ -22,7 +22,7 @@ namespace Chart.Core.Parsers.Benchmarks
             this.Expression = File.ReadAllText(this.Query);
         }
 
-        [Benchmark]
+        [Benchmark(Baseline = true)]
         public void Tokenize()
         {
             Token token;

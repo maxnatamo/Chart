@@ -1,27 +1,30 @@
 using Chart.Models.AST;
 
-namespace Chart.Core.Parsers
+namespace Chart.Core.TypeResolver
 {
     /// <summary>
-    /// Scalar type for the ID-type in GraphQL.
+    /// Scalar type for the Int-type in GraphQL.
     /// </summary>
-    /// <seealso href="https://spec.graphql.org/October2021/#sec-ID">Original documentation.</seealso>
-    public class IdScalarType : GraphBaseType
+    /// <seealso href="https://spec.graphql.org/October2021/#sec-Int">Original documentation.</seealso>
+    public class IntScalarType : GraphBaseType
     {
         /// <inheritdoc cref="GraphBaseType.Name" />
-        public override string Name => "ID";
+        public override string Name => "Int";
 
-        /// <inheritdoc cref="GraphBaseScalarType.ParseValue(GraphValue)" />
+        /// <inheritdoc cref="GraphBaseType.ParseValue(GraphValue)" />
         public override object? ParseValue(GraphValue value)
         {
-            return value switch
+            if(value is GraphNullValue)
             {
-                GraphNullValue      => null,
-                GraphStringValue    => ((GraphStringValue) value).Value,
-                GraphIntValue       => ((GraphIntValue) value).Value,
+                return null;
+            }
 
-                _                   => throw new ArgumentException("Failed to parse value.")
-            };
+            if(value is GraphIntValue intValue)
+            {
+                return intValue.Value;
+            }
+
+            throw new ArgumentException("Failed to parse literal.");
         }
 
         /// <inheritdoc cref="GraphBaseType.ParseLiteral(object?)" />
@@ -30,7 +33,6 @@ namespace Chart.Core.Parsers
             return value switch
             {
                 null        => new GraphNullValue(),
-                String      => new GraphStringValue((String) value),
                 SByte       => new GraphIntValue(Convert.ToInt32(value)),
                 Int16       => new GraphIntValue(Convert.ToInt32(value)),
                 Int32       => new GraphIntValue(Convert.ToInt32(value)),
@@ -42,17 +44,16 @@ namespace Chart.Core.Parsers
                 UInt64      => new GraphIntValue(Convert.ToInt32(value)),
                 UInt128     => new GraphIntValue(Convert.ToInt32(value)),
 
-                _           => throw new ArgumentException("Failed to parse literal.")
+                _           => throw new ArgumentException("Failed to parse value.")
             };
         }
 
-        /// <inheritdoc cref="GraphBaseType.Serialize(object?)" />
+        /// <inheritdoc cref="GraphBaseScalarType.Serialize(object?)" />
         public override string? Serialize(object? value)
         {
             return value switch
             {
                 null        => "null",
-                String      => $"\"{value.ToString()}\"",
                 SByte       => value.ToString(),
                 Int16       => value.ToString(),
                 Int32       => value.ToString(),

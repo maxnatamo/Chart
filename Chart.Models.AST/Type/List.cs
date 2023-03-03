@@ -17,6 +17,21 @@ namespace Chart.Models.AST
         public GraphType UnderlyingType { get; set; } = default!;
 
         /// <summary>
+        /// Initialize a new GraphListType-object without a type specified.
+        /// </summary>
+        public GraphListType()
+        { }
+
+        /// <summary>
+        /// Initialize a new GraphListType-object with the type specified.
+        /// </summary>
+        /// <param name="underlyingType">The underlying type of the list.</param>
+        public GraphListType(GraphType underlyingType)
+        {
+            this.UnderlyingType = underlyingType;
+        }
+
+        /// <summary>
         /// Used with DocumentPrinter.
         /// </summary>
         public override string ToString()

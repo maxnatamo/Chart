@@ -1,6 +1,6 @@
 using Chart.Models.AST;
 
-namespace Chart.Core.Parsers
+namespace Chart.Core.TypeResolver
 {
     /// <summary>
     /// Base scalar type for the types in GraphQL.
@@ -27,10 +27,10 @@ namespace Chart.Core.Parsers
         public abstract object? ParseValue(GraphValue value);
 
         /// <summary>
-        /// Parse a C# native type into a GraphValue-object.
+        /// Parse a C# native value into a GraphValue-object.
         /// </summary>
         /// <example>
-        /// Passing a string value will return a GraphStringValue with the stirng content..
+        /// Passing a string value will return a GraphStringValue with the string content..
         /// </example>
         /// <remarks>
         /// Passing a null value will return GraphNullValue.

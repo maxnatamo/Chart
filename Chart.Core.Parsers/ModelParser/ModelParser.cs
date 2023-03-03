@@ -1,16 +1,18 @@
 using System.Reflection;
 using Chart.Models.AST;
+using Chart.Core.TypeResolver;
 using Chart.Shared.Attributes;
+using Chart.Shared.Extensions;
 
 namespace Chart.Core.Parsers
 {
     public partial class ModelParser
     {
-        private readonly TypeResolver TypeResolver;
+        private readonly Resolver TypeResolver;
 
         public ModelParser()
         {
-            this.TypeResolver = new TypeResolver();
+            this.TypeResolver = new Resolver();
         }
 
         public GraphObjectType ConvertType<T>()
