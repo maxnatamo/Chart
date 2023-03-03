@@ -45,6 +45,11 @@ namespace Chart.Utils.Printer
         /// <param name="definition">The definition to descend into.</param>
         protected void Visit(GraphDirectives definition)
         {
+            if(!definition.Directives.Any())
+            {
+                return;
+            }
+
             this.WriteLine(definition.ToString());
 
             this.IncreaseDepth();
