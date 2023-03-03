@@ -1,5 +1,6 @@
 using System.Reflection;
 using Chart.Models.AST;
+using Chart.Shared.Extensions;
 
 namespace Chart.Core.Parsers
 {
@@ -22,9 +23,9 @@ namespace Chart.Core.Parsers
             GraphFields def = new GraphFields();
 
             List<MemberInfo> typeFiles = new List<MemberInfo>();
-            typeFiles.AddRange(this.GetFields(type));
-            typeFiles.AddRange(this.GetProperties(type));
-            typeFiles.AddRange(this.GetMethods(type));
+            typeFiles.AddRange(type.GetLocalFields());
+            typeFiles.AddRange(type.GetLocalProperties());
+            typeFiles.AddRange(type.GetLocalMethods());
 
             def.Fields = typeFiles
                 .Where(v => this.ShouldIncludeField(v))

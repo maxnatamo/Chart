@@ -20,6 +20,8 @@ namespace Chart.Core.Parsers
 
         public GraphObjectType ConvertType(Type type)
         {
+            this.TypeResolver.RegisterType(type);
+
             GraphObjectType def = this.ConvertAnonymousType(type);
             def.Name = this.ParseName(type);
 
