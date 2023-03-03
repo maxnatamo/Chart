@@ -65,7 +65,7 @@ namespace Chart.Core.Parsers
         {
             return info.MemberType switch
             {
-                // MemberTypes.Field       => this.ParseMemberField((FieldInfo) info),
+                MemberTypes.Field       => this.ParseFieldsField((FieldInfo) info),
                 MemberTypes.Property    => this.ParsePropertyField((PropertyInfo) info),
                 MemberTypes.Method      => this.ParseMethodField((MethodInfo) info),
 
