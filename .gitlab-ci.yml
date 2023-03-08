@@ -1,0 +1,23 @@
+stages:
+  - test
+  - build
+
+test:
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:6.0
+  before_script:
+    - dotnet restore
+  script:
+    - dotnet test
+    
+benchmark:
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:6.0
+  before_script:
+    - dotnet restore
+  script:
+    - dotnet run -c Release --project Chart.Core.Parsers.Benchmarks/Chart.Core.Parsers.Benchmarks.csproj
+    - cat "BenchmarkDotNet.Artifacts/results/*.metrics" > metrics.txt
+  artifacts:
+    reports:
+      metrics: metrics.txt
