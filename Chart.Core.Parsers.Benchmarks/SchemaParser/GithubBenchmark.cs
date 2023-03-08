@@ -1,6 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Jobs;
 
+using Chart.Shared.Exporters;
 using Chart.Models.AST;
 
 namespace Chart.Core.Parsers.Benchmarks
@@ -8,6 +8,7 @@ namespace Chart.Core.Parsers.Benchmarks
     [InProcess()]
     [GcServer(true)]
     [MinColumn, MaxColumn, MemoryDiagnoser]
+    [OpenMetricsExporter]
     public class GithubSchemaParserBenchmark
     {
         [Params("Files/github.graphql")]
