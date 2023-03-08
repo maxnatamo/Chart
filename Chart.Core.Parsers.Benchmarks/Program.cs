@@ -1,4 +1,5 @@
-﻿using BenchmarkDotNet.Running;
+﻿using BenchmarkDotNet.Reports;
+using BenchmarkDotNet.Running;
 
 namespace Chart.Core.Parsers.Benchmarks
 {
@@ -6,7 +7,7 @@ namespace Chart.Core.Parsers.Benchmarks
     {
         public static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<GithubSchemaParserBenchmark>();
+            Summary summary = BenchmarkRunner.Run<SchemaParserBenchmark>();
         }
     }
 }

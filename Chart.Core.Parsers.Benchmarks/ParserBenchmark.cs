@@ -1,18 +1,19 @@
 ﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Diagnosers;
 
 using Chart.Shared.Exporters;
 using Chart.Models.AST;
 
 namespace Chart.Core.Parsers.Benchmarks
 {
-    [InProcess()]
+    [InProcess]
     [GcServer(true)]
     [MinColumn, MaxColumn, MemoryDiagnoser]
     [OpenMetricsExporter]
-    public class GithubSchemaParserBenchmark
+    public class SchemaParserBenchmark : BaseBenchmark
     {
-        [Params("Files/github.graphql")]
-        public string Query = "";
+        [ParamsSource(nameof(GetGraphTestFiles))]
+        public string QueryFile = "";
 
         private string Expression = "";
         private List<Token> Tokens = new List<Token>();
@@ -20,17 +21,23 @@ namespace Chart.Core.Parsers.Benchmarks
         [GlobalSetup]
         public void Setup()
         {
-            this.Expression = File.ReadAllText(this.Query);
+            this.Expression = this.ReadTestFile(this.QueryFile);
         }
 
-        [Benchmark(Baseline = true)]
-        public void Tokenize()
+        [Benchmark]
+        public uint Tokenize()
         {
+            uint tokenCount = 0;
+
             Token token;
             Tokenizer tokenizer = new Tokenizer(this.Expression);
 
             while((token = tokenizer.GetNextToken()).Type != TokenType.EOF)
-            { }
+            {
+                tokenCount++;
+            }
+
+            return tokenCount;
         }
 
         [Benchmark]
