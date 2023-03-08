@@ -17,7 +17,7 @@ benchmark:
     - dotnet restore
   script:
     - dotnet run -c Release --project Chart.Core.Parsers.Benchmarks/Chart.Core.Parser.Benchmarks.csproj
-    - cat "BenchmarkDotNet.Artifacts/results/*.metrics" > metrics.txt
+    - cat "BenchmarkDotNet.Artifacts/results/Chart.Core.Parsers.Benchmarks.SchemaParserBenchmark-report.metrics" > metrics.txt
   artifacts:
     reports:
       metrics: metrics.txt
