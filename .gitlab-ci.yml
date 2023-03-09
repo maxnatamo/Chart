@@ -5,19 +5,24 @@ stages:
 test:
   stage: test
   image: mcr.microsoft.com/dotnet/sdk:7.0
-  before_script:
-    - dotnet restore
   script:
-    - dotnet test
+    - ./build.cmd Test
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+  only:
+    - merge_requests
+    - branches
     
 benchmark:
   stage: test
   image: mcr.microsoft.com/dotnet/sdk:7.0
-  before_script:
-    - dotnet restore
   script:
-    - dotnet run -c Release --project Chart.Core.Parsers.Benchmarks/Chart.Core.Parser.Benchmarks.csproj
-    - cat "BenchmarkDotNet.Artifacts/results/Chart.Core.Parsers.Benchmarks.SchemaParserBenchmark-report.metrics" > metrics.txt
+    - ./build.cmd Metrics
   artifacts:
     reports:
       metrics: metrics.txt
+  only:
+    - merge_requests
