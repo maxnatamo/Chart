@@ -9,6 +9,9 @@ test:
     - dotnet restore
   script:
     - dotnet test
+  only:
+    - merge_requests
+    - branches
     
 benchmark:
   stage: test
@@ -21,3 +24,5 @@ benchmark:
   artifacts:
     reports:
       metrics: metrics.txt
+  only:
+    - merge_requests
