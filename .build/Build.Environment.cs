@@ -30,7 +30,4 @@ partial class Build
 
     [GitRepository]
     readonly GitRepository GitRepository;
-
-    [GitVersion(Framework = "net6.0", NoFetch = true)]
-    readonly GitVersion GitVersion;
 }
