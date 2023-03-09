@@ -479,4 +479,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-.nuke/
+.nuke/temp/
