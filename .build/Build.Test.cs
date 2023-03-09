@@ -13,6 +13,8 @@ partial class Build : NukeBuild
                 .SetProjectFile(MainSolutionFile)
                 .SetCoverletOutput(TestCoverageDirectory / "cobertura-coverage.xml")
                 .SetCoverletOutputFormat(CoverletOutputFormat.cobertura)
-                .SetCollectCoverage(true));
+                .SetCollectCoverage(true)
+                .EnableNoBuild()
+                .EnableNoRestore());
         });
 }
