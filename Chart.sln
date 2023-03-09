@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Core.Validation.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Core.Validation", "Chart.Core.Validation\Chart.Core.Validation.csproj", "{E78AC45B-FCB0-4BA4-876B-3E1E56682B52}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", ".build\_build.csproj", "{E58EB01A-CC62-4D35-B9AA-70ED2B6D4B4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E58EB01A-CC62-4D35-B9AA-70ED2B6D4B4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E58EB01A-CC62-4D35-B9AA-70ED2B6D4B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9955700-C662-4D77-872A-A15CB0520321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C9955700-C662-4D77-872A-A15CB0520321}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9955700-C662-4D77-872A-A15CB0520321}.Release|Any CPU.ActiveCfg = Release|Any CPU
