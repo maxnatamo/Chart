@@ -1,4 +1,5 @@
 using Nuke.Common;
+using Nuke.Common.CI.GitLab;
 
 partial class Build : NukeBuild
 {
@@ -18,10 +19,22 @@ partial class Build : NukeBuild
         Serilog.Log.Information("🔥 Build process started");
         Serilog.Log.Information("");
         Serilog.Log.Information("Build manifest:");
-        Serilog.Log.Information("  Git head: {Head}", GitRepository.Head);
-        Serilog.Log.Information("  Git branch: {BranchName}", GitVersion.BranchName);
-        Serilog.Log.Information("  Git commit hash: {ShortSha}", GitVersion.ShortSha);
-        Serilog.Log.Information("  Git semantic version: {SemVer}", GitVersion.SemVer);
+
+        if(Host is GitLab)
+        {
+            GitLab GitLab = Host as GitLab;
+
+            Serilog.Log.Information("  GitLab Job ID: {JobId}", GitLab.JobId);
+            Serilog.Log.Information("  Git branch: {CommitRefName}", GitLab.CommitRefName);
+            Serilog.Log.Information("  Git commit hash: {CommitSha}", GitLab.CommitSha);
+        }
+        else
+        {
+            Serilog.Log.Information("  Git head: {Head}", GitRepository.Head);
+            Serilog.Log.Information("  Git branch: {BranchName}", GitVersion.BranchName);
+            Serilog.Log.Information("  Git commit hash: {ShortSha}", GitVersion.ShortSha);
+            Serilog.Log.Information("  Git semantic version: {SemVer}", GitVersion.SemVer);
+        }
 
         base.OnBuildInitialized();
     }
