@@ -21,9 +21,6 @@ partial class Build : NukeBuild
             DotNetBuild(c => c
                 .SetProjectFile(MainSolutionFile)
                 .SetNoRestore(InvokedTargets.Contains(Restore))
-                .SetConfiguration(this.Configuration)
-                .SetAssemblyVersion(GitVersion.AssemblySemVer)
-                .SetFileVersion(GitVersion.AssemblySemFileVer)
-                .SetInformationalVersion(GitVersion.InformationalVersion));
+                .SetConfiguration(this.Configuration));
         });
 }
