@@ -1,17 +1,6 @@
-using System;
-using System.Linq;
 using Nuke.Common;
-using Nuke.Common.CI;
-using Nuke.Common.Execution;
-using Nuke.Common.IO;
-using Nuke.Common.ProjectModel;
-using Nuke.Common.Tooling;
-using Nuke.Common.Utilities.Collections;
-using static Nuke.Common.EnvironmentInfo;
-using static Nuke.Common.IO.FileSystemTasks;
-using static Nuke.Common.IO.PathConstruction;
 
-class Build : NukeBuild
+partial class Build : NukeBuild
 {
     /// Support plugins are available for:
     ///   - JetBrains ReSharper        https://nuke.build/resharper
@@ -24,21 +13,16 @@ class Build : NukeBuild
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    Target Clean => _ => _
-        .Before(Restore)
-        .Executes(() =>
-        {
-        });
+    protected override void OnBuildInitialized()
+    {
+        Serilog.Log.Information("🔥 Build process started");
+        Serilog.Log.Information("");
+        Serilog.Log.Information("Build manifest:");
+        Serilog.Log.Information("  Git head: {Head}", GitRepository.Head);
+        Serilog.Log.Information("  Git branch: {BranchName}", GitVersion.BranchName);
+        Serilog.Log.Information("  Git commit hash: {ShortSha}", GitVersion.ShortSha);
+        Serilog.Log.Information("  Git semantic version: {SemVer}", GitVersion.SemVer);
 
-    Target Restore => _ => _
-        .Executes(() =>
-        {
-        });
-
-    Target Compile => _ => _
-        .DependsOn(Restore)
-        .Executes(() =>
-        {
-        });
-
+        base.OnBuildInitialized();
+    }
 }
