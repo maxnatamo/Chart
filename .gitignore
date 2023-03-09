@@ -480,3 +480,4 @@ $RECYCLE.BIN/
 *.lnk
 
 .nuke/temp/
+/metrics.txt
