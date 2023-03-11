@@ -28,11 +28,6 @@ namespace Chart.Core.Parsers
         internal Tokenizer Tokenizer = new Tokenizer();
 
         /// <summary>
-        /// The current depth of the document.
-        /// </summary>
-        internal int CurrentDepth { get; set; } = 0;
-
-        /// <summary>
         /// The parent document for the parsing.
         /// </summary>
         internal GraphDocument Document { get; set; } = default!;
@@ -182,11 +177,6 @@ namespace Chart.Core.Parsers
             this.Options = options;
 
             this.Document.Definitions = this.IterateParse<GraphDefinition>(this.ParseDefinition);
-
-            if(this.CurrentDepth != 0)
-            {
-                throw new MissingBraceException();
-            }
 
             return this.Document;
         }
