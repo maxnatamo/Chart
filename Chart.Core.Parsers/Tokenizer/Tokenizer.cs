@@ -348,7 +348,11 @@ namespace Chart.Core.Parsers
 
                 if(idx < this.Source.Length)
                 {
-                    window = this.Source.Substring(idx, windowSize);
+                    // Avoid ArgumentOutOfRangeException, when startIndex + length
+                    // is more than the length of the source string.
+                    int length = Math.Min(windowSize, this.Source.Length - idx);
+
+                    window = this.Source.Substring(idx, length);
                 }
                 else
                 {
