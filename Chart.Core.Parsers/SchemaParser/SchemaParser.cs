@@ -20,32 +20,32 @@ namespace Chart.Core.Parsers
         /// <summary>
         /// The options used for parsing.
         /// </summary>
-        private SchemaParserOptions Options = new SchemaParserOptions();
+        internal SchemaParserOptions Options = new SchemaParserOptions();
 
         /// <summary>
         /// The source document.
         /// </summary>
-        public Tokenizer Tokenizer = new Tokenizer();
+        internal Tokenizer Tokenizer = new Tokenizer();
 
         /// <summary>
         /// The current depth of the document.
         /// </summary>
-        private int CurrentDepth { get; set; } = 0;
+        internal int CurrentDepth { get; set; } = 0;
 
         /// <summary>
         /// The parent document for the parsing.
         /// </summary>
-        public GraphDocument Document { get; protected set; } = default!;
+        internal GraphDocument Document { get; set; } = default!;
 
         /// <summary>
         /// The current position into the token-list
         /// </summary>
-        private int CurrentTokenIndex { get; set; } = 0;
+        internal int CurrentTokenIndex { get; set; } = 0;
 
         /// <summary>
         /// The currently-processing token
         /// </summary>
-        private Token CurrentToken = new Token();
+        internal Token CurrentToken = new Token();
 
         /// <summary>
         /// Peek the type of the current token.
@@ -55,7 +55,7 @@ namespace Chart.Core.Parsers
         /// The method returns false if the current token is out-of-bounds.
         /// </remarks>
         /// <returns>True, if the type matches the current token. Otherwise, false.</returns>
-        private bool Peek(TokenType type)
+        internal bool Peek(TokenType type)
         {
             return this.CurrentToken.Type == type;
         }
