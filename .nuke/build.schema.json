@@ -75,6 +75,7 @@
               "Benchmark",
               "Clean",
               "Compile",
+              "Format",
               "Metrics",
               "Restore",
               "Test"
@@ -90,6 +91,7 @@
               "Benchmark",
               "Clean",
               "Compile",
+              "Format",
               "Metrics",
               "Restore",
               "Test"
