@@ -13,9 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Shared", "Chart.Share
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Utils.Printer", "Chart.Utils.Printer\Chart.Utils.Printer.csproj", "{70DC33A2-811D-4882-8099-7BA55437C9F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Core.Parsers.Tests", "Chart.Core.Parsers.Tests\Chart.Core.Parser.Tests.csproj", "{73E29285-1196-46CA-9BF2-D2CD529B211D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Core.Parsers.Tests", "Chart.Core.Parsers.Tests\Chart.Core.Parsers.Tests.csproj", "{73E29285-1196-46CA-9BF2-D2CD529B211D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Core.Parsers.Benchmarks", "Chart.Core.Parsers.Benchmarks\Chart.Core.Parser.Benchmarks.csproj", "{FAD435DB-16E5-4994-90E1-11FF424D69B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Core.Parsers.Benchmarks", "Chart.Core.Parsers.Benchmarks\Chart.Core.Parsers.Benchmarks.csproj", "{FAD435DB-16E5-4994-90E1-11FF424D69B2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Core.TypeResolver", "Chart.Core.TypeResolver\Chart.Core.TypeResolver.csproj", "{E9BA98B8-5F64-420A-8CED-C4F1E356A663}"
 EndProject
