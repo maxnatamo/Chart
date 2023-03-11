@@ -68,7 +68,7 @@ namespace Chart.Core.Parsers
         /// The method returns false if the current token is out-of-bounds.
         /// </remarks>
         /// <returns>True, if the value matches the current token. Otherwise, false.</returns>
-        private bool Peek(string value)
+        internal bool Peek(string value)
         {
             return this.CurrentToken.Value == value;
         }
@@ -78,7 +78,7 @@ namespace Chart.Core.Parsers
         /// </summary>
         /// <param name="types">The token-types to assert for.</param>
         /// <exception cref="UnexpectedTokenException">Thrown if the assertion fails.</exception>
-        private void Expect(params TokenType[] types)
+        internal void Expect(params TokenType[] types)
         {
             if(!types.Any(v => this.Peek(v)))
             {
@@ -91,7 +91,7 @@ namespace Chart.Core.Parsers
         /// </summary>
         /// <param name="values">The values to assert for.</param>
         /// <exception cref="UnexpectedTokenException">Thrown if the assertion fails.</exception>
-        private void Expect(params string[] values)
+        internal void Expect(params string[] values)
         {
             if(!values.Any(v => this.Peek(v)))
             {
@@ -105,7 +105,7 @@ namespace Chart.Core.Parsers
         /// <remarks>
         /// If the position points to the end of the file, nothing is done.
         /// </remarks>
-        private void Skip()
+        internal void Skip()
         {
             this.CurrentTokenIndex++;
             this.CurrentToken = this.Tokenizer.GetNextToken();
@@ -115,7 +115,7 @@ namespace Chart.Core.Parsers
         /// Return UnexpectedTokenException-object with location attached as description.
         /// </summary>
         /// <returns>UnexpectedTokenException-object.</returns>
-        private Exception UnexpectedToken()
+        internal Exception UnexpectedToken()
             => new UnexpectedTokenException(this.CurrentToken.Start);
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Chart.Core.Parsers
         /// </summary>
         /// <typeparam name="T">The type of object to read.</typeparam>
         /// <returns>The non-null object retrieved, when still processing. Otherwise, null.</returns>
-        delegate T? IterateParseFunction<T>();
+        internal delegate T? IterateParseFunction<T>();
 
         /// <summary>
         /// <para>
@@ -143,7 +143,7 @@ namespace Chart.Core.Parsers
         /// </summary>
         /// <typeparam name="T">The type of object to read.</typeparam>
         /// <returns>A list of objects, of type T, found in the current buffer.</returns>
-        private List<T> IterateParse<T>(IterateParseFunction<T> parserFunction) where T : class
+        internal List<T> IterateParse<T>(IterateParseFunction<T> parserFunction) where T : class
         {
             List<T> nodes = new List<T>();
 

@@ -221,7 +221,7 @@ namespace Chart.Core.Parsers
             _ => new Token(TokenType.UNKNOWN, this.CurrentIndex, this.CurrentIndex + 1)
         };
 
-        private Token ParseCommentToken()
+        internal Token ParseCommentToken()
         {
             string value = this.GetUntil(c => (c != '\n' && c != '\r'));
 
@@ -235,7 +235,7 @@ namespace Chart.Core.Parsers
         /// Parse a name token on the current position.
         /// </summary>
         /// <returns>A valid name token.</returns>
-        private Token ParseNameToken()
+        internal Token ParseNameToken()
         {
             string name = this.GetUntil(c =>
             {
@@ -249,7 +249,7 @@ namespace Chart.Core.Parsers
         /// Parse a number token on the current position.
         /// </summary>
         /// <returns>A valid float- or int-token.</returns>
-        private Token ParseNumberToken()
+        internal Token ParseNumberToken()
         {
             NumberStyles styles = NumberStyles.Float;
 
@@ -276,7 +276,7 @@ namespace Chart.Core.Parsers
         /// Quotes are not included in the value.
         /// </remarks>
         /// <returns>A valid string token.</returns>
-        private Token ParseStringToken()
+        internal Token ParseStringToken()
         {
             string value = this.GetUntil(c => (c >= ' ' && c != '"'));
             string trimmed = value.Substring(1, value.Length - 1).Trim();
@@ -291,7 +291,7 @@ namespace Chart.Core.Parsers
         /// Quotes are not included in the value.
         /// </remarks>
         /// <returns>A valid string token.</returns>
-        private Token ParseBlockStringToken()
+        internal Token ParseBlockStringToken()
         {
             string value = this.GetUntil(str => !str.StartsWith("\"\"\""));
             string trimmed = value.Substring(3, value.Length - 3);
@@ -306,7 +306,7 @@ namespace Chart.Core.Parsers
         /// </summary>
         /// <param name="predicate">Retrieve characters until this predicate fails.</param>
         /// <returns>The next content in the source.</returns>
-        private string GetUntil(Func<char, bool> predicate)
+        internal string GetUntil(Func<char, bool> predicate)
         {
             char c;
             int idx = this.CurrentIndex;
@@ -337,7 +337,7 @@ namespace Chart.Core.Parsers
         /// <param name="predicate">Retrieve characters until this predicate fails.</param>
         /// <param name="windowSize">Size of the search window, to limit performance impact.</param>
         /// <returns>The next content in the source.</returns>
-        private string GetUntil(Func<string, bool> predicate, int windowSize = 3)
+        internal string GetUntil(Func<string, bool> predicate, int windowSize = 3)
         {
             string window = "";
             int idx = this.CurrentIndex;
@@ -373,7 +373,7 @@ namespace Chart.Core.Parsers
         /// <param name="next">The string to check for in the source.</param>
         /// <param name="matchWhole">Whether to match the whole word or not.</param>
         /// <returns>True, if the string is next in the source. Otherwise, false.</returns>
-        private bool ContainsNext(string next, bool matchWhole = true)
+        internal bool ContainsNext(string next, bool matchWhole = true)
         {
             if(this.CurrentIndex + next.Length > this.Source.Length)
             {
@@ -412,7 +412,7 @@ namespace Chart.Core.Parsers
         /// <param name="next">List of strings to check for in the source.</param>
         /// <param name="matchWhole">Whether to match the whole word or not.</param>
         /// <returns>True, if any of the inputs is next in the source. Otherwise, false.</returns>
-        private bool ContainsNext([NotNullWhen(true)] out string? match, string[] next, bool matchWhole = true)
+        internal bool ContainsNext([NotNullWhen(true)] out string? match, string[] next, bool matchWhole = true)
         {
             foreach(var v in next)
             {
@@ -433,7 +433,7 @@ namespace Chart.Core.Parsers
         /// <param name="blockString">The block quote to remove indentation for.</param>
         /// <returns>The formatted block quote.</returns>
         /// <seealso href="https://spec.graphql.org/October2021/#BlockStringValue()">Stand-in method.</seealso>
-        private string RemoveCommonIndentation(string blockString)
+        internal string RemoveCommonIndentation(string blockString)
         {
             int minIndent = int.MaxValue;
             string[] lines = blockString.Split('\n');

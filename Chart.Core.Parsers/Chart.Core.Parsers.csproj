@@ -5,6 +5,10 @@
     <ProjectReference Include="..\Chart.Shared\Chart.Shared.csproj" />
     <ProjectReference Include="..\Chart.Core.TypeResolver\Chart.Core.TypeResolver.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <InternalsVisibleTo Include="Chart.Core.Parsers.Tests" />
+  </ItemGroup>
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
