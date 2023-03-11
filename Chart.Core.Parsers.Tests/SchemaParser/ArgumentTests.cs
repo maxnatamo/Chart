@@ -272,5 +272,18 @@ namespace Chart.Core.Parsers.Tests
                 .As<GraphObjectValue>().Fields[new GraphName("prefix")]
                 .As<GraphStringValue>().Value.Should().Be("admin-");
         }
+
+        [Fact]
+        public void ArgumentWithDefaultValueThrowsDefaultValuesNotAllowedException()
+        {
+            // Arrange
+            string source = @"query { user(id: 1 = 1) }";
+
+            // Act
+            Action act = () => new SchemaParser().Parse(source);
+
+            // Assert
+            act.Should().Throw<DefaultValuesNotAllowedException>();
+        }
     }
 }
