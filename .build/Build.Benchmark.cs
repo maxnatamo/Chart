@@ -18,9 +18,7 @@ partial class Build : NukeBuild
             {
                 DotNetRun(s => s
                     .SetProjectFile(projectFile)
-                    .SetConfiguration(Configuration.Release)
-                    .EnableNoRestore()
-                    .EnableNoBuild());
+                    .SetConfiguration(Configuration.Release));
             }
         });
 

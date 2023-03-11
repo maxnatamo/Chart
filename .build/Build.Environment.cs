@@ -14,7 +14,7 @@ partial class Build
     /// </summary>
     AbsolutePath[] BenchmarkProjectFiles = 
     {
-        RootDirectory / "Chart.Core.Parsers.Benchmarks" / "Chart.Core.Parser.Benchmarks.csproj"
+        RootDirectory / "Chart.Core.Parsers.Benchmarks" / "Chart.Core.Parsers.Benchmarks.csproj"
     };
 
     /// <summary>
