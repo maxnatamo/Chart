@@ -48,34 +48,6 @@ namespace Chart.Core.Parsers
         private Token CurrentToken = new Token();
 
         /// <summary>
-        /// Increase the current depth of the document.
-        /// </summary>
-        /// <exception cref="MaxDepthReachedException">Thrown when the maximum depth of querying has been reached.</exception>
-        private void IncreaseDepth()
-        {
-            this.CurrentDepth++;
-
-            if(this.CurrentDepth > this.Options.MaxDepth)
-            {
-                throw new MaxDepthReachedException(this.CurrentDepth);
-            }
-        }
-
-        /// <summary>
-        /// Decrease the current depth of the document.
-        /// </summary>
-        /// <exception cref="UnmatchedBraceException">Thrown when the depth of the document becomes negative.</exception>
-        private void DecreaseDepth()
-        {
-            this.CurrentDepth--;
-
-            if(this.CurrentDepth < 0)
-            {
-                throw new UnmatchedBraceException(this.CurrentToken.Start);
-            }
-        }
-
-        /// <summary>
         /// Peek the type of the current token.
         /// </summary>
         /// <param name="type">The token-type to peek for.</param>
