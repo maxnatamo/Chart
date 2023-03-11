@@ -68,7 +68,7 @@ namespace Chart.Utils.Printer
             this.WriteLine(definition.ToString());
 
             this.IncreaseDepth();
-            
+
             this.WriteLine($"[GraphName] {definition.Name.ToString()}");
 
             if(definition.Arguments != null)

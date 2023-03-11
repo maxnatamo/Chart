@@ -15,7 +15,7 @@ namespace Chart.Shared.Attributes
         public object? Arguments { get; }
 
         public GraphDirectiveAttribute(string name, object? arguments = null)
-        {  
+        {
             this.Name = name;
             this.Arguments = arguments;
         }

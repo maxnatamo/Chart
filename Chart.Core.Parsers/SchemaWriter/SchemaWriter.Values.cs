@@ -144,7 +144,7 @@ namespace Chart.Core.Parsers
         protected void Visit(GraphObjectValue definition)
         {
             this.Write("{");
-    
+
             foreach(var field in definition.Fields)
             {
 

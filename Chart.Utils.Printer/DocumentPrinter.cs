@@ -27,7 +27,7 @@ namespace Chart.Utils.Printer
         /// </summary>
         public DocumentPrinter()
         {
-            this.Lines = new List<string>{ "" };
+            this.Lines = new List<string> { "" };
         }
 
         /// <summary>

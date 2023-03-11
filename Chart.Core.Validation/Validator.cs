@@ -32,7 +32,7 @@ namespace Chart.Core.Validation
         protected bool Validate(GraphDocument document, GraphDefinition definition) => definition.DefinitionKind switch
         {
             GraphDefinitionKind.Operation => this.ValidateOperation(document, (GraphOperationDefinition) definition),
-            GraphDefinitionKind.Fragment  => this.ValidateFragment(document, (GraphFragmentDefinition) definition),
+            GraphDefinitionKind.Fragment => this.ValidateFragment(document, (GraphFragmentDefinition) definition),
             _ => false
         };
     }

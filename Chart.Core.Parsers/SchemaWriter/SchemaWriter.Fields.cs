@@ -34,7 +34,7 @@ namespace Chart.Core.Parsers
             {
                 this.Visit(definition.Description);
             }
-            
+
             this.Write(definition.Name.ToString());
 
             if(definition.Arguments != null)
@@ -63,7 +63,7 @@ namespace Chart.Core.Parsers
             {
                 this.Write($"{definition.Alias.ToString()}: ");
             }
-            
+
             this.Write(definition.Name.ToString());
 
             if(definition.Arguments != null)

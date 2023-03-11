@@ -13,7 +13,7 @@ namespace Chart.Shared.Attributes
         public string Description { get; }
 
         public GraphDescriptionAttribute(string description)
-        {  
+        {
             this.Description = description;
         }
     }

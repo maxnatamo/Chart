@@ -225,25 +225,25 @@ namespace Chart.Core.Parsers
         {
             return this.CurrentToken.Value switch
             {
-                "{"             => this.ParseOperationDefinition(),
-                "query"         => this.ParseOperationDefinition(),
-                "mutation"      => this.ParseOperationDefinition(),
-                "subscription"  => this.ParseOperationDefinition(),
-                "interface"     => this.ParseInterfaceDefinition(),
-                "type"          => this.ParseObjectTypeDefinition(),
-                "input"         => this.ParseInputTypeDefinition(),
-                "scalar"        => this.ParseScalarTypeDefinition(),
-                "schema"        => this.ParseSchemaDefinition(),
-                "extend"        => this.ParseExtensionDefinition(),
-                "enum"          => this.ParseEnumDefinition(),
-                "union"         => this.ParseUnionDefinition(),
-                "fragment"      => this.ParseFragmentDefinition(),
-                "directive"     => this.ParseDirectiveDefinition(),
+                "{" => this.ParseOperationDefinition(),
+                "query" => this.ParseOperationDefinition(),
+                "mutation" => this.ParseOperationDefinition(),
+                "subscription" => this.ParseOperationDefinition(),
+                "interface" => this.ParseInterfaceDefinition(),
+                "type" => this.ParseObjectTypeDefinition(),
+                "input" => this.ParseInputTypeDefinition(),
+                "scalar" => this.ParseScalarTypeDefinition(),
+                "schema" => this.ParseSchemaDefinition(),
+                "extend" => this.ParseExtensionDefinition(),
+                "enum" => this.ParseEnumDefinition(),
+                "union" => this.ParseUnionDefinition(),
+                "fragment" => this.ParseFragmentDefinition(),
+                "directive" => this.ParseDirectiveDefinition(),
 
                 _ => throw UnexpectedToken()
             };
         }
-    
+
         /// <summary>
         /// Parse a named top-level definition with a description in the GraphQL-document, such operations, schemas, types, etc.
         /// </summary>

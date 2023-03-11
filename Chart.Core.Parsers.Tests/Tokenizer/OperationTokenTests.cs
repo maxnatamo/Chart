@@ -38,7 +38,7 @@ namespace Chart.Core.Parsers.Tests
             tokens[0].End.Should().Be(5);
             tokens[0].Type.Should().Be(TokenType.NAME);
             tokens[0].Value.Should().Be("query");
-            
+
             tokens[1].Start.Should().Be(6);
             tokens[1].End.Should().Be(15);
             tokens[1].Type.Should().Be(TokenType.NAME);

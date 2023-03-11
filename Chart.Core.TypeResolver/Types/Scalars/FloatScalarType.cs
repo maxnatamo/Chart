@@ -32,12 +32,12 @@ namespace Chart.Core.TypeResolver
         {
             return value switch
             {
-                null        => new GraphNullValue(),
-                Single      => new GraphFloatValue(Convert.ToSingle(value)),
-                Double      => new GraphFloatValue(Convert.ToSingle(value)),
-                Decimal     => new GraphFloatValue(Convert.ToSingle(value)),
+                null => new GraphNullValue(),
+                Single => new GraphFloatValue(Convert.ToSingle(value)),
+                Double => new GraphFloatValue(Convert.ToSingle(value)),
+                Decimal => new GraphFloatValue(Convert.ToSingle(value)),
 
-                _           => throw new ArgumentException("Failed to parse value.")
+                _ => throw new ArgumentException("Failed to parse value.")
             };
         }
 
@@ -46,12 +46,12 @@ namespace Chart.Core.TypeResolver
         {
             return value switch
             {
-                null        => "null",
-                Single      => value.ToString(),
-                Double      => value.ToString(),
-                Decimal     => value.ToString(),
+                null => "null",
+                Single => value.ToString(),
+                Double => value.ToString(),
+                Decimal => value.ToString(),
 
-                _           => throw new ArgumentException("Failed to parse value.")
+                _ => throw new ArgumentException("Failed to parse value.")
             };
 
             throw new ArgumentException("Failed to serialize literal.");

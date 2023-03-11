@@ -24,17 +24,17 @@ namespace Chart.Core.Parsers
 
             return this.CurrentToken.Type switch
             {
-                TokenType.INT           => this.ParseIntValue(),
-                TokenType.FLOAT         => this.ParseFloatValue(),
-                TokenType.STRING        => this.ParseStringValue(),
-                TokenType.BOOLEAN       => this.ParseBooleanValue(),
-                TokenType.NULL          => this.ParseNullValue(),
-                TokenType.NAME          => this.ParseEnumValue(),
-                TokenType.BRACKET_LEFT  => this.ParseListValue(),
-                TokenType.BRACE_LEFT    => this.ParseObjectValue(),
+                TokenType.INT => this.ParseIntValue(),
+                TokenType.FLOAT => this.ParseFloatValue(),
+                TokenType.STRING => this.ParseStringValue(),
+                TokenType.BOOLEAN => this.ParseBooleanValue(),
+                TokenType.NULL => this.ParseNullValue(),
+                TokenType.NAME => this.ParseEnumValue(),
+                TokenType.BRACKET_LEFT => this.ParseListValue(),
+                TokenType.BRACE_LEFT => this.ParseObjectValue(),
 
-                TokenType.DOLLAR_SIGN   => throw new VariableNotAllowedException(this.CurrentToken.Start),
-                _                       => throw UnexpectedToken()
+                TokenType.DOLLAR_SIGN => throw new VariableNotAllowedException(this.CurrentToken.Start),
+                _ => throw UnexpectedToken()
             };
         }
 

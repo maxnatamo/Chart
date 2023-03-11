@@ -29,10 +29,9 @@ namespace Chart.Core.Parsers.Benchmarks
         {
             uint tokenCount = 0;
 
-            Token token;
             Tokenizer tokenizer = new Tokenizer(this.Expression);
 
-            while((token = tokenizer.GetNextToken()).Type != TokenType.EOF)
+            while(tokenizer.GetNextToken().Type != TokenType.EOF)
             {
                 tokenCount++;
             }

@@ -32,19 +32,19 @@ namespace Chart.Core.TypeResolver
         {
             return value switch
             {
-                null        => new GraphNullValue(),
-                SByte       => new GraphIntValue(Convert.ToInt32(value)),
-                Int16       => new GraphIntValue(Convert.ToInt32(value)),
-                Int32       => new GraphIntValue(Convert.ToInt32(value)),
-                Int64       => new GraphIntValue(Convert.ToInt32(value)),
-                Int128      => new GraphIntValue(Convert.ToInt32(value)),
-                Byte        => new GraphIntValue(Convert.ToInt32(value)),
-                UInt16      => new GraphIntValue(Convert.ToInt32(value)),
-                UInt32      => new GraphIntValue(Convert.ToInt32(value)),
-                UInt64      => new GraphIntValue(Convert.ToInt32(value)),
-                UInt128     => new GraphIntValue(Convert.ToInt32(value)),
+                null => new GraphNullValue(),
+                SByte => new GraphIntValue(Convert.ToInt32(value)),
+                Int16 => new GraphIntValue(Convert.ToInt32(value)),
+                Int32 => new GraphIntValue(Convert.ToInt32(value)),
+                Int64 => new GraphIntValue(Convert.ToInt32(value)),
+                Int128 => new GraphIntValue(Convert.ToInt32(value)),
+                Byte => new GraphIntValue(Convert.ToInt32(value)),
+                UInt16 => new GraphIntValue(Convert.ToInt32(value)),
+                UInt32 => new GraphIntValue(Convert.ToInt32(value)),
+                UInt64 => new GraphIntValue(Convert.ToInt32(value)),
+                UInt128 => new GraphIntValue(Convert.ToInt32(value)),
 
-                _           => throw new ArgumentException("Failed to parse value.")
+                _ => throw new ArgumentException("Failed to parse value.")
             };
         }
 
@@ -53,19 +53,19 @@ namespace Chart.Core.TypeResolver
         {
             return value switch
             {
-                null        => "null",
-                SByte       => value.ToString(),
-                Int16       => value.ToString(),
-                Int32       => value.ToString(),
-                Int64       => value.ToString(),
-                Int128      => value.ToString(),
-                Byte        => value.ToString(),
-                UInt16      => value.ToString(),
-                UInt32      => value.ToString(),
-                UInt64      => value.ToString(),
-                UInt128     => value.ToString(),
+                null => "null",
+                SByte => value.ToString(),
+                Int16 => value.ToString(),
+                Int32 => value.ToString(),
+                Int64 => value.ToString(),
+                Int128 => value.ToString(),
+                Byte => value.ToString(),
+                UInt16 => value.ToString(),
+                UInt32 => value.ToString(),
+                UInt64 => value.ToString(),
+                UInt128 => value.ToString(),
 
-                _           => throw new ArgumentException("Failed to parse value.")
+                _ => throw new ArgumentException("Failed to parse value.")
             };
 
             throw new ArgumentException("Failed to serialize literal.");

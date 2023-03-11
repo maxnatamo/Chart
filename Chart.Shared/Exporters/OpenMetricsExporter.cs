@@ -100,7 +100,7 @@ namespace Chart.Shared.Exporters
                     { "arch", summary.HostEnvironmentInfo.Architecture },
                     { "dotnet_version", summary.HostEnvironmentInfo.DotNetSdkVersion.Value },
                 };
-                
+
                 this.ExportReport(logger, summary.HostEnvironmentInfo, report, labels);
             }
         }
@@ -262,7 +262,7 @@ namespace Chart.Shared.Exporters
 
             // TODO: Check whether another value would be more appropriate.
             logger.WriteLine(metric.Value?.ToString() ?? "nan");
-            
+
             logger.WriteLine();
         }
     }

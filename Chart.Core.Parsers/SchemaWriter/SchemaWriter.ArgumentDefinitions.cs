@@ -14,7 +14,7 @@ namespace Chart.Core.Parsers
             {
                 return;
             }
-            
+
             this.WriteLine("(");
             this.IncreaseDepth();
 

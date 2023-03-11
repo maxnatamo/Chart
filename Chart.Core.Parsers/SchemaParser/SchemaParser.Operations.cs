@@ -13,9 +13,9 @@ namespace Chart.Core.Parsers
         {
             GraphOperationDefinition def = this.CurrentToken.Value switch
             {
-                "query"         => new GraphQueryOperation(),
-                "mutation"      => new GraphMutationOperation(),
-                "subscription"  => new GraphSubscriptionOperation(),
+                "query" => new GraphQueryOperation(),
+                "mutation" => new GraphMutationOperation(),
+                "subscription" => new GraphSubscriptionOperation(),
 
                 // If nothing is specified, default to query-operation.
                 _ => new GraphQueryOperation()

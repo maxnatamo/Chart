@@ -19,7 +19,7 @@ namespace Chart.Utils.Printer
             }
 
             definition.Selections.ForEach(this.Visit);
-            
+
             this.DecreaseDepth();
         }
 

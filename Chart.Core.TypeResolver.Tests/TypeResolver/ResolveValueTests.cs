@@ -42,7 +42,7 @@ namespace Chart.Core.TypeResolver.Tests
             resolver.RegisterType<Book>();
 
             // Act
-            GraphValue value = resolver.ResolveValue(new List<Book>{ new Book() });
+            GraphValue value = resolver.ResolveValue(new List<Book> { new Book() });
 
             // Assert
             value.ValueKind.Should().Be(GraphValueKind.List);

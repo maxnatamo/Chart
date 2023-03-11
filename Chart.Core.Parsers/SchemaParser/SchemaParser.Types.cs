@@ -116,8 +116,8 @@ namespace Chart.Core.Parsers
         {
             return this.CurrentToken.Type switch
             {
-                TokenType.NAME          => this.ParseNamedType(),
-                TokenType.BRACKET_LEFT  => this.ParseListType(),
+                TokenType.NAME => this.ParseNamedType(),
+                TokenType.BRACKET_LEFT => this.ParseListType(),
 
                 _ => throw UnexpectedToken()
             };
@@ -131,7 +131,7 @@ namespace Chart.Core.Parsers
         private GraphNamedType ParseNamedType()
         {
             this.Expect(TokenType.NAME);
-    
+
             GraphNamedType def = new GraphNamedType
             {
                 Name = new GraphName(this.CurrentToken.Value)

@@ -29,12 +29,12 @@ namespace Chart.Utils.Printer
 
             this.WriteLine($"[GraphName] {definition.Name.ToString()}");
             this.WriteLine($"[GraphType] {definition.Type.ToString()}");
-            
+
             if(definition.DefaultValue != null)
             {
                 this.Visit(definition.DefaultValue);
             }
-            
+
             if(definition.Directives != null)
             {
                 this.Visit(definition.Directives);

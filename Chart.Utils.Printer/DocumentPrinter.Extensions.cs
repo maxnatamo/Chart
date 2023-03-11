@@ -14,7 +14,7 @@ namespace Chart.Utils.Printer
             {
                 this.Visit(definition.Directives);
             }
-            
+
             switch(definition.ExtensionKind)
             {
                 case GraphExtensionKind.Scalar:

@@ -14,8 +14,8 @@ namespace Chart.Shared.Attributes
     {
         public GraphName Name { get; protected set; }
 
-        public GraphNameAttribute(string name)  
-        {  
+        public GraphNameAttribute(string name)
+        {
             this.Name = new GraphName(name);
         }
     }

@@ -14,7 +14,7 @@ namespace Chart.Utils.Printer
             {
                 this.Visit(definition.Directives);
             }
-            
+
             switch(definition.TypeKind)
             {
                 case GraphTypeDefinitionKind.Object:
@@ -67,7 +67,7 @@ namespace Chart.Utils.Printer
         /// <param name="definition">The definition to descend into.</param>
         protected void Visit(GraphScalarType definition)
         {
-            
+
         }
     }
 }

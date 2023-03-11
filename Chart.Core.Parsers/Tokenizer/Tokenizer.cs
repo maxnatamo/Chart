@@ -63,7 +63,7 @@ namespace Chart.Core.Parsers
             this.Source = source;
             this.CurrentIndex = 0;
         }
-        
+
         /// <summary>
         /// Get the next token in the document.
         /// </summary>
@@ -95,7 +95,7 @@ namespace Chart.Core.Parsers
             {
                 return new Token(TokenType.EOF, this.CurrentIndex, this.CurrentIndex);
             }
-            
+
             char firstChar = this.Source[this.CurrentIndex];
 
             if(firstChar < ' ' && firstChar != '\t' && firstChar != '\n')
@@ -118,7 +118,7 @@ namespace Chart.Core.Parsers
                 return new Token(TokenType.SPREAD, this.CurrentIndex, this.CurrentIndex + 3);
             }
 
-            if(this.ContainsNext(out match, new string[]{ "true", "false" }))
+            if(this.ContainsNext(out match, new string[] { "true", "false" }))
             {
                 return new Token(TokenType.BOOLEAN, match, this.CurrentIndex, this.CurrentIndex + match.Length);
             }

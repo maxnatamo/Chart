@@ -7,9 +7,9 @@ namespace Chart.Shared.Attributes
     )]
     public class GraphIgnoreAttribute : Attribute
     {
-        public GraphIgnoreAttribute()  
-        {  
-            
+        public GraphIgnoreAttribute()
+        {
+
         }
     }
 }

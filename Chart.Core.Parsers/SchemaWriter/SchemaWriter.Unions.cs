@@ -37,7 +37,7 @@ namespace Chart.Core.Parsers
         public void Visit(GraphUnionMembers definition)
         {
             this.Write(" = ");
-            
+
             for(int i = 0; i < definition.Members.Count; i++)
             {
                 this.Write(definition.Members[i].ToString());

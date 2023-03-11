@@ -44,7 +44,7 @@ namespace Chart.Core.TypeResolver.Tests
             // Assert
             resolver.ResolveType<List<Book>>()
                 .TypeKind.Should().Be(GraphTypeKind.List);
-    
+
             resolver.ResolveType<List<Book>>()
                 .As<GraphListType>().UnderlyingType
                 .As<GraphNamedType>().Name.Value.Should().Be("Book");

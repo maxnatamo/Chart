@@ -13,7 +13,7 @@ namespace Chart.Utils.Printer
             this.WriteLine(definition.ToString());
 
             this.IncreaseDepth();
-    
+
             switch(definition.ValueKind)
             {
                 case GraphValueKind.Variable:

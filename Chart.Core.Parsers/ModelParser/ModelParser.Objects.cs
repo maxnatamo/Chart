@@ -53,7 +53,7 @@ namespace Chart.Core.Parsers
 
             return def;
         }
-        
+
         /// <summary>
         /// Parse a MemberInfo-struct into a GraphField-object.
         /// </summary>
@@ -65,9 +65,9 @@ namespace Chart.Core.Parsers
         {
             return info.MemberType switch
             {
-                MemberTypes.Field       => this.ParseFieldsField((FieldInfo) info),
-                MemberTypes.Property    => this.ParsePropertyField((PropertyInfo) info),
-                MemberTypes.Method      => this.ParseMethodField((MethodInfo) info),
+                MemberTypes.Field => this.ParseFieldsField((FieldInfo) info),
+                MemberTypes.Property => this.ParsePropertyField((PropertyInfo) info),
+                MemberTypes.Method => this.ParseMethodField((MethodInfo) info),
 
                 _ => throw new NotImplementedException()
             };

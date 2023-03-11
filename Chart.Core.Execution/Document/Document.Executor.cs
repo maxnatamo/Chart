@@ -17,7 +17,7 @@ namespace Chart.Core.Execution
         public string Execute(Action<ExecutionContext> action)
         {
             ExecutionContext ctx = new ExecutionContext();
-            
+
             // Context is passed via reference
             action(ctx);
 
@@ -65,7 +65,7 @@ namespace Chart.Core.Execution
             {
                 GraphFieldSelection field = (GraphFieldSelection) selection;
 
-                
+
             }
 
             return result;

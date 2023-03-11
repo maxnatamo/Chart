@@ -10,7 +10,7 @@ namespace Chart.Shared.Attributes
         public Type Type { get; }
 
         public GraphTypeAttribute(Type type)
-        {  
+        {
             this.Type = type;
         }
     }

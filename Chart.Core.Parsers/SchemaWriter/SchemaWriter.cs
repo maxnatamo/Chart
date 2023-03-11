@@ -23,7 +23,7 @@ namespace Chart.Core.Parsers
         /// </summary>
         public SchemaWriter()
         {
-            this.Lines = new List<string>{ "" };
+            this.Lines = new List<string> { "" };
         }
 
         /// <summary>

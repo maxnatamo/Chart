@@ -20,15 +20,15 @@ namespace Chart.Core.Parsers
 
             return this.CurrentToken.Value switch
             {
-                "scalar"    => this.ParseScalarExtension(),
-                "type"      => this.ParseObjectExtension(),
-                "schema"    => this.ParseSchemaExtension(),
+                "scalar" => this.ParseScalarExtension(),
+                "type" => this.ParseObjectExtension(),
+                "schema" => this.ParseSchemaExtension(),
                 "interface" => this.ParseInterfaceExtension(),
-                "union"     => this.ParseUnionExtension(),
-                "enum"      => this.ParseEnumExtension(),
-                "input"     => this.ParseInputExtension(),
+                "union" => this.ParseUnionExtension(),
+                "enum" => this.ParseEnumExtension(),
+                "input" => this.ParseInputExtension(),
 
-                _           => throw UnexpectedToken()
+                _ => throw UnexpectedToken()
             };
         }
 
@@ -176,11 +176,11 @@ namespace Chart.Core.Parsers
             {
                 def.Directives = this.ParseDirectives();
             }
-            
+
             if(this.Peek(TokenType.EQUAL))
             {
                 def.Members = new GraphUnionMembers();
-                
+
                 this.Skip();
 
                 while(true)
@@ -230,7 +230,7 @@ namespace Chart.Core.Parsers
             {
                 def.Directives = this.ParseDirectives();
             }
-            
+
             if(this.Peek(TokenType.BRACE_LEFT))
             {
                 def.Values = this.ParseEnumValuesDefinition();
@@ -260,7 +260,7 @@ namespace Chart.Core.Parsers
             {
                 def.Directives = this.ParseDirectives();
             }
-            
+
             if(this.Peek(TokenType.BRACE_LEFT))
             {
                 def.Arguments = ParseArgumentsDefinition(

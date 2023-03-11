@@ -106,7 +106,7 @@ namespace Chart.Core.TypeResolver
                 BindingFlags.Instance |
                 BindingFlags.Public
             );
-    
+
             for(int i = 0; i < methodInfos.Count(); i++)
             {
                 if(methodInfos[i].IsSpecialName)
@@ -134,7 +134,7 @@ namespace Chart.Core.TypeResolver
         public bool Visited(Type type)
             => this.VisitedTypes.Contains(type);
 
-            /// <summary>
+        /// <summary>
         /// Resolve a Type into a GraphType-object.
         /// </summary>
         /// <typeparam name="T">The type to resolve a GraphType.</typeparam>

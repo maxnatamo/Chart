@@ -15,13 +15,13 @@ namespace Chart.Core.Parsers.Tests
             // Assert
             idx.Should().Be(3);
         }
-    
+
         [Fact]
         public void IndexNotAnyOfReturnsTheIndexOfFirstCharacter()
         {
             // Arrange
             string str = "  \ta";
-            char[] c = {' ', '\t', '\n', '\r'};
+            char[] c = { ' ', '\t', '\n', '\r' };
 
             // Act
             int idx = str.IndexNotOfAny(c);

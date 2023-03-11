@@ -34,7 +34,7 @@ namespace Chart.Core.Parsers.Tests
                 .As<GraphOperationDefinition>().Variables?.Variables[0].Type
                 .As<GraphNamedType>().Name.Value.Should().Be("Int");
 
-            
+
             document.Definitions[0]
                 .As<GraphOperationDefinition>().Variables?.Variables[0].Type
                 .As<GraphNamedType>().NonNullable.Should().BeFalse();
@@ -53,7 +53,7 @@ namespace Chart.Core.Parsers.Tests
             document.Definitions[0]
                 .As<GraphOperationDefinition>().Variables?.Variables[0]
                 .DefaultValue.Should().NotBeNull();
-    
+
             document.Definitions[0]
                 .As<GraphOperationDefinition>().Variables?.Variables[0]
                 .As<GraphVariable>().DefaultValue

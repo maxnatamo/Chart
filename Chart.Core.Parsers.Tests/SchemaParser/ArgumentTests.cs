@@ -174,7 +174,7 @@ namespace Chart.Core.Parsers.Tests
                 .As<GraphFieldSelection>().Arguments?.Arguments[0].Value
                 .As<GraphListValue>().Values[0]
                 .As<GraphStringValue>().Value.Should().Be("element1");
-            
+
             document.Definitions[0]
                 .As<GraphOperationDefinition>().Selections.Selections[0]
                 .As<GraphFieldSelection>().Arguments?.Arguments[1].Value.ValueKind

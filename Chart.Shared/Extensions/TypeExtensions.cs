@@ -12,7 +12,7 @@ namespace Chart.Shared.Extensions
         public static bool IsEnumerable(this Type type)
             => typeof(System.Collections.IEnumerable).IsAssignableFrom(type);
 
-            /// <summary>
+        /// <summary>
         /// Get all properties of a type parameter.
         /// </summary>
         /// <param name="type">The type to retrieve properties from.</param>

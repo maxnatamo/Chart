@@ -49,10 +49,10 @@ namespace Chart.Core.TypeResolver
         {
             return value switch
             {
-                null        => "null",
-                Boolean     => value.ToString()?.ToLower(),
+                null => "null",
+                Boolean => value.ToString()?.ToLower(),
 
-                _           => throw new ArgumentException("Failed to parse value.")
+                _ => throw new ArgumentException("Failed to parse value.")
             };
 
             throw new ArgumentException("Failed to serialize.");
