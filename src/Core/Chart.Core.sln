@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Core", "src\Chart.Core.csproj", "{C384F70B-A8E3-475C-A236-D28CC3E45C6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Core.Tests", "test\Chart.Core.Tests.csproj", "{421C2576-22A8-40F3-8F9E-1CBA91262BD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C384F70B-A8E3-475C-A236-D28CC3E45C6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C384F70B-A8E3-475C-A236-D28CC3E45C6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C384F70B-A8E3-475C-A236-D28CC3E45C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C384F70B-A8E3-475C-A236-D28CC3E45C6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{421C2576-22A8-40F3-8F9E-1CBA91262BD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{421C2576-22A8-40F3-8F9E-1CBA91262BD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{421C2576-22A8-40F3-8F9E-1CBA91262BD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{421C2576-22A8-40F3-8F9E-1CBA91262BD9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
