@@ -1,0 +1,6 @@
+﻿[GraphInterfaceExtension]
+   [GraphName] Test
+   [GraphFields]
+      [GraphField]
+         [GraphName] age
+         [GraphType] Int

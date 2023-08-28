@@ -1,0 +1,69 @@
+﻿{
+  "TypeKind": "Object",
+  "Fields": {
+    "Fields": [
+      {
+        "Name": {
+          "Value": "field",
+          "Location": null
+        },
+        "Type": {
+          "TypeKind": "Named",
+          "Name": {
+            "Value": "String",
+            "Location": null
+          },
+          "NonNullable": true,
+          "Location": null
+        },
+        "Description": null,
+        "Arguments": {
+          "Arguments": [
+            {
+              "Name": {
+                "Value": "argument",
+                "Location": null
+              },
+              "Description": null,
+              "Type": {
+                "TypeKind": "Named",
+                "Name": {
+                  "Value": "Int",
+                  "Location": null
+                },
+                "NonNullable": true,
+                "Location": null
+              },
+              "DefaultValue": null,
+              "Directives": {
+                "Directives": [],
+                "Location": null
+              },
+              "Location": null
+            }
+          ],
+          "Location": null
+        },
+        "Directives": {
+          "Directives": [],
+          "Location": null
+        },
+        "Location": null
+      }
+    ],
+    "Location": null
+  },
+  "Interface": null,
+  "DefinitionKind": "Type",
+  "Executable": false,
+  "Directives": {
+    "Directives": [],
+    "Location": null
+  },
+  "Name": {
+    "Value": "ObjectWithMethodArgument",
+    "Location": null
+  },
+  "Description": null,
+  "Location": null
+}

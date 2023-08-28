@@ -1,0 +1,9 @@
+﻿[GraphArguments]
+   [GraphArgument]
+      [GraphName] name
+      [GraphStringValue]
+         [GraphValue] Max
+   [GraphArgument]
+      [GraphName] age
+      [GraphIntValue]
+         [GraphValue] 23

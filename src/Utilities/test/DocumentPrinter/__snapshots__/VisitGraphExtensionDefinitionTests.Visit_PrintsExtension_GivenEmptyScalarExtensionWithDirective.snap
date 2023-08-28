@@ -1,0 +1,5 @@
+﻿[GraphScalarExtension]
+   [GraphName] Test
+   [GraphDirectives]
+      [GraphDirective]
+         [GraphName] ignore

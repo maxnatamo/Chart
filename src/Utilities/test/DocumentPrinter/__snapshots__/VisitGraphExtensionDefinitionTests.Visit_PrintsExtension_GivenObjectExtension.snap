@@ -1,0 +1,10 @@
+﻿[GraphObjectExtension]
+   [GraphName] Test
+   [GraphFields]
+      [GraphField]
+         [GraphName] age
+         [GraphType] Int
+      [GraphField]
+         [GraphName] ageInDogYears
+         [GraphType] Int
+         [GraphDescription] Super useful description!

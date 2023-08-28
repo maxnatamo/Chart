@@ -1,0 +1,5 @@
+﻿[GraphEnumDefinition]
+   [GraphName] Direction
+   [GraphDirectives]
+      [GraphDirective]
+         [GraphName] include

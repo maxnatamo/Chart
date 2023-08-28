@@ -1,0 +1,40 @@
+name: Staging
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+
+jobs:
+  pack:
+    name: Pack
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+  
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+            dotnet-version: | 
+              6.0.x
+              7.0.x
+
+      - name: Cache .nuke/temp, ~/.nuget/packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            .nuke/temp
+            ~/.nuget/packages
+          key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj') }}
+
+      - name: Run './build.cmd Pack'
+        run: ./build.cmd Pack
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: nuget
+          path: artifacts/nuget

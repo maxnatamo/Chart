@@ -1,0 +1,7 @@
+﻿[GraphArgumentsDefinition]
+   [GraphArgumentDefinition]
+      [GraphName] filter
+      [GraphType] [String]
+      [GraphListValue]
+         [GraphStringValue]
+            [GraphValue] Max

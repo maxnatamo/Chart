@@ -1,0 +1,5 @@
+﻿[GraphDirectiveDefinition]
+   [GraphName] directive
+   [GraphDescription] A cool description.
+   [GraphDirectiveLocations]
+      [GraphName] QUERY

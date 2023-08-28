@@ -1,0 +1,6 @@
+﻿[GraphUnionDefinition]
+   [GraphName] Creature
+   [GraphUnionMembers]
+      [GraphName] Human
+      [GraphName] Dog
+      [GraphName] Cat

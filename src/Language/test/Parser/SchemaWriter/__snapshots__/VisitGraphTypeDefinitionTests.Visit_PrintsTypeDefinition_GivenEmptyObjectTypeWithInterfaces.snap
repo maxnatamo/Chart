@@ -1,0 +1,1 @@
+﻿type Person implements Creature & OxygenBased

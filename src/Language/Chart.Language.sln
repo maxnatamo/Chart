@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Language", "src\Chart.Language.csproj", "{18D54ED1-9778-49D6-9675-AC3DFB0B37C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Language.Tests", "test\Chart.Language.Tests.csproj", "{143058A4-7E4F-4568-BBC8-C823C227FC1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chart.Language.Benchmarks", "benchmark\Chart.Language.Benchmarks.csproj", "{1F6BE0E7-98D7-48B0-85E2-A3F4D78ACE9A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{18D54ED1-9778-49D6-9675-AC3DFB0B37C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18D54ED1-9778-49D6-9675-AC3DFB0B37C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18D54ED1-9778-49D6-9675-AC3DFB0B37C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18D54ED1-9778-49D6-9675-AC3DFB0B37C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{143058A4-7E4F-4568-BBC8-C823C227FC1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{143058A4-7E4F-4568-BBC8-C823C227FC1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{143058A4-7E4F-4568-BBC8-C823C227FC1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{143058A4-7E4F-4568-BBC8-C823C227FC1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F6BE0E7-98D7-48B0-85E2-A3F4D78ACE9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F6BE0E7-98D7-48B0-85E2-A3F4D78ACE9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F6BE0E7-98D7-48B0-85E2-A3F4D78ACE9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F6BE0E7-98D7-48B0-85E2-A3F4D78ACE9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,7 @@
+﻿[GraphUnionExtension]
+   [GraphName] Direction
+   [GraphUnionMembers]
+      [GraphName] NORTH
+      [GraphName] EAST
+      [GraphName] WEST
+      [GraphName] SOUTH

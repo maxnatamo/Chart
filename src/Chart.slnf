@@ -1,0 +1,14 @@
+{
+  "solution": {
+    "path": "Chart.sln",
+    "projects": [
+      "Benchmarks\\src\\Chart.Benchmarks.csproj",
+      "Core\\src\\Chart.Core.csproj",
+      "Core\\test\\Chart.Core.Tests.csproj",
+      "Language\\src\\Chart.Language.csproj",
+      "Language\\test\\Chart.Language.Tests.csproj",
+      "Utilities\\src\\Chart.Utilities.csproj",
+      "Utilities\\test\\Chart.Utilities.Tests.csproj"
+    ]
+  }
+}

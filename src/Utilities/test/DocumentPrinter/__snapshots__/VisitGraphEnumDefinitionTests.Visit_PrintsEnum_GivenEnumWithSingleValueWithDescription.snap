@@ -1,0 +1,6 @@
+﻿[GraphEnumDefinition]
+   [GraphName] enumeration
+   [GraphEnumDefinitionValues]
+      [GraphEnumDefinitionValue]
+         [GraphName] ENUM_VALUE_ONE
+         [GraphDescription] The most bare-bone enum ever.

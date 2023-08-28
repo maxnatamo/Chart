@@ -1,0 +1,7 @@
+﻿[GraphFieldSelection]
+   [GraphName] person
+   [GraphSelectionSet]
+      [GraphFieldSelection]
+         [GraphName] name
+      [GraphFieldSelection]
+         [GraphName] age

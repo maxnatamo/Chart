@@ -1,0 +1,3 @@
+﻿enum enumeration {
+  ENUM_VALUE_ONE @obselete(by: "v1.2")
+}

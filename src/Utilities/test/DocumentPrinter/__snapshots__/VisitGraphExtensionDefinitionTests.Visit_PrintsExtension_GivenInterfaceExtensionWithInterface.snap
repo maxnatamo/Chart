@@ -1,0 +1,4 @@
+﻿[GraphInterfaceExtension]
+   [GraphName] Test
+   [GraphInterfaces]
+      [GraphName] ITest

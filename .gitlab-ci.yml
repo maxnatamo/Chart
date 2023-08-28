@@ -1,0 +1,34 @@
+stages:
+  - test
+  - build
+
+format:
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:7.0
+  script:
+    - ./build.cmd Format
+
+test:
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:7.0
+  script:
+    - ./build.cmd Test
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+  only:
+    - merge_requests
+    - branches
+    
+benchmark:
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:7.0
+  script:
+    - ./build.cmd Metrics
+  artifacts:
+    reports:
+      metrics: metrics.txt
+  only:
+    - merge_requests

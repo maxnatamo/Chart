@@ -1,0 +1,3 @@
+﻿[GraphType] Scalar
+   [GraphName] DateTime
+   [GraphDescription] A data type for dates with times

@@ -1,0 +1,1 @@
+﻿union Creature = Human | Dog | Cat

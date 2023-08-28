@@ -1,0 +1,5 @@
+﻿[GraphType] Object
+   [GraphName] Person
+   [GraphInterfaces]
+      [GraphName] Creature
+      [GraphName] OxygenBased

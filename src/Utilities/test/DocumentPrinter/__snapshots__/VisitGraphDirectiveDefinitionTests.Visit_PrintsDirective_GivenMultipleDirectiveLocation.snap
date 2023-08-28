@@ -1,0 +1,6 @@
+﻿[GraphDirectiveDefinition]
+   [GraphName] directive
+   [GraphDirectiveLocations]
+      [GraphName] QUERY
+      [GraphName] MUTATION
+      [GraphName] SUBSCRIPTION

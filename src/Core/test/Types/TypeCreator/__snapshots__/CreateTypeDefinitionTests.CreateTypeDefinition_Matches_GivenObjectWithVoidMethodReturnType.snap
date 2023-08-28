@@ -1,0 +1,20 @@
+﻿{
+  "TypeKind": "Object",
+  "Fields": {
+    "Fields": [],
+    "Location": null
+  },
+  "Interface": null,
+  "DefinitionKind": "Type",
+  "Executable": false,
+  "Directives": {
+    "Directives": [],
+    "Location": null
+  },
+  "Name": {
+    "Value": "ObjectWithVoidMethodReturnType",
+    "Location": null
+  },
+  "Description": null,
+  "Location": null
+}

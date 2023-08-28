@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <AssemblyName>Chart.Utilities.Tests</AssemblyName>
+    <RootNamespace>Chart.Utilities</RootNamespace>
+  </PropertyGroup>
+
+</Project>

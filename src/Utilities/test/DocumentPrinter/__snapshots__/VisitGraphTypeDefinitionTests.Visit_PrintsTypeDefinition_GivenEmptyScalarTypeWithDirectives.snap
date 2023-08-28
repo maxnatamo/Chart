@@ -1,0 +1,5 @@
+﻿[GraphType] Scalar
+   [GraphName] DateTime
+   [GraphDirectives]
+      [GraphDirective]
+         [GraphName] deprecated

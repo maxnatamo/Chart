@@ -1,0 +1,5 @@
+﻿[GraphDirectiveDefinition]
+   [GraphName] directive
+   [GraphValue] Repeatable
+   [GraphDirectiveLocations]
+      [GraphName] QUERY

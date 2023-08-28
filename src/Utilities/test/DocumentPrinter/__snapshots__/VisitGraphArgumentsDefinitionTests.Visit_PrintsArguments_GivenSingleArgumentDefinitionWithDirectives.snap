@@ -1,0 +1,9 @@
+﻿[GraphArgumentsDefinition]
+   [GraphArgumentDefinition]
+      [GraphName] filter
+      [GraphType] [String]
+      [GraphDirectives]
+         [GraphDirective]
+            [GraphName] include
+         [GraphDirective]
+            [GraphName] skip

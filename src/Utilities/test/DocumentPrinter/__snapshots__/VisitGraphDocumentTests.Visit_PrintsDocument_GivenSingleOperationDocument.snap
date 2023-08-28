@@ -1,0 +1,5 @@
+﻿[GraphDocument]
+   [GraphOperation] Query
+      [GraphSelectionSet]
+         [GraphFieldSelection]
+            [GraphName] admin

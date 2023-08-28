@@ -1,0 +1,7 @@
+﻿[GraphFieldSelection]
+   [GraphName] name
+   [GraphArguments]
+      [GraphArgument]
+         [GraphName] where
+         [GraphStringValue]
+            [GraphValue] age >= 18

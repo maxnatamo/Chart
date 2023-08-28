@@ -1,0 +1,20 @@
+{
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/*.AssemblyInfo.cs": true
+  },
+  "omnisharp.projectFilesExcludePattern": "**/node_modules/**,**/.git/**,**/bower_components/**",
+  "editor.rulers": [0, 120],
+  "omnisharp.enableEditorConfigSupport": true,
+  "files.trimTrailingWhitespace": true,
+  "files.associations": {
+    "*.Build.props": "xml",
+    "*.Build.targets": "xml",
+  },
+  "dotnet.defaultSolution": "src/Chart.sln",
+  "markdown.styles": [
+      "https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+  ]
+}

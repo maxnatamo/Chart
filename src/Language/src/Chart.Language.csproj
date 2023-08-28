@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Chart.Language</PackageId>
+    <AssemblyName>Chart.Language</AssemblyName>
+    <RootNamespace>Chart.Language</RootNamespace>
+  </PropertyGroup>
+
+</Project>

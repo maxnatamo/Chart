@@ -1,0 +1,4 @@
+﻿"""
+A cool description.
+"""
+directive @directive on QUERY

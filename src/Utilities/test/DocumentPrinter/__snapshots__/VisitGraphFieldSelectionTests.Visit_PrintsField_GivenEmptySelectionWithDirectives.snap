@@ -1,0 +1,10 @@
+﻿[GraphFieldSelection]
+   [GraphName] name
+   [GraphDirectives]
+      [GraphDirective]
+         [GraphName] include
+         [GraphArguments]
+            [GraphArgument]
+               [GraphName] if
+               [GraphVariableValue]
+                  [GraphValue] nameIncluded

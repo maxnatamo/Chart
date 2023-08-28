@@ -1,0 +1,5 @@
+﻿[GraphArguments]
+   [GraphArgument]
+      [GraphName] name
+      [GraphStringValue]
+         [GraphValue] Max

@@ -1,0 +1,6 @@
+﻿(
+  """
+  An optional filter of the queries.
+  """
+  filter: [String]
+)

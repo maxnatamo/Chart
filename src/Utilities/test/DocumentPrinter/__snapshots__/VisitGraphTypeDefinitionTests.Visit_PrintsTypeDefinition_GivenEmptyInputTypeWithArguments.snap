@@ -1,0 +1,6 @@
+﻿[GraphInputDefinition]
+   [GraphName] Person
+   [GraphInputFieldsDefinition]
+      [GraphArgumentDefinition]
+         [GraphName] name
+         [GraphType] String

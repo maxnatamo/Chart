@@ -1,0 +1,46 @@
+﻿{
+  "TypeKind": "Object",
+  "Fields": {
+    "Fields": [
+      {
+        "Name": {
+          "Value": "ExplicitField",
+          "Location": null
+        },
+        "Type": {
+          "TypeKind": "Named",
+          "Name": {
+            "Value": "String",
+            "Location": null
+          },
+          "NonNullable": true,
+          "Location": null
+        },
+        "Description": null,
+        "Arguments": {
+          "Arguments": [],
+          "Location": null
+        },
+        "Directives": {
+          "Directives": [],
+          "Location": null
+        },
+        "Location": null
+      }
+    ],
+    "Location": null
+  },
+  "Interface": null,
+  "DefinitionKind": "Type",
+  "Executable": false,
+  "Directives": {
+    "Directives": [],
+    "Location": null
+  },
+  "Name": {
+    "Value": "ObjectWithNamedMethod",
+    "Location": null
+  },
+  "Description": null,
+  "Location": null
+}

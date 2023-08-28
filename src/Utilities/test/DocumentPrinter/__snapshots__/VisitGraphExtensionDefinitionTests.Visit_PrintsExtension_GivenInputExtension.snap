@@ -1,0 +1,6 @@
+﻿[GraphInputExtension]
+   [GraphName] Direction
+   [GraphArgumentsDefinition]
+      [GraphArgumentDefinition]
+         [GraphName] test
+         [GraphType] String

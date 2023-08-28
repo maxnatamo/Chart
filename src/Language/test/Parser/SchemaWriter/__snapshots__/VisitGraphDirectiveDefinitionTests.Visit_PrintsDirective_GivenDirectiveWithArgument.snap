@@ -1,0 +1,3 @@
+﻿directive @directive(
+  argument1: String
+) on QUERY

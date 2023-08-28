@@ -1,0 +1,9 @@
+"chart":
+  - "src/**/*"
+
+"documentation":
+  - "docs/**/*.md"
+
+"ci/cd":
+  - ".build/**/*"
+  - ".github/**/*"

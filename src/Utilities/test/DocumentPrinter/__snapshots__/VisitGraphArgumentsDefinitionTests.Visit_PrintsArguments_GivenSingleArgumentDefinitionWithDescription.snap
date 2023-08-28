@@ -1,0 +1,5 @@
+﻿[GraphArgumentsDefinition]
+   [GraphArgumentDefinition]
+      [GraphName] filter
+      [GraphType] [String]
+      [GraphDescription] An optional filter of the queries.

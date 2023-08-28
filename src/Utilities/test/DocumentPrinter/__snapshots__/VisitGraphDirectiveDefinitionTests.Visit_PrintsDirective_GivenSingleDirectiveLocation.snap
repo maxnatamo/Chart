@@ -1,0 +1,4 @@
+﻿[GraphDirectiveDefinition]
+   [GraphName] directive
+   [GraphDirectiveLocations]
+      [GraphName] QUERY

@@ -1,0 +1,6 @@
+﻿[GraphSchemaExtension]
+   [GraphName] Test
+   [GraphSchemaValues]
+      [GraphSchemaValue]
+         [GraphOperation] query
+         [GraphType] Query
