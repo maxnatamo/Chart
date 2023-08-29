@@ -493,7 +493,7 @@ namespace Chart.Language
         /// <returns>True, if any of the inputs is next in the source. Otherwise, false.</returns>
         internal bool ContainsNext([NotNullWhen(true)] out string? match, string[] next, bool matchWhole = true)
         {
-            match = next.FirstOrDefault(v => this.ContainsNext(v, matchWhole));
+            match = next.ToList().Find(v => this.ContainsNext(v, matchWhole));
             return match is not null;
         }
 

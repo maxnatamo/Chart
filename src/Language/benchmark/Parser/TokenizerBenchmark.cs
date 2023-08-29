@@ -11,14 +11,13 @@ namespace Chart.Language.Parsers.Benchmarks
         [ParamsSource(nameof(GetGraphTestFiles))]
         public string QueryFile = "";
 
-        private string queryFileContent = "";
         private Tokenizer Tokenizer = new();
 
         [GlobalSetup]
         public void Setup()
         {
-            this.queryFileContent = this.ReadTestFile(this.QueryFile);
-            this.Tokenizer = new Tokenizer(this.queryFileContent);
+            string queryFileContent = this.ReadTestFile(this.QueryFile);
+            this.Tokenizer = new Tokenizer(queryFileContent);
         }
 
         [Benchmark]

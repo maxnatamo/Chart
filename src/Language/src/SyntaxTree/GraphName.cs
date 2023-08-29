@@ -6,7 +6,7 @@ namespace Chart.Language.SyntaxTree
     /// Definition of a type in the GraphQL-document.
     /// </summary>
     /// <seealso href="https://spec.graphql.org/October2021/#Name">Original documentation</seealso>
-    public partial class GraphName : IGraphNode, ICloneable, IEquatable<GraphName>
+    public sealed partial class GraphName : IGraphNode, ICloneable, IEquatable<GraphName>
     {
         [GeneratedRegex(@"^[a-zA-Z_]+[a-zA-Z0-9_]*$", RegexOptions.IgnoreCase, "en-US")]
         private static partial Regex GraphNameGeneratedRegex();
