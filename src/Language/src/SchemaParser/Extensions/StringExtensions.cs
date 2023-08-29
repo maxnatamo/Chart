@@ -18,7 +18,7 @@ namespace Chart.Language
         {
             for(int i = 0; i < str.Length; i++)
             {
-                if(!values.Any(v => v == str[i]))
+                if(!values.ToList().Exists(v => v == str[i]))
                 {
                     return i;
                 }

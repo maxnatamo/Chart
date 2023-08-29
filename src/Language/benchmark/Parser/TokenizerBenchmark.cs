@@ -12,13 +12,13 @@ namespace Chart.Language.Parsers.Benchmarks
         public string QueryFile = "";
 
         private string queryFileContent = "";
-        private Tokenizer tokenizer = new Tokenizer();
+        private Tokenizer Tokenizer = new();
 
         [GlobalSetup]
         public void Setup()
         {
             this.queryFileContent = this.ReadTestFile(this.QueryFile);
-            this.tokenizer = new Tokenizer(this.queryFileContent);
+            this.Tokenizer = new Tokenizer(this.queryFileContent);
         }
 
         [Benchmark]
@@ -26,9 +26,7 @@ namespace Chart.Language.Parsers.Benchmarks
         {
             uint tokenCount = 0;
 
-            Tokenizer tokenizer = new Tokenizer(this.queryFileContent);
-
-            while(tokenizer.GetNextToken().Type != TokenType.EOF)
+            while(this.Tokenizer.GetNextToken().Type != TokenType.EOF)
             {
                 tokenCount++;
             }

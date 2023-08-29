@@ -26,7 +26,7 @@ namespace Chart.Utilities
         {
             this.TraverseChildren("Locations", node, children);
 
-            foreach(GraphDirectiveLocation location in Enum.GetValues<GraphDirectiveLocation>())
+            foreach(GraphDirectiveLocationFlags location in Enum.GetValues<GraphDirectiveLocationFlags>())
             {
                 if(!node.Locations.HasFlag(location))
                 {

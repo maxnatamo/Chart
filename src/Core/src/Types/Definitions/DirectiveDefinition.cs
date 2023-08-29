@@ -10,7 +10,7 @@ namespace Chart.Core
         /// <summary>
         /// Possible locations which the directive can be applied on.
         /// </summary>
-        public GraphDirectiveLocation Locations { get; protected set; }
+        public GraphDirectiveLocationFlags Locations { get; protected set; }
 
         /// <summary>
         /// Whether this directive is repeatable.
@@ -27,7 +27,7 @@ namespace Chart.Core
         /// </summary>
         public bool HasArguments => this.Arguments is { Count: > 0 };
 
-        public DirectiveDefinition(string name, GraphDirectiveLocation locations)
+        public DirectiveDefinition(string name, GraphDirectiveLocationFlags locations)
         {
             this.Name = name;
             this.Locations = locations;

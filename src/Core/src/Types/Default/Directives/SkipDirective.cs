@@ -1,13 +1,13 @@
 using Chart.Language.SyntaxTree;
 
-using static Chart.Language.SyntaxTree.GraphDirectiveLocation;
+using static Chart.Language.SyntaxTree.GraphDirectiveLocationFlags;
 
 namespace Chart.Core
 {
     public class SkipDirective : DirectiveDefinition
     {
         public static string Alias => "skip";
-        public static GraphDirectiveLocation Location => FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT;
+        public static GraphDirectiveLocationFlags Location => FIELD | FRAGMENT_SPREAD | INLINE_FRAGMENT;
 
         public SkipDirective()
             : base(Alias, Location)

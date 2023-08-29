@@ -9,7 +9,7 @@ namespace Chart.Language.SyntaxTree
         /// <summary>
         /// List of directive locations selected by the directive.
         /// </summary>
-        public GraphDirectiveLocation Locations { get; set; }
+        public GraphDirectiveLocationFlags Locations { get; set; }
 
         /// <inheritdoc />
         public GraphLocation? Location { get; set; } = null;

@@ -94,7 +94,7 @@ namespace Chart.Core
         public static Error DirectiveInvalidLocation(
             GraphDirective directive,
             GraphDirectiveDefinition directiveDefinition,
-            GraphDirectiveLocation location) =>
+            GraphDirectiveLocationFlags location) =>
             new ErrorBuilder()
                 .SetCode(ErrorCodes.DirectiveLocationNotValid)
                 .SetMessage($"Directive '{directive.Name}' was not used in correct location.")

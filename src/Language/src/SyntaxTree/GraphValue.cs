@@ -18,7 +18,7 @@ namespace Chart.Language.SyntaxTree
     }
 
     /// <inheritdoc />
-    public interface IGraphValue<TValue> : IGraphValue
+    public interface IGraphValue<out TValue> : IGraphValue
     {
         /// <inheritdoc />
         new TValue Value { get; }

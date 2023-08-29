@@ -17,7 +17,7 @@ namespace Chart.Utilities
         /// <summary>
         /// Optional index, if the node is in a list.
         /// </summary>
-        public readonly int? Index = null;
+        public readonly int? Index;
 
         public GraphNodeInfo(string name, IGraphNode node, int? index = null)
         {

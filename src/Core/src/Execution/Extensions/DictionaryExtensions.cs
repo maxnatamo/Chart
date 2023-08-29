@@ -13,13 +13,9 @@ namespace Chart.Core
         public static void Set<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, TValue value)
             where TKey : notnull
         {
-            if(dictionary.ContainsKey(key))
+            if(!dictionary.TryAdd(key, value))
             {
                 dictionary[key] = value;
-            }
-            else
-            {
-                dictionary.Add(key, value);
             }
         }
 
@@ -36,9 +32,9 @@ namespace Chart.Core
             where TKey : notnull
             where TValue : new()
         {
-            if(dictionary.ContainsKey(key))
+            if(dictionary.TryGetValue(key, out TValue? foundValue))
             {
-                return dictionary[key];
+                return foundValue;
             }
 
             TValue value = new();

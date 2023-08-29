@@ -34,7 +34,7 @@ namespace Chart.Utilities
             this.WriteLine(definition.ToString());
 
             this.IncreaseDepth();
-            foreach(GraphDirectiveLocation location in Enum.GetValues<GraphDirectiveLocation>())
+            foreach(GraphDirectiveLocationFlags location in Enum.GetValues<GraphDirectiveLocationFlags>())
             {
                 if(!definition.Locations.HasFlag(location))
                 {

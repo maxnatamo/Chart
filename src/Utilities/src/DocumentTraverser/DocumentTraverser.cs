@@ -56,22 +56,20 @@ namespace Chart.Utilities
             return children;
         }
 
-        private DocumentTraverser TraverseChildren(
+        private void TraverseChildren(
             string name,
             List<IGraphNode> nodes,
             List<GraphNodeInfo> children)
         {
             if(nodes.Count == 0)
             {
-                return this;
+                return;
             }
 
             for(int i = 0; i < nodes.Count; i++)
             {
                 children.Add(new GraphNodeInfo(name, nodes[i], i));
             }
-
-            return this;
         }
 
         private DocumentTraverser TraverseChildren(

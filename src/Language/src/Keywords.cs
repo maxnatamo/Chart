@@ -1,6 +1,6 @@
 namespace Chart.Language
 {
-    internal class Keywords
+    internal static class Keywords
     {
         public static readonly string Query = "query";
         public static readonly string Mutation = "mutation";
