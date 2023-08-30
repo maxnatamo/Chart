@@ -1,0 +1,7 @@
+﻿[GraphDirective]
+   [GraphName] directive
+   [GraphArguments]
+      [GraphArgument]
+         [GraphName] arg1
+         [GraphIntValue]
+            [GraphValue] 1
