@@ -1,23 +1,6 @@
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
 
-[GitHubActions(
-    "continuous",
-    GitHubActionsImage.UbuntuLatest,
-    FetchDepth = 0,
-    OnPushBranches = new[]
-    {
-        "main"
-    },
-    OnPushIncludePaths = new[]
-    {
-        "src/**"
-    },
-    InvokedTargets = new[]
-    {
-        nameof(Pack)
-    }
-)]
 partial class Build : NukeBuild
 {
     /// Support plugins are available for:
