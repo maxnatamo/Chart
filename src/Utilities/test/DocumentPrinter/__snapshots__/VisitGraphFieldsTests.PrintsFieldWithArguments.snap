@@ -1,0 +1,7 @@
+﻿[GraphField]
+   [GraphName] field
+   [GraphType] Int
+   [GraphArgumentsDefinition]
+      [GraphArgumentDefinition]
+         [GraphName] directive
+         [GraphType] arg
