@@ -2,7 +2,7 @@ using Chart.Language.SyntaxTree;
 
 namespace Chart.Language
 {
-    internal class Definitions
+    internal static class Definitions
     {
         public static readonly IReadOnlyCollection<Type> ExecutableTypes = new List<Type>()
         {

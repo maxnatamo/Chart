@@ -26,7 +26,7 @@ namespace Chart.Core.Validation
 
         private async Task ValidateDirectivesAsync(
             GraphDirectives? directives,
-            GraphDirectiveLocation nodeLocation,
+            GraphDirectiveLocationFlags nodeLocation,
             ValidationContext context)
         {
             if(directives is null)
@@ -45,7 +45,7 @@ namespace Chart.Core.Validation
 
         private async Task ValidateDirectiveAsync(
             GraphDirective directive,
-            GraphDirectiveLocation nodeLocation,
+            GraphDirectiveLocationFlags nodeLocation,
             ValidationContext context)
         {
             if(!context.Schema.TryGetDefinition(directive.Name, out GraphDirectiveDefinition? directiveDefinition))

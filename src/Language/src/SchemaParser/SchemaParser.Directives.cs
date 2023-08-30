@@ -5,36 +5,6 @@ namespace Chart.Language
     public partial class SchemaParser
     {
         /// <summary>
-        /// List of all valid directive locations, as per the spec.
-        /// </summary>
-        /// <seealso href="https://spec.graphql.org/October2021/#DirectiveLocation">Original documentation</seealso>
-        private static readonly string[] VALID_DIRECTIVE_LOCATIONS =
-        {
-            // ExecutableDirectiveLocation
-            "QUERY",
-            "MUTATION",
-            "SUBSCRIPTION",
-            "FIELD",
-            "FRAGMENT_DEFINITION",
-            "FRAGMENT_SPREAD",
-            "INLINE_FRAGMENT",
-            "VARIABLE_DEFINITION",
-
-            // TypeSystemDirectiveLocation
-            "SCHEMA",
-            "SCALAR",
-            "OBJECT",
-            "FIELD_DEFINITION",
-            "ARGUMENT_DEFINITION",
-            "INTERFACE",
-            "UNION",
-            "ENUM",
-            "ENUM_VALUE",
-            "INPUT_OBJECT",
-            "INPUT_FIELD_DEFINITION",
-        };
-
-        /// <summary>
         /// Parse a top-level enum-definition in the GraphQL-document.
         /// </summary>
         /// <returns>A non-null GraphEnumDefinition, if a type was found. Otherwise, null.</returns>
@@ -102,7 +72,7 @@ namespace Chart.Language
 
                 this.Expect(TokenType.NAME);
 
-                if(!Enum.TryParse<GraphDirectiveLocation>(this.CurrentToken.Value, out GraphDirectiveLocation location))
+                if(!Enum.TryParse<GraphDirectiveLocationFlags>(this.CurrentToken.Value, out GraphDirectiveLocationFlags location))
                 {
                     throw new InvalidDirectiveLocationException(this.CurrentToken.Value);
                 }

@@ -36,7 +36,7 @@ namespace Chart.Language
         /// <summary>
         /// The source document.
         /// </summary>
-        public string Source = string.Empty;
+        private string Source = string.Empty;
 
         /// <summary>
         /// The position into the document currently being processed.
@@ -317,10 +317,8 @@ namespace Chart.Language
         /// <returns>A valid name token.</returns>
         internal Token ParseNameToken()
         {
-            string name = this.GetUntil(c =>
-            {
-                return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || ('0' <= c && c <= '9') || c == '_';
-            });
+            string name = this.GetUntil(c
+                => ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || ('0' <= c && c <= '9') || c == '_');
 
             return new Token(TokenType.NAME, name, this.CurrentIndex, this.CurrentIndex + name.Length);
         }
@@ -474,16 +472,13 @@ namespace Chart.Language
 
             // We should only return true when the whole word is match,
             // not just the beginning of the word.
-            if(matchWhole)
+            if(matchWhole && this.CurrentIndex + next.Length < this.Source.Length)
             {
-                if(this.CurrentIndex + next.Length < this.Source.Length)
-                {
-                    char charAfterString = this.Source[this.CurrentIndex + next.Length];
+                char charAfterString = this.Source[this.CurrentIndex + next.Length];
 
-                    if(!WHITESPACE_TOKENS.Contains(charAfterString) && !PUNCTUATION_TOKENS.Contains(charAfterString))
-                    {
-                        return false;
-                    }
+                if(!WHITESPACE_TOKENS.Contains(charAfterString) && !PUNCTUATION_TOKENS.Contains(charAfterString))
+                {
+                    return false;
                 }
             }
 
@@ -498,17 +493,8 @@ namespace Chart.Language
         /// <returns>True, if any of the inputs is next in the source. Otherwise, false.</returns>
         internal bool ContainsNext([NotNullWhen(true)] out string? match, string[] next, bool matchWhole = true)
         {
-            foreach(string v in next)
-            {
-                if(this.ContainsNext(v, matchWhole))
-                {
-                    match = v;
-                    return true;
-                }
-            }
-
-            match = null;
-            return false;
+            match = next.ToList().Find(v => this.ContainsNext(v, matchWhole));
+            return match is not null;
         }
 
         /// <summary>

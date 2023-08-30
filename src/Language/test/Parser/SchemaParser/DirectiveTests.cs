@@ -29,7 +29,7 @@ namespace Chart.Language.Tests
                 .As<GraphDirectiveDefinition>().Name?.Value.Should().Be("Test");
 
             document.Definitions[0]
-                .As<GraphDirectiveDefinition>().Locations.Locations.Should().Be(GraphDirectiveLocation.SCHEMA);
+                .As<GraphDirectiveDefinition>().Locations.Locations.Should().Be(GraphDirectiveLocationFlags.SCHEMA);
         }
     }
 }

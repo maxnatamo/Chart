@@ -56,11 +56,7 @@ namespace Chart.Core.Tests.Execution.Strategy.SerialExecutionStrategyImplementat
         public async Task ExecutesAllTaskInSequal()
         {
             // Arrange
-            Func<Task> task = () =>
-            {
-                Thread.Sleep(100);
-                return Task.CompletedTask;
-            };
+            Func<Task> task = () => Task.Delay(100);
             SerialExecutionStrategyImplementation strategy = new();
 
             strategy.AddTask(task);

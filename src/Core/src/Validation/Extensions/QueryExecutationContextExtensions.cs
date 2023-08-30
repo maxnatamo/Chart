@@ -21,7 +21,7 @@ namespace Chart.Core
         public static IEnumerable<GraphDirectiveDefinition> GetDirectiveDefinitions(
             this QueryExecutionContext context,
             string? name,
-            GraphDirectiveLocation location)
+            GraphDirectiveLocationFlags location)
             => context.GetDirectiveDefinitions(name)
                 .Where(v => v.Locations.Locations.HasFlag(location));
 

@@ -9,7 +9,7 @@ namespace Chart.Language.SyntaxTree
         /// <summary>
         /// The value of the name.
         /// </summary>
-        public string Value { get; set; } = default!;
+        public string Value { get; set; }
 
         /// <inheritdoc />
         public GraphLocation? Location { get; set; } = null;

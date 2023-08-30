@@ -8,7 +8,7 @@ namespace Chart.Utilities.Tests.DocumentPrinterTests
             // Arrange
             GraphDirectiveDefinition directiveDefinition = new GraphDirectiveDefinition();
             directiveDefinition.Name = new GraphName("directive");
-            directiveDefinition.Locations.Locations = GraphDirectiveLocation.QUERY;
+            directiveDefinition.Locations.Locations = GraphDirectiveLocationFlags.QUERY;
 
             // Act
 
@@ -26,7 +26,7 @@ namespace Chart.Utilities.Tests.DocumentPrinterTests
             GraphDirectiveDefinition directiveDefinition = new GraphDirectiveDefinition();
             directiveDefinition.Name = new GraphName("directive");
             directiveDefinition.Description = new GraphDescription("A cool description.");
-            directiveDefinition.Locations.Locations = GraphDirectiveLocation.QUERY;
+            directiveDefinition.Locations.Locations = GraphDirectiveLocationFlags.QUERY;
 
             // Act
 
@@ -44,9 +44,9 @@ namespace Chart.Utilities.Tests.DocumentPrinterTests
             GraphDirectiveDefinition directiveDefinition = new GraphDirectiveDefinition();
             directiveDefinition.Name = new GraphName("directive");
             directiveDefinition.Locations.Locations =
-                GraphDirectiveLocation.QUERY |
-                GraphDirectiveLocation.MUTATION |
-                GraphDirectiveLocation.SUBSCRIPTION;
+                GraphDirectiveLocationFlags.QUERY |
+                GraphDirectiveLocationFlags.MUTATION |
+                GraphDirectiveLocationFlags.SUBSCRIPTION;
 
             // Act
 
@@ -63,7 +63,7 @@ namespace Chart.Utilities.Tests.DocumentPrinterTests
             // Arrange
             GraphDirectiveDefinition directiveDefinition = new GraphDirectiveDefinition();
             directiveDefinition.Name = new GraphName("directive");
-            directiveDefinition.Locations.Locations = GraphDirectiveLocation.QUERY;
+            directiveDefinition.Locations.Locations = GraphDirectiveLocationFlags.QUERY;
             directiveDefinition.Repeatable = true;
 
             // Act
@@ -81,7 +81,7 @@ namespace Chart.Utilities.Tests.DocumentPrinterTests
             // Arrange
             GraphDirectiveDefinition directiveDefinition = new GraphDirectiveDefinition();
             directiveDefinition.Name = new GraphName("directive");
-            directiveDefinition.Locations.Locations = GraphDirectiveLocation.QUERY;
+            directiveDefinition.Locations.Locations = GraphDirectiveLocationFlags.QUERY;
             directiveDefinition.Arguments = new GraphArgumentsDefinition()
             {
                 Arguments = new List<GraphArgumentDefinition>
@@ -109,7 +109,7 @@ namespace Chart.Utilities.Tests.DocumentPrinterTests
             // Arrange
             GraphDirectiveDefinition directiveDefinition = new GraphDirectiveDefinition();
             directiveDefinition.Name = new GraphName("directive");
-            directiveDefinition.Locations.Locations = GraphDirectiveLocation.QUERY;
+            directiveDefinition.Locations.Locations = GraphDirectiveLocationFlags.QUERY;
             directiveDefinition.Arguments = new GraphArgumentsDefinition()
             {
                 Arguments = new List<GraphArgumentDefinition>

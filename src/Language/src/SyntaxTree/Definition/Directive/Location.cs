@@ -5,7 +5,7 @@ namespace Chart.Language.SyntaxTree
     /// </summary>
     /// <seealso href="https://spec.graphql.org/October2021/#DirectiveLocation">Original documentation</seealso>
     [Flags]
-    public enum GraphDirectiveLocation
+    public enum GraphDirectiveLocationFlags
     {
         QUERY = (1 << 0),
         MUTATION = (1 << 1),

@@ -43,7 +43,7 @@ namespace Chart.Language
         /// <param name="definition">The definition to descend into.</param>
         public SchemaWriter Visit(GraphDirectiveLocations definition)
         {
-            List<GraphDirectiveLocation> locations = Enum.GetValues<GraphDirectiveLocation>().ToList();
+            List<GraphDirectiveLocationFlags> locations = Enum.GetValues<GraphDirectiveLocationFlags>().ToList();
             locations = locations.Where(l => definition.Locations.HasFlag(l)).ToList();
 
             this.WriteMany(locations, v => this.Write(v.ToString()), " | ");

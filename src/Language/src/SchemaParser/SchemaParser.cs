@@ -74,7 +74,7 @@ namespace Chart.Language
         /// <exception cref="UnexpectedTokenException">Thrown if the assertion fails.</exception>
         internal void Expect(params TokenType[] types)
         {
-            if(!types.Any(v => this.Peek(v)))
+            if(!types.ToList().Exists(v => this.Peek(v)))
             {
                 throw this.UnexpectedToken();
             }
@@ -87,7 +87,7 @@ namespace Chart.Language
         /// <exception cref="UnexpectedTokenException">Thrown if the assertion fails.</exception>
         internal void Expect(params string[] values)
         {
-            if(!values.Any(v => this.Peek(v)))
+            if(!values.ToList().Exists(v => this.Peek(v)))
             {
                 throw this.UnexpectedToken();
             }
@@ -123,7 +123,7 @@ namespace Chart.Language
         /// </summary>
         /// <typeparam name="T">The type of object to read.</typeparam>
         /// <returns>The non-null object retrieved, when still processing. Otherwise, null.</returns>
-        internal delegate T? IterateParseFunction<T>();
+        internal delegate T? IterateParseFunction<out T>();
 
         /// <summary>
         /// <para>

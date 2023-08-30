@@ -34,10 +34,10 @@ namespace Chart.Core
         public static bool IsLocationValid(string location)
             => ExecutableDirectiveLocations.Contains(location) || TypeSystemDirectiveLocations.Contains(location);
 
-        public static GraphDirectiveLocation[] SplitLocation(GraphDirectiveLocation location)
+        public static GraphDirectiveLocationFlags[] SplitLocation(GraphDirectiveLocationFlags location)
         {
-            List<GraphDirectiveLocation> locations = new();
-            foreach(GraphDirectiveLocation locationFlag in Enum.GetValues<GraphDirectiveLocation>())
+            List<GraphDirectiveLocationFlags> locations = new();
+            foreach(GraphDirectiveLocationFlags locationFlag in Enum.GetValues<GraphDirectiveLocationFlags>())
             {
                 if(location.HasFlag(locationFlag))
                 {
@@ -48,38 +48,38 @@ namespace Chart.Core
             return locations.ToArray();
         }
 
-        public static GraphDirectiveLocation GetLocation<TNode>(TNode node) =>
+        public static GraphDirectiveLocationFlags GetLocation<TNode>(TNode node) =>
             node switch
             {
                 // Executable
-                GraphQueryOperation => GraphDirectiveLocation.QUERY,
-                GraphMutationOperation => GraphDirectiveLocation.MUTATION,
-                GraphSubscriptionOperation => GraphDirectiveLocation.SUBSCRIPTION,
-                GraphFieldSelection => GraphDirectiveLocation.FIELD,
-                GraphFragmentDefinition => GraphDirectiveLocation.FRAGMENT_DEFINITION,
-                GraphFragmentSelection => GraphDirectiveLocation.FRAGMENT_SPREAD,
-                GraphInlineFragmentSelection => GraphDirectiveLocation.INLINE_FRAGMENT,
-                GraphVariable => GraphDirectiveLocation.VARIABLE_DEFINITION,
+                GraphQueryOperation => GraphDirectiveLocationFlags.QUERY,
+                GraphMutationOperation => GraphDirectiveLocationFlags.MUTATION,
+                GraphSubscriptionOperation => GraphDirectiveLocationFlags.SUBSCRIPTION,
+                GraphFieldSelection => GraphDirectiveLocationFlags.FIELD,
+                GraphFragmentDefinition => GraphDirectiveLocationFlags.FRAGMENT_DEFINITION,
+                GraphFragmentSelection => GraphDirectiveLocationFlags.FRAGMENT_SPREAD,
+                GraphInlineFragmentSelection => GraphDirectiveLocationFlags.INLINE_FRAGMENT,
+                GraphVariable => GraphDirectiveLocationFlags.VARIABLE_DEFINITION,
 
                 // Non-executable
-                GraphSchemaDefinition => GraphDirectiveLocation.SCHEMA,
-                GraphSchemaExtension => GraphDirectiveLocation.SCHEMA,
-                GraphScalarType => GraphDirectiveLocation.SCALAR,
-                GraphScalarExtension => GraphDirectiveLocation.SCALAR,
-                GraphObjectType => GraphDirectiveLocation.OBJECT,
-                GraphObjectExtension => GraphDirectiveLocation.OBJECT,
-                GraphField => GraphDirectiveLocation.FIELD_DEFINITION,
-                GraphArgumentDefinition => GraphDirectiveLocation.ARGUMENT_DEFINITION,
-                GraphInterfaceDefinition => GraphDirectiveLocation.INTERFACE,
-                GraphInterfaceExtension => GraphDirectiveLocation.INTERFACE,
-                GraphUnionDefinition => GraphDirectiveLocation.UNION,
-                GraphUnionExtension => GraphDirectiveLocation.UNION,
-                GraphEnumDefinition => GraphDirectiveLocation.ENUM,
-                GraphEnumExtension => GraphDirectiveLocation.ENUM,
-                GraphEnumDefinitionValue => GraphDirectiveLocation.ENUM_VALUE,
-                GraphInputDefinition => GraphDirectiveLocation.INPUT_OBJECT,
-                GraphInputExtension => GraphDirectiveLocation.INPUT_OBJECT,
-                GraphInputFieldsDefinition => GraphDirectiveLocation.INPUT_FIELD_DEFINITION,
+                GraphSchemaDefinition => GraphDirectiveLocationFlags.SCHEMA,
+                GraphSchemaExtension => GraphDirectiveLocationFlags.SCHEMA,
+                GraphScalarType => GraphDirectiveLocationFlags.SCALAR,
+                GraphScalarExtension => GraphDirectiveLocationFlags.SCALAR,
+                GraphObjectType => GraphDirectiveLocationFlags.OBJECT,
+                GraphObjectExtension => GraphDirectiveLocationFlags.OBJECT,
+                GraphField => GraphDirectiveLocationFlags.FIELD_DEFINITION,
+                GraphArgumentDefinition => GraphDirectiveLocationFlags.ARGUMENT_DEFINITION,
+                GraphInterfaceDefinition => GraphDirectiveLocationFlags.INTERFACE,
+                GraphInterfaceExtension => GraphDirectiveLocationFlags.INTERFACE,
+                GraphUnionDefinition => GraphDirectiveLocationFlags.UNION,
+                GraphUnionExtension => GraphDirectiveLocationFlags.UNION,
+                GraphEnumDefinition => GraphDirectiveLocationFlags.ENUM,
+                GraphEnumExtension => GraphDirectiveLocationFlags.ENUM,
+                GraphEnumDefinitionValue => GraphDirectiveLocationFlags.ENUM_VALUE,
+                GraphInputDefinition => GraphDirectiveLocationFlags.INPUT_OBJECT,
+                GraphInputExtension => GraphDirectiveLocationFlags.INPUT_OBJECT,
+                GraphInputFieldsDefinition => GraphDirectiveLocationFlags.INPUT_FIELD_DEFINITION,
 
                 _ => throw new NotSupportedException()
             };
