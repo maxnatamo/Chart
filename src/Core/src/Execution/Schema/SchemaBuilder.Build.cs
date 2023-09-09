@@ -141,15 +141,15 @@ namespace Chart.Core
                 switch(typeBinding.Key)
                 {
                     case string key when key.Equals(Operations.Query, OrdinalIgnoreCase):
-                        this.QueryType = typeBinding.Value;
+                        this.QueryType ??= typeBinding.Value;
                         break;
 
                     case string key when key.Equals(Operations.Mutation, OrdinalIgnoreCase):
-                        this.MutationType = typeBinding.Value;
+                        this.MutationType ??= typeBinding.Value;
                         break;
 
                     case string key when key.Equals(Operations.Subscription, OrdinalIgnoreCase):
-                        this.SubscriptionType = typeBinding.Value;
+                        this.SubscriptionType ??= typeBinding.Value;
                         break;
                 }
             }
