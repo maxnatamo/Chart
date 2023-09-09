@@ -7,6 +7,10 @@ namespace Chart.Core
     public interface IQueryExecutor
     {
         Task<ExecutionResult> ExecuteAsync(
+            string requestQuery,
+            CancellationToken? cancellationToken = null);
+
+        Task<ExecutionResult> ExecuteAsync(
             QueryRequest request,
             CancellationToken? cancellationToken = null);
     }
@@ -38,6 +42,17 @@ namespace Chart.Core
         }
 
         public async Task<ExecutionResult> ExecuteAsync(
+            string requestQuery,
+            CancellationToken? cancellationToken = null)
+        {
+            QueryRequest request = new QueryRequestBuilder()
+                .SetQuery(requestQuery)
+                .Create();
+
+            return await this.ExecuteAsync(request, cancellationToken);
+        }
+
+        public async Task<ExecutionResult> ExecuteAsync(
             QueryRequest request,
             CancellationToken? cancellationToken = null)
         {
@@ -53,10 +68,10 @@ namespace Chart.Core
 
             this._serviceProvider.UpdateResponse(executionContext.Result);
 
+            serverEventRaiser.RequestReceived(executionContext);
+
             IExecutionPipeline executionPipeline = this._serviceProvider.GetService<IExecutionPipeline>()
                 ?? throw new NotSupportedException("No execution pipeline configured.");
-
-            serverEventRaiser.RequestReceived(executionContext);
 
             ExecutionResult executionResult = await executionPipeline
                 .ExecuteAsync(executionContext, cancellationToken.Value);
