@@ -13,6 +13,7 @@ namespace Chart.Core
             builder.Services.AddSingleton<IValueRegistry, ValueRegistry>();
             builder.Services.AddSingleton<IResolverCache, ResolverCache>();
 
+            builder.Services.AddScoped<IAttributeResolver, AttributeResolver>();
             builder.Services.AddScoped<IFieldResolver, FieldResolver>();
             builder.Services.AddScoped<IFieldCollector, FieldCollector>();
             builder.Services.AddScoped<IFieldExecutor, FieldExecutor>();
