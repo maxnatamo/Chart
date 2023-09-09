@@ -58,7 +58,9 @@ namespace Chart.Core
             Dictionary<string, object?>? arguments,
             CancellationToken cancellationToken)
         {
-            if(objectValue is null && cancellationToken.IsCancellationRequested)
+            cancellationToken.ThrowIfCancellationRequested();
+
+            if(objectValue is null)
             {
                 return null;
             }
