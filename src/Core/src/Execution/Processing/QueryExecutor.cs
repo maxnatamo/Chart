@@ -6,12 +6,24 @@ namespace Chart.Core
 {
     public interface IQueryExecutor
     {
-        Task<ExecutionResult> ExecuteAsync(QueryRequest request);
+        Task<ExecutionResult> ExecuteAsync(
+            QueryRequest request,
+            CancellationToken? cancellationToken = null);
     }
 
     public class QueryExecutor : IQueryExecutor
     {
         private readonly IServiceProvider _serviceProvider;
+
+        internal QueryExecutor(IServiceProvider serviceProvider)
+        {
+            this._serviceProvider = serviceProvider;
+
+            if(this._serviceProvider.GetService<SchemaAccessor>()?.Schema is null)
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         internal QueryExecutor(Schema schema, IServiceProvider serviceProvider)
         {
@@ -25,9 +37,11 @@ namespace Chart.Core
             this._serviceProvider.UpdateSchema(schema);
         }
 
-        public async Task<ExecutionResult> ExecuteAsync(QueryRequest request)
+        public async Task<ExecutionResult> ExecuteAsync(
+            QueryRequest request,
+            CancellationToken? cancellationToken = null)
         {
-            CancellationTokenSource cancellationTokenSource = new();
+            cancellationToken ??= new();
 
             IServerEventRaiser serverEventRaiser = this._serviceProvider
                 .GetRequiredService<IServerEventRaiser>();
@@ -45,7 +59,7 @@ namespace Chart.Core
             serverEventRaiser.RequestReceived(executionContext);
 
             ExecutionResult executionResult = await executionPipeline
-                .ExecuteAsync(executionContext, cancellationTokenSource.Token);
+                .ExecuteAsync(executionContext, cancellationToken.Value);
 
             serverEventRaiser.RequestEnded(executionContext);
 
