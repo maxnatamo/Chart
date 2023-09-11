@@ -1,4 +1,3 @@
-using Chart.Language.SyntaxTree;
 using static Chart.Language.SyntaxTree.GraphDirectiveLocationFlags;
 
 namespace Chart.Core.Tests
