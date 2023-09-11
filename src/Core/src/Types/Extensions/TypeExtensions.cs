@@ -28,13 +28,13 @@ namespace Chart.Core
         /// Check whether the given type is derived from <see cref="ListType{T}" />.
         /// </summary>
         public static bool IsListType(this Type type)
-            => type.IsAssignableTo(typeof(IListType));
+            => type.IsAssignableTo(typeof(ListType));
 
         /// <summary>
         /// Check whether the given type is derived from <see cref="ListType{T}" />.
         /// </summary>
         public static bool IsNonNullType(this Type type)
-            => type.IsAssignableTo(typeof(INonNullType));
+            => type.IsAssignableTo(typeof(NonNullType));
 
         /// <summary>
         /// Check whether the given type is derived from the given generic type.

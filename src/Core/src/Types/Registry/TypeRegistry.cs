@@ -1,26 +1,38 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Chart.Core
 {
     public interface ITypeRegistry
     {
         /// <summary>
-        /// Map between type definition names (such as <c>Int</c>) to <see cref="ITypeDefinition" />-instances.
+        /// Map between type definition names (such as <c>Int</c>) to <see cref="TypeDefinition" />-instances.
         /// </summary>
-        Dictionary<string, ITypeDefinition> RuntimeTypes { get; }
+        Dictionary<string, TypeDefinition> RuntimeTypes { get; }
 
         /// <summary>
-        /// Map between type definition names (such as <c>specifiedBy</c>) to <see cref="ITypeDefinition" />-instances.
+        /// Map between type definition names (such as <c>specifiedBy</c>) to <see cref="TypeDefinition" />-instances.
         /// </summary>
-        Dictionary<string, ITypeDefinition> TypeDefinitionBindings { get; }
+        Dictionary<string, TypeDefinition> TypeDefinitionBindings { get; }
 
         /// <summary>
-        /// Map between type definition names (such as <c>SpecifiedByDirective</c>) to <see cref="ITypeDefinition" />-instances.
+        /// Map between type definition names (such as <c>SpecifiedByDirective</c>) to <see cref="TypeDefinition" />-instances.
         /// </summary>
-        Dictionary<string, ITypeDefinition> TypeBindings { get; }
+        Dictionary<string, TypeDefinition> TypeBindings { get; }
 
         /// <summary>
         /// Lookup of enum-definitions, keyed by the enum definitions name.
         /// </summary>
         Dictionary<string, List<string>> EnumDefinitions { get; }
+
+        /// <summary>
+        /// List of all registered types in the registry.
+        /// </summary>
+        Dictionary<string, RegisteredType> RegisteredTypes { get; }
+
+        /// <summary>
+        /// Try to get the registered type definition with the given name.
+        /// </summary>
+        bool TryGetType(string name, [NotNullWhen(true)] out RegisteredType? type);
 
         /// <summary>
         /// Whether the given type has been registered.
@@ -40,32 +52,53 @@ namespace Chart.Core
     public sealed partial class TypeRegistry : ITypeRegistry
     {
         /// <inheritdoc />
-        public Dictionary<string, ITypeDefinition> RuntimeTypes { get; } = new();
+        public Dictionary<string, TypeDefinition> RuntimeTypes { get; } = new();
 
         /// <inheritdoc />
-        public Dictionary<string, ITypeDefinition> TypeDefinitionBindings { get; } = new();
+        public Dictionary<string, TypeDefinition> TypeDefinitionBindings { get; } = new();
 
         /// <inheritdoc />
-        public Dictionary<string, ITypeDefinition> TypeBindings { get; } = new();
+        public Dictionary<string, TypeDefinition> TypeBindings { get; } = new();
 
         /// <inheritdoc />
         public Dictionary<string, List<string>> EnumDefinitions { get; } = new();
 
-        public TypeRegistry(IEnumerable<ITypeDefinition> typeDefinitions)
+        public Dictionary<string, RegisteredType> RegisteredTypes { get; } = new();
+
+        public TypeRegistry(IEnumerable<TypeDefinition> typeDefinitions)
         {
             this.PopulateDefinitions(typeDefinitions);
         }
 
-        /// <summary>
-        /// Whether the given type has been registered.
-        /// </summary>
-        public bool Visited(string typeName) =>
-            this.RuntimeTypes.ContainsKey(typeName) ||
-            this.TypeDefinitionBindings.ContainsKey(typeName) ||
-            this.TypeBindings.ContainsKey(typeName) ||
-            typeName == typeof(object).Name;
+        public bool TryGetType(string name, [NotNullWhen(true)] out RegisteredType? type)
+        {
+            foreach(KeyValuePair<string, RegisteredType> registeredType in this.RegisteredTypes)
+            {
+                if(registeredType.Value.IsOfType(name))
+                {
+                    type = registeredType.Value;
+                    return true;
+                }
+            }
 
-        /// <inheritdoc cref="TypeRegistry.Visited(string)" />
+            type = null;
+            return false;
+        }
+
+        public bool Visited(string typeName)
+        {
+            foreach(KeyValuePair<string, RegisteredType> type in this.RegisteredTypes)
+            {
+                if(type.Value.IsOfType(typeName))
+                {
+                    return true;
+                }
+            }
+
+            // Halt type inheritence descending too deep, when registering types.
+            return typeName == typeof(object).Name;
+        }
+
         public bool Visited(Type type)
         {
             if(type.IsNonNullType() || type.IsListType())
@@ -75,25 +108,20 @@ namespace Chart.Core
 
             if(type.HasElementType)
             {
-                return this.Visited(type.GetElementType()!);
+                Type elementalType = type.GetElementType()!;
+                return this.Visited(elementalType);
             }
 
             return this.Visited(type.Name);
         }
 
-        /// <inheritdoc cref="TypeRegistry.Visited(string)" />
         public bool Visited<TType>()
             => this.Visited(typeof(TType));
 
-        private void PopulateDefinitions(IEnumerable<ITypeDefinition> typeDefinitions)
+        private void PopulateDefinitions(IEnumerable<TypeDefinition> typeDefinitions)
         {
-            foreach(ITypeDefinition typeDefinition in typeDefinitions)
+            foreach(TypeDefinition typeDefinition in typeDefinitions)
             {
-                // We need to register all the different names that a type can have:
-                // - GraphQL schema name (such as 'Int'),
-                // - definition type name (such as 'IntType'),
-                // - and runtime type name (such as 'Int32'), if any
-
                 if(typeDefinition.Name is null)
                 {
                     throw new InvalidOperationException(
@@ -102,14 +130,8 @@ namespace Chart.Core
                     );
                 }
 
-
-                this.TypeBindings.Add(typeDefinition.GetType().Name, typeDefinition);
-                this.TypeDefinitionBindings.Add(typeDefinition.Name, typeDefinition);
-
-                if(typeDefinition.RuntimeType is not null)
-                {
-                    this.RuntimeTypes.Add(typeDefinition.RuntimeType.Name, typeDefinition);
-                }
+                RegisteredType registeredTypetype = new(typeDefinition);
+                this.RegisteredTypes.Add(registeredTypetype.SchemaName, registeredTypetype);
             }
         }
     }

@@ -5,7 +5,7 @@ namespace Chart.Core
     public partial class TypeCreator : ITypeCreator
     {
         /// <inheritdoc />
-        public ITypeDefinition CreateFromDefinition(GraphDefinition definition) =>
+        public TypeDefinition CreateFromDefinition(GraphDefinition definition) =>
             definition switch
             {
                 GraphObjectType _definition => this.CreateFromGraphType(_definition),
@@ -13,7 +13,7 @@ namespace Chart.Core
                 _ => throw new NotSupportedException()
             };
 
-        private ITypeDefinition CreateFromGraphType(GraphObjectType definition)
+        private TypeDefinition CreateFromGraphType(GraphObjectType definition)
         {
             ObjectType typeDefinition = new(
                 name: definition.Name,

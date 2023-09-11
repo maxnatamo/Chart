@@ -1,15 +1,11 @@
 namespace Chart.Core
 {
-    public interface INonNullType : ITypeDefinition
+    public abstract class NonNullType : TypeDefinition
     { }
 
-    public class NonNullType<TType> : INonNullType
-        where TType : ITypeDefinition
+    public class NonNullType<TType> : NonNullType
+        where TType : TypeDefinition
     {
-        public string Name => string.Empty;
-
-        public string? Description => null;
-
-        public Type? RuntimeType { get; set; } = null;
+        public override string Name { get; protected set; } = string.Empty;
     }
 }

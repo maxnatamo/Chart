@@ -65,7 +65,7 @@ namespace Chart.Core
                 throw new NotSupportedException("Any non-list types must be named types.");
             }
 
-            if(!this._typeResolver.TryResolveTypeDefinition(_fieldType.Name, out ITypeDefinition? typeDefinition))
+            if(!this._typeResolver.TryResolveTypeDefinition(_fieldType.Name, out TypeDefinition? typeDefinition))
             {
                 context.RaiseRequestError(DefaultErrors.TypeNotFound(_fieldType.Name).WithPath(path));
                 return null;

@@ -17,17 +17,17 @@ namespace Chart.Core
         /// If the given type, <paramref name="type" />, is a value type, the resulting type definition will be of type <see cref="ScalarType" />.
         /// Otherwise, it will of type <see cref="ObjectType" />.
         /// </remarks>
-        ITypeDefinition CreateTypeDefinition(Type type, string? typeName = null);
+        TypeDefinition CreateTypeDefinition(Type type, string? typeName = null);
 
         /// <inheritdoc cref="ITypeCreator.CreateTypeDefinition(Type, string?)" />
-        ITypeDefinition CreateTypeDefinition<TType>(string? typeName = null);
+        TypeDefinition CreateTypeDefinition<TType>(string? typeName = null);
 
         /// <summary>
         /// Create a definition from the given <see cref="GraphDefinition" />-instance.
         /// </summary>
         /// <param name="definition">The definition to create the definition from.</param>
         /// <returns>The created definition.</returns>
-        ITypeDefinition CreateFromDefinition(GraphDefinition definition);
+        TypeDefinition CreateFromDefinition(GraphDefinition definition);
     }
 
     /// <summary>
@@ -56,13 +56,11 @@ namespace Chart.Core
         }
 
         /// <inheritdoc />
-        public virtual ITypeDefinition CreateTypeDefinition(Type type, string? typeName = null)
+        public virtual TypeDefinition CreateTypeDefinition(Type type, string? typeName = null)
         {
             string name = typeName ?? this._attributeResolver.GetName(type);
             string? description = this._attributeResolver.GetDescription(type);
             List<Directive>? directives = this._attributeResolver.GetDirectives(type);
-
-            Console.WriteLine("Added type with name {0} ({1})", name, type.Name);
 
             return type switch
             {
@@ -72,13 +70,13 @@ namespace Chart.Core
         }
 
         /// <inheritdoc />
-        public virtual ITypeDefinition CreateTypeDefinition<TType>(string? typeName = null)
+        public virtual TypeDefinition CreateTypeDefinition<TType>(string? typeName = null)
             => this.CreateTypeDefinition(typeof(TType), typeName);
 
         /// <summary>
         /// Create an object type definitions with the given parameters.
         /// </summary>
-        protected ITypeDefinition CreateObjectDefinition(
+        protected TypeDefinition CreateObjectDefinition(
             string name,
             string? description,
             Type runtimeType,
@@ -99,7 +97,7 @@ namespace Chart.Core
         /// <summary>
         /// Create an object type definitions with the given parameters.
         /// </summary>
-        protected ITypeDefinition CreateEnumDefinition(
+        protected TypeDefinition CreateEnumDefinition(
             string name,
             string? description,
             Type enumType,

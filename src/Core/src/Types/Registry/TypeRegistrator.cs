@@ -44,6 +44,8 @@ namespace Chart.Core
         public TypeRegistrator Register(Type type, string? explicitName = null)
         {
             string typeKey = explicitName ?? type.Name;
+
+            // Remove the ampersand-suffix on references.
             typeKey = typeKey.TrimEnd('&');
 
             if(type.IsGenericType)
@@ -60,14 +62,18 @@ namespace Chart.Core
             // TODO: Dirty hack.
             // We need to register the object type, before we can use it in the type creator.
             // But, certain cases will make this loop infinitely, as the type has not yet been registered.
-            this._typeRegistry.TypeDefinitionBindings.Add(typeKey, new BooleanType());
+            TypeDefinition typeDefinition = new PlaceholderType(typeKey);
+            RegisteredType registeredType = new(typeDefinition);
+            this._typeRegistry.RegisteredTypes.Add(typeKey, registeredType);
 
             if(!type.IsEnum)
             {
                 this.RegisterObjectType(type);
             }
 
-            this._typeRegistry.TypeDefinitionBindings[typeKey] = this._typeCreator.CreateTypeDefinition(type);
+            typeDefinition = this._typeCreator.CreateTypeDefinition(type, explicitName);
+            registeredType = new(typeDefinition);
+            this._typeRegistry.RegisteredTypes[typeKey] = registeredType;
 
             return this;
         }
@@ -179,12 +185,13 @@ namespace Chart.Core
                 return;
             }
 
-            ITypeDefinition definition = this._typeCreator.CreateTypeDefinition(
+            TypeDefinition definition = this._typeCreator.CreateTypeDefinition(
                 type,
                 this._nameFormatter.GetGenericsName(type)
             );
 
-            this._typeRegistry.TypeDefinitionBindings.Add(type.Name, definition);
+            RegisteredType registeredType = new(definition);
+            this._typeRegistry.RegisteredTypes.Add(registeredType.SchemaName, registeredType);
         }
     }
 }

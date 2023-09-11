@@ -5,18 +5,18 @@ namespace Chart.Core
 {
     public static class TypeReference
     {
-        private static SchemaParser schemaParser { get; set; } = new();
+        private static readonly SchemaParser _schemaParser = new();
 
         public static GraphType Parse(string type)
-            => TypeReference.schemaParser.ParseString(type, parser => parser.ParseType());
+            => TypeReference._schemaParser.ParseString(type, parser => parser.ParseType());
 
         /// <summary>
         /// Translate the given type into an instance of <see cref="GraphType" />.
         /// </summary>
         public static GraphType Parse(Type type)
         {
-            bool isNonNullType = type.IsAssignableTo(typeof(INonNullType));
-            bool isListType = type.IsAssignableTo(typeof(IListType));
+            bool isNonNullType = type.IsAssignableTo(typeof(NonNullType));
+            bool isListType = type.IsAssignableTo(typeof(ListType));
 
             if(isNonNullType || isListType)
             {
