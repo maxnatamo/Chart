@@ -57,12 +57,12 @@ namespace Chart.Core
         public static TValue GetValueOrAdd<TKey, TValue>(this Dictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TValue> valueFactory)
             where TKey : notnull
         {
-            if(dictionary.ContainsKey(key))
+            if(dictionary.TryGetValue(key, out TValue? value))
             {
-                return dictionary[key];
+                return value;
             }
 
-            TValue value = valueFactory(key);
+            value = valueFactory(key);
             dictionary[key] = value;
 
             return value;

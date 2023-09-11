@@ -1,5 +1,6 @@
-﻿using Chart.Language.SyntaxTree;
-using System.Reflection;
+﻿using System.Reflection;
+
+using Chart.Language.SyntaxTree;
 
 namespace Chart.Core
 {
