@@ -45,6 +45,8 @@ namespace Chart.Core
             string requestQuery,
             CancellationToken? cancellationToken = null)
         {
+            ArgumentNullException.ThrowIfNullOrEmpty(requestQuery, nameof(requestQuery));
+
             QueryRequest request = new QueryRequestBuilder()
                 .SetQuery(requestQuery)
                 .Create();
@@ -56,6 +58,8 @@ namespace Chart.Core
             QueryRequest request,
             CancellationToken? cancellationToken = null)
         {
+            ArgumentNullException.ThrowIfNull(request, nameof(request));
+
             cancellationToken ??= new();
 
             IServerEventRaiser serverEventRaiser = this._serviceProvider

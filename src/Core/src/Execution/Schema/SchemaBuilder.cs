@@ -216,7 +216,7 @@ namespace Chart.Core
                 Type when clrType.IsClass && !clrType.IsAssignableTo(typeof(Delegate))
                     => this.AddNativeType(clrType, typeName, lifetime),
 
-                _ => throw new NotSupportedException()
+                _ => throw new ArgumentException("Type must be a directive, definition or reference type.", nameof(clrType))
             };
         }
 
