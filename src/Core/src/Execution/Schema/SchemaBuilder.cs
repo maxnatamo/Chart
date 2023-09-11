@@ -12,17 +12,17 @@ namespace Chart.Core
         /// <summary>
         /// Query root operation type.
         /// </summary>
-        public Type? QueryType { get; private set; } = null;
+        public ObjectType? QueryType { get; private set; } = null;
 
         /// <summary>
         /// Mutation root operation type.
         /// </summary>
-        public Type? MutationType { get; private set; } = null;
+        public ObjectType? MutationType { get; private set; } = null;
 
         /// <summary>
         /// Subscription root operation type.
         /// </summary>
-        public Type? SubscriptionType { get; private set; } = null;
+        public ObjectType? SubscriptionType { get; private set; } = null;
 
         /// <summary>
         /// Internal state for schema configurations, which contains definitions to be processed.
@@ -38,7 +38,7 @@ namespace Chart.Core
             /// <remarks>
             /// All types must inherit from <see cref="TypeDefinition" />.
             /// </remarks>
-            internal readonly Dictionary<string, Type> TypeBindings = new();
+            internal readonly Dictionary<string, TypeDefinition> TypeBindings = new();
 
             /// <summary>
             /// List of all directive definitions to add to the schema.
@@ -46,7 +46,7 @@ namespace Chart.Core
             /// <remarks>
             /// All types must inherit from <see cref="DirectiveDefinition" />.
             /// </remarks>
-            internal readonly List<Type> DirectiveDefinitions = new();
+            internal readonly Dictionary<string, DirectiveDefinition> DirectiveDefinitions = new();
 
             /// <summary>
             /// List of graph definitions, which were defined in the schema.
@@ -125,7 +125,7 @@ namespace Chart.Core
         /// </summary>
         public SchemaBuilder BindQuery<TType>()
         {
-            this.QueryType = typeof(TType);
+            this.BindRootType<TType>((builder, type) => builder.QueryType = type);
             return this;
         }
 
@@ -134,7 +134,7 @@ namespace Chart.Core
         /// </summary>
         public SchemaBuilder BindMutation<TType>()
         {
-            this.MutationType = typeof(TType);
+            this.BindRootType<TType>((builder, type) => builder.MutationType = type);
             return this;
         }
 
@@ -143,8 +143,30 @@ namespace Chart.Core
         /// </summary>
         public SchemaBuilder BindSubscription<TType>()
         {
-            this.SubscriptionType = typeof(TType);
+            this.BindRootType<TType>((builder, type) => builder.SubscriptionType = type);
             return this;
+        }
+
+        /// <summary>
+        /// Bind the given type parameter to a root type in the schema.
+        /// </summary>
+        /// <typeparam name="TType">The type to bind the root type to.</typeparam>
+        /// <param name="handler">Action for assigning the root value to the type definition.</param>
+        private void BindRootType<TType>(Action<SchemaBuilder, ObjectType> handler)
+        {
+            Type type = typeof(TType);
+            this.AddType(type);
+
+            this.SchemaConfigurations.Add((builder, provider) =>
+            {
+                IAttributeResolver attributeResolver = provider.GetRequiredService<IAttributeResolver>();
+                string typeName = attributeResolver.GetExplicitName(type) ?? type.Name;
+
+                ITypeResolver typeResolver = provider.GetRequiredService<ITypeResolver>();
+                ObjectType rootType = typeResolver.ResolveTypeDefinition<ObjectType>(typeName);
+
+                handler(builder, rootType);
+            });
         }
 
         /// <summary>
@@ -169,7 +191,10 @@ namespace Chart.Core
         ///         .AddType&lt;Query&gt;("Query")
         ///
         ///         // Binds the type Mutation to the inferred name of "Mutation"
-        ///         .AddType&lt;Mutation&gt;());
+        ///         .AddType&lt;Mutation&gt;()
+        ///
+        ///         // Explicitly binds the type ArticleSubscription to the name of "Subscription"
+        ///         .AddType&lt;ArticleSubscription&gt;("Subscription"));
         /// </code>
         /// </example>
         public SchemaBuilder AddType(
@@ -177,12 +202,10 @@ namespace Chart.Core
             string? typeName = null,
             ServiceLifetime lifetime = ServiceLifetime.Transient)
         {
-            typeName ??= clrType.Name;
-
             return clrType switch
             {
                 Type when clrType.IsAssignableTo(typeof(DirectiveDefinition))
-                    => this.AddDirectiveType(clrType, lifetime),
+                    => this.AddDirectiveType(clrType, typeName, lifetime),
 
                 Type when clrType.IsAssignableTo(typeof(TypeDefinition))
                     => this.AddDefinitionType(clrType, typeName, lifetime),
@@ -212,7 +235,7 @@ namespace Chart.Core
         /// </summary>
         /// <param name="definitionType">The graph definition type to bind to the given name.</param>
         /// <param name="typeName">An explicit name to give to the definition.</param>
-        private SchemaBuilder AddDefinitionType(Type definitionType, string typeName, ServiceLifetime lifetime)
+        private SchemaBuilder AddDefinitionType(Type definitionType, string? typeName, ServiceLifetime lifetime)
         {
             if(!definitionType.IsAssignableTo(typeof(TypeDefinition)))
             {
@@ -222,7 +245,15 @@ namespace Chart.Core
             }
 
             this.RegisterService(definitionType, lifetime);
-            this.RegisterService(typeof(ITypeDefinition), definitionType, lifetime);
+            this.RegisterService(typeof(TypeDefinition), definitionType, lifetime);
+
+            this.SchemaConfigurations.Add((builder, provider) =>
+            {
+                TypeDefinition typeDefinition = (TypeDefinition) provider.GetRequiredService(definitionType);
+                typeName ??= typeDefinition.Name;
+
+                builder.ConfigurationState.TypeBindings.Add(typeName, typeDefinition);
+            });
 
             return this;
         }
@@ -231,7 +262,7 @@ namespace Chart.Core
         /// Add a directive type to the builder.
         /// </summary>
         /// <param name="directiveType">The directive definition type to add.</param>
-        private SchemaBuilder AddDirectiveType(Type directiveType, ServiceLifetime lifetime)
+        private SchemaBuilder AddDirectiveType(Type directiveType, string? directiveName, ServiceLifetime lifetime)
         {
             if(!directiveType.IsAssignableTo(typeof(DirectiveDefinition)))
             {
@@ -242,8 +273,13 @@ namespace Chart.Core
 
             this.RegisterService(directiveType, lifetime);
 
-            this.SchemaConfigurations.Add((builder, _)
-                => builder.ConfigurationState.DirectiveDefinitions.Add(directiveType));
+            this.SchemaConfigurations.Add((builder, provider) =>
+            {
+                DirectiveDefinition directiveDefinition = (DirectiveDefinition) provider.GetRequiredService(directiveType);
+                directiveName ??= directiveDefinition.Name;
+
+                builder.ConfigurationState.DirectiveDefinitions.Add(directiveName, directiveDefinition);
+            });
 
             return this;
         }
@@ -256,21 +292,27 @@ namespace Chart.Core
         private SchemaBuilder AddNativeType(
             Type clrType,
             string? typeName = null,
-            ServiceLifetime lifetime = ServiceLifetime.Transient)
+            ServiceLifetime lifetime = TypeDefinition.Scope)
         {
-            typeName ??= clrType.Name;
-
             this.RegisterService(clrType, lifetime);
 
             this.SchemaConfigurations.Add((builder, provider) =>
             {
+                IAttributeResolver attributeResolver = provider.GetRequiredService<IAttributeResolver>();
+                typeName ??= attributeResolver.GetExplicitName(clrType) ?? clrType.Name;
+
                 if(builder.ConfigurationState.TypeBindings.ContainsKey(typeName))
                 {
                     throw new ArgumentException($"Type of name '{typeName}' has already been defined.");
                 }
 
-                builder.ConfigurationState.TypeBindings.Add(typeName, clrType);
-                provider.GetRequiredService<ITypeRegistrator>().Register(clrType, typeName);
+                ITypeRegistrator typeRegistrator = provider.GetRequiredService<ITypeRegistrator>();
+                typeRegistrator.Register(clrType, typeName);
+
+                ITypeResolver typeResolver = provider.GetRequiredService<ITypeResolver>();
+                TypeDefinition typeDefinition = typeResolver.ResolveTypeDefinition(typeName);
+
+                builder.ConfigurationState.TypeBindings.Add(typeName, typeDefinition);
             });
 
             return this;

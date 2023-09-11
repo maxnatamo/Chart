@@ -23,50 +23,35 @@ namespace Chart.Core
             ITypeResolver typeResolver = serviceProvider.GetRequiredService<ITypeResolver>();
             ITypeRegistrator typeRegistrator = serviceProvider.GetRequiredService<ITypeRegistrator>();
 
-            ITypeDefinition CreateTypeDefinition(Type t, string name)
-            {
-                typeRegistrator.Register(t, name);
-                return typeResolver.ResolveTypeDefinition(name);
-            }
-
             Schema schema = new(serviceProvider);
 
             this.SchemaConfigurations.Execute(this, serviceProvider);
             this.SchemaConfigurations.Clear();
 
             // Types which are registered with TypeRegistrator.Register are not added to TypeBindings.
-            foreach(KeyValuePair<string, ITypeDefinition> registeredType in typeRegistry.TypeDefinitionBindings)
+            foreach(KeyValuePair<string, RegisteredType> registeredType in typeRegistry.RegisteredTypes)
             {
                 if(this.ConfigurationState.TypeBindings.ContainsKey(registeredType.Key))
                 {
                     continue;
                 }
 
-                this.ConfigurationState.TypeBindings.Add(registeredType.Key, registeredType.Value.GetType());
+                this.ConfigurationState.TypeBindings.Add(registeredType.Key, registeredType.Value.TypeDefinition);
             }
 
-            foreach(KeyValuePair<string, Type> binding in this.ConfigurationState.TypeBindings)
+            foreach(KeyValuePair<string, TypeDefinition> binding in this.ConfigurationState.TypeBindings)
             {
                 // Ensure that a valid GraphDefinition exists for all type-bindings.
                 if(!this.ConfigurationState.Definitions.TryGetValue(binding.Key, out GraphDefinition? bindingDefinition))
                 {
-                    ITypeDefinition typeDefinition = binding.Value switch
-                    {
-                        Type t when t.IsTypeDefinition() => typeResolver.ResolveTypeDefinition(binding.Key),
-                        Type t when t.IsClass() => CreateTypeDefinition(t, binding.Key),
-                        Type t when t.IsEnum => CreateTypeDefinition(t, binding.Key),
-
-                        Type t => throw new NotSupportedException(t.FullName)
-                    };
-
-                    bindingDefinition = typeDefinition switch
+                    bindingDefinition = binding.Value switch
                     {
                         ObjectType _typeDefinition => _typeDefinition.CreateSyntaxNode(serviceProvider),
                         ScalarType _typeDefinition => _typeDefinition.CreateSyntaxNode(serviceProvider),
                         EnumType _typeDefinition => _typeDefinition.CreateSyntaxNode(serviceProvider),
                         DirectiveDefinition _typeDefinition => _typeDefinition.CreateSyntaxNode(serviceProvider),
 
-                        _ => throw new NotSupportedException(typeDefinition.Name)
+                        _ => throw new NotSupportedException(binding.Key)
                     };
                 }
 
@@ -74,14 +59,11 @@ namespace Chart.Core
                 schema.AddDefinitions(bindingDefinition);
             }
 
-            foreach(Type directiveType in this.ConfigurationState.DirectiveDefinitions)
+            foreach(KeyValuePair<string, DirectiveDefinition> directiveType in this.ConfigurationState.DirectiveDefinitions)
             {
-                DirectiveDefinition? directiveDefinition = (DirectiveDefinition?) serviceProvider.GetService(directiveType)
-                    ?? throw new NotImplementedException();
+                GraphDefinition directiveGraphDefinition = directiveType.Value.CreateSyntaxNode(serviceProvider);
 
-                GraphDefinition directiveGraphDefinition = directiveDefinition.CreateSyntaxNode(serviceProvider);
-
-                this.ConfigurationState.Definitions.Remove(directiveDefinition.Name);
+                this.ConfigurationState.Definitions.Remove(directiveType.Key);
                 schema.AddDefinitions(directiveGraphDefinition);
             }
 
@@ -116,40 +98,34 @@ namespace Chart.Core
                         .Build());
             }
 
-            if(this.QueryType is not null)
-            {
-                schema.QueryType = (ObjectType) typeCreator.CreateTypeDefinition(this.QueryType);
-            }
-
-            if(this.MutationType is not null)
-            {
-                schema.MutationType = (ObjectType) typeCreator.CreateTypeDefinition(this.MutationType);
-            }
-
-            if(this.SubscriptionType is not null)
-            {
-                schema.SubscriptionType = (ObjectType) typeCreator.CreateTypeDefinition(this.SubscriptionType);
-            }
+            schema.QueryType = this.QueryType!;
+            schema.MutationType = this.MutationType;
+            schema.SubscriptionType = this.SubscriptionType;
 
             return schema;
         }
 
         private void InferRootTypes()
         {
-            foreach(KeyValuePair<string, Type> typeBinding in this.ConfigurationState.TypeBindings)
+            foreach(KeyValuePair<string, TypeDefinition> typeBinding in this.ConfigurationState.TypeBindings)
             {
+                if(typeBinding.Value is not ObjectType objectType)
+                {
+                    continue;
+                }
+
                 switch(typeBinding.Key)
                 {
                     case string key when key.Equals(Operations.Query, OrdinalIgnoreCase):
-                        this.QueryType ??= typeBinding.Value;
+                        this.QueryType ??= objectType;
                         break;
 
                     case string key when key.Equals(Operations.Mutation, OrdinalIgnoreCase):
-                        this.MutationType ??= typeBinding.Value;
+                        this.MutationType ??= objectType;
                         break;
 
                     case string key when key.Equals(Operations.Subscription, OrdinalIgnoreCase):
-                        this.SubscriptionType ??= typeBinding.Value;
+                        this.SubscriptionType ??= objectType;
                         break;
                 }
             }
