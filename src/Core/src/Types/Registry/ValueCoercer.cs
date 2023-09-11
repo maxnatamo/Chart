@@ -82,15 +82,15 @@ namespace Chart.Core
         /// <inheritdoc />
         public IGraphValue? CoerceInput(IGraphValue value, GraphNamedType type)
         {
-            if(!this._typeRegistry.TypeDefinitionBindings.TryGetValue(type.Name, out ITypeDefinition? typeDefinition))
+            if(!this._typeRegistry.TryGetType(type.Name, out RegisteredType? registeredType))
             {
                 throw new NotImplementedException();
             }
 
-            return this.CoerceInput(value, typeDefinition);
+            return this.CoerceInput(value, registeredType.Value.TypeDefinition);
         }
 
-        private IGraphValue? CoerceInput(IGraphValue value, ITypeDefinition typeDefinition) =>
+        private IGraphValue? CoerceInput(IGraphValue value, TypeDefinition typeDefinition) =>
             (value, typeDefinition) switch
             {
                 (_, ScalarType _type) when value.ValueKind.IsScalar() => this.CoerceInput(value, _type),
@@ -164,15 +164,15 @@ namespace Chart.Core
         /// <inheritdoc />
         public object? CoerceResult(object? value, GraphNamedType type)
         {
-            if(!this._typeRegistry.TypeDefinitionBindings.TryGetValue(type.Name, out ITypeDefinition? typeDefinition))
+            if(!this._typeRegistry.TryGetType(type.Name, out RegisteredType? registeredType))
             {
                 throw new NotImplementedException();
             }
 
-            return this.CoerceResult(value, typeDefinition);
+            return this.CoerceResult(value, registeredType.Value.TypeDefinition);
         }
 
-        private object? CoerceResult(object? value, ITypeDefinition typeDefinition) =>
+        private object? CoerceResult(object? value, TypeDefinition typeDefinition) =>
             (value, typeDefinition) switch
             {
                 (_, ObjectType) => value,

@@ -13,6 +13,7 @@ partial class Build
         RootDirectory / "src" / "Core",
         RootDirectory / "src" / "Language",
         RootDirectory / "src" / "Utilities",
+        RootDirectory / "src" / "Testing",
     };
 
     private static IEnumerable<string> GetAllProjects()

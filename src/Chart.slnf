@@ -8,7 +8,8 @@
       "Language\\src\\Chart.Language.csproj",
       "Language\\test\\Chart.Language.Tests.csproj",
       "Utilities\\src\\Chart.Utilities.csproj",
-      "Utilities\\test\\Chart.Utilities.Tests.csproj"
+      "Utilities\\test\\Chart.Utilities.Tests.csproj",
+      "Testing\\src\\Chart.Testing.csproj"
     ]
   }
 }

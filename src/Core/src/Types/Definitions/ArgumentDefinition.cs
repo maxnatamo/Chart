@@ -19,7 +19,7 @@ namespace Chart.Core
         public override string Name { get; protected set; }
 
         /// <summary>
-        /// The type that the argument accepts. Must be a subclass of <see cref="ITypeDefinition" />.
+        /// The type that the argument accepts. Must be a subclass of <see cref="TypeDefinition" />.
         /// </summary>
         public Type Type { get; }
 
@@ -54,9 +54,9 @@ namespace Chart.Core
                 throw new ArgumentNullException(nameof(name));
             }
 
-            if(!type.IsAssignableTo(typeof(ITypeDefinition)))
+            if(!type.IsAssignableTo(typeof(TypeDefinition)))
             {
-                throw new ArgumentException($"Argument '{name}' type must derive from {nameof(ITypeDefinition)}", nameof(type));
+                throw new ArgumentException($"Argument '{name}' type must derive from {nameof(TypeDefinition)}", nameof(type));
             }
 
             this.Name = name;

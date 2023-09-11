@@ -6,7 +6,7 @@ using Chart.Language.SyntaxTree;
 namespace Chart.Core
 {
     /// <summary>
-    /// Utility class for resolving (or attempting thereat) types from the <see cref="ITypeRegistry" /> into <see cref="GraphType" />- and <see cref="ITypeDefinition" />-instances.
+    /// Utility class for resolving (or attempting thereat) types from the <see cref="ITypeRegistry" /> into <see cref="GraphType" />- and <see cref="TypeDefinition" />-instances.
     /// </summary>
     public interface ITypeResolver
     {
@@ -45,28 +45,28 @@ namespace Chart.Core
         /// <summary>
         /// Resolve the type definition, which corresponds to the given name.
         /// </summary>
-        ITypeDefinition ResolveTypeDefinition(string typeName);
+        TypeDefinition ResolveTypeDefinition(string typeName);
 
         /// <inheritdoc cref="ITypeResolver.ResolveTypeDefinition(string)" />
         TTypeDefinition ResolveTypeDefinition<TTypeDefinition>(string typeName)
-            where TTypeDefinition : ITypeDefinition;
+            where TTypeDefinition : TypeDefinition;
 
         /// <summary>
         /// Attempt to resolve the type definition, which corresponds to the given name.
         /// </summary>
-        bool TryResolveTypeDefinition(string typeName, [NotNullWhen(true)] out ITypeDefinition? typeDefinition);
+        bool TryResolveTypeDefinition(string typeName, [NotNullWhen(true)] out TypeDefinition? typeDefinition);
 
-        /// <inheritdoc cref="ITypeResolver.TryResolveTypeDefinition(string, out ITypeDefinition?)" />
+        /// <inheritdoc cref="ITypeResolver.TryResolveTypeDefinition(string, out TypeDefinition?)" />
         bool TryResolveTypeDefinition<TTypeDefinition>(string typeName, [NotNullWhen(true)] out TTypeDefinition? typeDefinition)
-            where TTypeDefinition : ITypeDefinition;
+            where TTypeDefinition : TypeDefinition;
 
         /// <summary>
-        /// Create a generic type of <see cref="ITypeDefinition" />, with the relevant composite types, inherited from the given type.
+        /// Create a generic type of <see cref="TypeDefinition" />, with the relevant composite types, inherited from the given type.
         /// </summary>
         Type CreateTypeDefinition(Type type);
 
         /// <summary>
-        /// Create a generic type of <see cref="ITypeDefinition" />, with the relevant composite types, inherited from the given graph type.
+        /// Create a generic type of <see cref="TypeDefinition" />, with the relevant composite types, inherited from the given graph type.
         /// </summary>
         Type CreateTypeDefinition(GraphType type);
     }
@@ -131,7 +131,7 @@ namespace Chart.Core
                 return true;
             }
 
-            if(this.TryResolveTypeDefinition(runtimeType.Name, out ITypeDefinition? value))
+            if(this.TryResolveTypeDefinition(runtimeType.Name, out TypeDefinition? value))
             {
                 schemaType = new GraphNamedType(value.Name)
                 {
@@ -165,8 +165,8 @@ namespace Chart.Core
         /// <inheritdoc />
         public bool TryResolveDefinition(Type runtimeType, [NotNullWhen(true)] out GraphType? schemaType)
         {
-            bool isNonNullType = runtimeType.IsAssignableTo(typeof(INonNullType));
-            bool isListType = runtimeType.IsAssignableTo(typeof(IListType));
+            bool isNonNullType = runtimeType.IsAssignableTo(typeof(NonNullType));
+            bool isListType = runtimeType.IsAssignableTo(typeof(ListType));
 
             if(isNonNullType || isListType)
             {
@@ -194,7 +194,17 @@ namespace Chart.Core
                 }
             }
 
-            if(this._typeRegistry.TypeBindings.TryGetValue(runtimeType.Name, out ITypeDefinition? value))
+            if(this._typeRegistry.TryGetType(runtimeType.Name, out RegisteredType? registeredType))
+            {
+                schemaType = new GraphNamedType(registeredType.Value.SchemaName)
+                {
+                    NonNullable = false
+                };
+
+                return true;
+            }
+
+            if(this._typeRegistry.TypeBindings.TryGetValue(runtimeType.Name, out TypeDefinition? value))
             {
                 schemaType = new GraphNamedType(value.Name)
                 {
@@ -216,9 +226,9 @@ namespace Chart.Core
             => this.TryResolveDefinition(typeof(TRuntime), out schemaType);
 
         /// <inheritdoc />
-        public ITypeDefinition ResolveTypeDefinition(string typeName)
+        public TypeDefinition ResolveTypeDefinition(string typeName)
         {
-            if(!this.TryResolveTypeDefinition(typeName, out ITypeDefinition? typeDefinition))
+            if(!this.TryResolveTypeDefinition(typeName, out TypeDefinition? typeDefinition))
             {
                 throw new KeyNotFoundException($"Type definition '{typeName}' was not found.");
             }
@@ -228,35 +238,27 @@ namespace Chart.Core
 
         /// <inheritdoc />
         public TTypeDefinition ResolveTypeDefinition<TTypeDefinition>(string typeName)
-            where TTypeDefinition : ITypeDefinition
+            where TTypeDefinition : TypeDefinition
             => (TTypeDefinition) this.ResolveTypeDefinition(typeName);
 
         /// <inheritdoc />
-        public bool TryResolveTypeDefinition(string typeName, [NotNullWhen(true)] out ITypeDefinition? typeDefinition)
+        public bool TryResolveTypeDefinition(string typeName, [NotNullWhen(true)] out TypeDefinition? typeDefinition)
         {
-            if(this._typeRegistry.TypeDefinitionBindings.TryGetValue(typeName, out typeDefinition))
+            if(this._typeRegistry.TryGetType(typeName, out RegisteredType? registeredType))
             {
+                typeDefinition = registeredType.Value.TypeDefinition;
                 return true;
             }
 
-            if(this._typeRegistry.TypeBindings.TryGetValue(typeName, out typeDefinition))
-            {
-                return true;
-            }
-
-            if(this._typeRegistry.RuntimeTypes.TryGetValue(typeName, out typeDefinition))
-            {
-                return true;
-            }
-
+            typeDefinition = null;
             return false;
         }
 
         /// <inheritdoc />
         public bool TryResolveTypeDefinition<TTypeDefinition>(string typeName, [NotNullWhen(true)] out TTypeDefinition? typeDefinition)
-            where TTypeDefinition : ITypeDefinition
+            where TTypeDefinition : TypeDefinition
         {
-            if(!this.TryResolveTypeDefinition(typeName, out ITypeDefinition? resolvedDefinition))
+            if(!this.TryResolveTypeDefinition(typeName, out TypeDefinition? resolvedDefinition))
             {
                 typeDefinition = default;
                 return false;

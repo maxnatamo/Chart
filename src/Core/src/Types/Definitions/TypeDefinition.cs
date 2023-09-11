@@ -1,32 +1,27 @@
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Chart.Core
 {
-    public interface ITypeDefinition
+    public abstract class TypeDefinition
     {
+        /// <summary>
+        /// In which scope type definitions should be registered in the dependency injection container.
+        /// </summary>
+        public const ServiceLifetime Scope = ServiceLifetime.Transient;
+
         /// <summary>
         /// The name of the definition.
         /// </summary>
-        string Name { get; }
+        public abstract string Name { get; protected set; }
 
         /// <summary>
         /// An optional description for the definition.
         /// </summary>
-        string? Description { get; }
+        public string? Description { get; set; } = null;
 
         /// <summary>
         /// An optional runtime type, for the type definition.
         /// </summary>
-        Type? RuntimeType { get; set; }
-    }
-
-    public abstract class TypeDefinition : ITypeDefinition
-    {
-        /// <inheritdoc />
-        public abstract string Name { get; protected set; }
-
-        /// <inheritdoc />
-        public string? Description { get; set; } = null;
-
-        /// <inheritdoc />
         public Type? RuntimeType { get; set; } = null;
     }
 }

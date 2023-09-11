@@ -1,15 +1,11 @@
 namespace Chart.Core
 {
-    public interface IListType : ITypeDefinition
+    public abstract class ListType : TypeDefinition
     { }
 
-    public class ListType<TType> : IListType
-        where TType : ITypeDefinition
+    public class ListType<TType> : ListType
+        where TType : TypeDefinition
     {
-        public string Name => string.Empty;
-
-        public string? Description => null;
-
-        public Type? RuntimeType { get; set; } = null;
+        public override string Name { get; protected set; } = string.Empty;
     }
 }

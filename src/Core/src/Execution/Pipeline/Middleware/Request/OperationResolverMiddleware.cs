@@ -26,11 +26,8 @@ namespace Chart.Core.Execution
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            GraphOperationDefinition? operation = this._operationResolver.Resolve(context);
-            if(operation is null)
-            {
-                throw new Exception();
-            }
+            GraphOperationDefinition operation = this._operationResolver.Resolve(context)
+                ?? throw new NotImplementedException();
 
             context.Operation = operation;
             this.ResolveRootValue(context);
@@ -46,7 +43,7 @@ namespace Chart.Core.Execution
                 GraphMutationOperation => context.Schema.MutationType,
                 GraphSubscriptionOperation => context.Schema.SubscriptionType,
 
-                _ => throw new NotSupportedException()
+                _ => throw new NotSupportedException(context.Operation.ToString())
             };
 
             if(rootType is null || rootType.RuntimeType is null)

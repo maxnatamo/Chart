@@ -10,7 +10,7 @@ namespace Chart.Core
     /// </code>
     /// </example>
     public class InputFieldDefinition<TType> : InputFieldDefinition
-        where TType : ITypeDefinition, new()
+        where TType : TypeDefinition, new()
     {
         public InputFieldDefinition(
             string name,

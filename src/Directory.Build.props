@@ -45,7 +45,11 @@
   <!-- Test projects -->
 
   <ItemGroup Condition="'$(IsTestProject)' == 'true'">
+    <!-- Reference to corresponding source project -->
     <ProjectReference Include="../src/$(RootNamespace).csproj" />
+
+    <!-- Reference to testing project -->
+    <ProjectReference Include="../../Testing/src/Chart.Testing.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(IsTestProject)' == 'true'">

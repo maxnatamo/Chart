@@ -10,7 +10,7 @@ namespace Chart.Core
     /// </code>
     /// </example>
     public class ArgumentDefinition<TType> : ArgumentDefinition
-        where TType : ITypeDefinition, new()
+        where TType : TypeDefinition, new()
     {
         public ArgumentDefinition(
             string name,
