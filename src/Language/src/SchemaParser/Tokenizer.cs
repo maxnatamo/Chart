@@ -157,7 +157,7 @@ namespace Chart.Language
         /// <returns>The parsed token.</returns>
         private Token ReadToken()
         {
-            string? match = "";
+            Token? token = null;
 
             if(string.IsNullOrEmpty(this.Source))
             {
@@ -183,77 +183,137 @@ namespace Chart.Language
                 return this.ParsePunctuationToken();
             }
 
+            if(this.TryParseKeywordToken(out token))
+            {
+                return token.Value;
+            }
+
+            if(this.TryParseSymbolToken(out token))
+            {
+                return token.Value;
+            }
+
+            if(this.TryParseBlockToken(out token))
+            {
+                return token.Value;
+            }
+
+            return new Token(TokenType.UNKNOWN, firstChar.ToString(), this.CurrentIndex, this.CurrentIndex + 1);
+        }
+
+        /// <summary>
+        /// Attemt to parse the next token as a keyword (e.g. null, spread, boolean values, etc.)
+        /// </summary>
+        private bool TryParseKeywordToken([NotNullWhen(true)] out Token? token)
+        {
             if(this.ContainsNext("null"))
             {
-                return new Token(TokenType.NULL, this.CurrentIndex, this.CurrentIndex + 4);
+                token = new Token(TokenType.NULL, this.CurrentIndex, this.CurrentIndex + 4);
+                return true;
             }
 
             if(this.ContainsNext("...", false))
             {
-                return new Token(TokenType.SPREAD, this.CurrentIndex, this.CurrentIndex + 3);
+                token = new Token(TokenType.SPREAD, this.CurrentIndex, this.CurrentIndex + 3);
+                return true;
             }
 
-            if(this.ContainsNext(out match, new string[] { "true", "false" }))
+            if(this.ContainsNext(out string? match, new string[] { "true", "false" }))
             {
-                return new Token(TokenType.BOOLEAN, match, this.CurrentIndex, this.CurrentIndex + match.Length);
+                token = new Token(TokenType.BOOLEAN, match, this.CurrentIndex, this.CurrentIndex + match.Length);
+                return true;
             }
 
-            if(firstChar == '#')
-            {
-                return this.ParseCommentToken();
-            }
+            token = null;
+            return false;
+        }
+
+        /// <summary>
+        /// Attemt to parse the next token as a symbol token.
+        /// </summary>
+        private bool TryParseSymbolToken([NotNullWhen(true)] out Token? token)
+        {
+            char firstChar = this.Source[this.CurrentIndex];
 
             if(firstChar == '$')
             {
-                return new Token(TokenType.DOLLAR_SIGN, "$", this.CurrentIndex, this.CurrentIndex + 1);
+                token = new Token(TokenType.DOLLAR_SIGN, "$", this.CurrentIndex, this.CurrentIndex + 1);
+                return true;
             }
 
             if(firstChar == '|')
             {
-                return new Token(TokenType.PIPE, "|", this.CurrentIndex, this.CurrentIndex + 1);
+                token = new Token(TokenType.PIPE, "|", this.CurrentIndex, this.CurrentIndex + 1);
+                return true;
             }
 
             if(firstChar == '=')
             {
-                return new Token(TokenType.EQUAL, "=", this.CurrentIndex, this.CurrentIndex + 1);
+                token = new Token(TokenType.EQUAL, "=", this.CurrentIndex, this.CurrentIndex + 1);
+                return true;
             }
 
             if(firstChar == '!')
             {
-                return new Token(TokenType.EXCLAMATION_POINT, "!", this.CurrentIndex, this.CurrentIndex + 1);
+                token = new Token(TokenType.EXCLAMATION_POINT, "!", this.CurrentIndex, this.CurrentIndex + 1);
+                return true;
             }
 
             if(firstChar == '@')
             {
-                return new Token(TokenType.AT, "@", this.CurrentIndex, this.CurrentIndex + 1);
+                token = new Token(TokenType.AT, "@", this.CurrentIndex, this.CurrentIndex + 1);
+                return true;
             }
 
             if(firstChar == '&')
             {
-                return new Token(TokenType.AMPERSAND, "&", this.CurrentIndex, this.CurrentIndex + 1);
+                token = new Token(TokenType.AMPERSAND, "&", this.CurrentIndex, this.CurrentIndex + 1);
+                return true;
             }
+
+            token = null;
+            return false;
+        }
+
+        /// <summary>
+        /// Attemt to parse the next token as a block token (name, number, comment, description, etc.)
+        /// </summary>
+        private bool TryParseBlockToken([NotNullWhen(true)] out Token? token)
+        {
+            char firstChar = this.Source[this.CurrentIndex];
 
             if(('a' <= firstChar && firstChar <= 'z') || ('A' <= firstChar && firstChar <= 'Z') || firstChar == '_')
             {
-                return this.ParseNameToken();
+                token = this.ParseNameToken();
+                return true;
             }
 
             if(('0' <= firstChar && firstChar <= '9') || firstChar == '-')
             {
-                return this.ParseNumberToken();
+                token = this.ParseNumberToken();
+                return true;
+            }
+
+            if(firstChar == '#')
+            {
+                token = this.ParseCommentToken();
+                return true;
             }
 
             if(this.ContainsNext("\"\"\"", false))
             {
-                return this.ParseBlockStringToken();
+                token = this.ParseBlockStringToken();
+                return true;
             }
 
             if(firstChar == '"')
             {
-                return this.ParseStringToken();
+                token = this.ParseStringToken();
+                return true;
             }
 
-            return new Token(TokenType.UNKNOWN, firstChar.ToString(), this.CurrentIndex, this.CurrentIndex + 1);
+            token = null;
+            return false;
         }
 
         /// <summary>

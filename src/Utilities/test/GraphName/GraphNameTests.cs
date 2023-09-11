@@ -9,7 +9,7 @@ namespace Chart.Utilities.Tests.GraphNameTests
             string name = string.Empty;
 
             // Act
-            Action act = () => new GraphName(name);
+            Action act = () => _ = new GraphName(name);
 
             // Assert
             act.Should().Throw<Exception>("NameStart is required by the spec");
@@ -22,7 +22,7 @@ namespace Chart.Utilities.Tests.GraphNameTests
             string name = "_";
 
             // Act
-            Action act = () => new GraphName(name);
+            Action act = () => _ = new GraphName(name);
 
             // Assert
             act.Should().NotThrow<Exception>();
@@ -35,7 +35,7 @@ namespace Chart.Utilities.Tests.GraphNameTests
             string name = "1Test";
 
             // Act
-            Action act = () => new GraphName(name);
+            Action act = () => _ = new GraphName(name);
 
             // Assert
             act.Should().Throw<Exception>();
@@ -48,7 +48,7 @@ namespace Chart.Utilities.Tests.GraphNameTests
             string name = "Test";
 
             // Act
-            Action act = () => new GraphName(name);
+            Action act = () => _ = new GraphName(name);
 
             // Assert
             act.Should().NotThrow<Exception>();
