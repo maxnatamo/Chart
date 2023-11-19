@@ -32,7 +32,7 @@ namespace Chart.Language.Parsers.Tests
             // Arrange
 
             // Act
-            Token token = new Tokenizer(source).GetNextToken();
+            Token token = new Tokenizer(source).ReadToken();
 
             // Assert
             token.Start.Should().Be(start);
@@ -48,7 +48,7 @@ namespace Chart.Language.Parsers.Tests
             string source = new ASCIIEncoding().GetString(new byte[] { 0x10 });
 
             // Act
-            Action act = () => new Tokenizer(source).GetNextToken();
+            Action act = () => new Tokenizer(source).ReadToken();
 
             // Assert
             act.Should().Throw<InvalidDataException>();
