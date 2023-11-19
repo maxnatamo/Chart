@@ -1,17 +1,18 @@
+using System.Collections.ObjectModel;
+
 using Chart.Language.SyntaxTree;
 
 namespace Chart.Language
 {
     internal static class Definitions
     {
-        public static readonly IReadOnlyCollection<Type> ExecutableTypes = new List<Type>()
+        public static readonly ReadOnlyCollection<Type> ExecutableTypes = new(new List<Type>()
         {
             typeof(GraphQueryOperation),
             typeof(GraphMutationOperation),
             typeof(GraphSubscriptionOperation),
             typeof(GraphFragmentDefinition),
-        }
-        .AsReadOnly();
+        });
 
         public static bool IsDefinitionExecutable(Type definitionType)
             => Definitions.ExecutableTypes.Contains(definitionType);

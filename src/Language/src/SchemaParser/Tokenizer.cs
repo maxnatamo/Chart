@@ -155,7 +155,7 @@ namespace Chart.Language
         /// Read the token at the current position and return it.
         /// </summary>
         /// <returns>The parsed token.</returns>
-        private Token ReadToken()
+        internal Token ReadToken()
         {
             Token? token = null;
 
